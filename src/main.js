@@ -1,17 +1,14 @@
 import Phaser from './lib/phaser.js'
 
-//Construir Scene para Ecran de entrada
+import Intro from './scenes/Intro.js'
 
-let introScene = new Phaser.Scene('Intro');
-
-let configIntro = {
+export default new Phaser.Game({
     type: Phaser.AUTO,
-    width: 640, 
-    height: 360, 
-    scene: introScene
-};
+    width: 640,
+    height: 480
+    scene: Intro
+    })
 
-let introConf = new Phaser.Game(configIntro);
 
 
 
