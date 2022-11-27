@@ -1,5 +1,7 @@
 import Phaser from '../lib/phaser.js'
 
+import Enemy from '../game/Enemies.js'
+
 //variavel onde fica a sprite da cidade e rectangulo
 let viana, r1
 
@@ -35,7 +37,7 @@ let apareceRec = false
 let apareceTexto = false
 
 //variavel para objeto Inimigo nos varios estador
-let enemyRun, enemyBullet, enemyMuzzle
+// let enemyRun, enemyBullet, enemyMuzzle
 
 
 export default class Intro extends Phaser.Scene{
@@ -49,12 +51,14 @@ export default class Intro extends Phaser.Scene{
 
         this.load.image('background', 'assets/background.png')
         this.load.image('cidade', 'assets/viana.png')
-        this.load.atlas('enemy_run', 'assets/spritesheets/enemy_run_spritesheet.png', 'assets/spritesheets/enemy_run_spritesheet.json')
-        this.load.atlas('enemy_bullet', 'assets/spritesheets/enemy_bullet_spritesheet.png', 'assets/spritesheets/enemy_bullet_spritesheet.json')
-        this.load.atlas('muzzle', 'assets/spritesheets/muzzle_spritesheet.png', 'assets/spritesheets/muzzle_spritesheet.json')
+        // this.load.atlas('enemy_run', 'assets/spritesheets/enemy_run_spritesheet.png', 'assets/spritesheets/enemy_run_spritesheet.json')
+        // this.load.atlas('enemy_bullet', 'assets/spritesheets/enemy_bullet_spritesheet.png', 'assets/spritesheets/enemy_bullet_spritesheet.json')
+        // this.load.atlas('muzzle', 'assets/spritesheets/muzzle_spritesheet.png', 'assets/spritesheets/muzzle_spritesheet.json')
     }
 
     create(){
+
+        let er = new Enemy (this, width / 2, height / 2, 'enemy_run')
 
         //arquivar tamanho da cena para usar no posicionamento dos objetos
         width = this.scale.width;
@@ -84,80 +88,80 @@ export default class Intro extends Phaser.Scene{
         //atrasa mostrar a primeira parte da historia
         tempText = this.time.delayedCall(7000, this.moveText, [], this)
 
-        this.anims.create({
-            key: 'run_shoot',
-            frames: this.anims.generateFrameNames('enemy_run', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Run_Shoot__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        });
+        // this.anims.create({
+        //     key: 'run_shoot',
+        //     frames: this.anims.generateFrameNames('enemy_run', {
+        //         start: 0,
+        //         end: 9,
+        //         zeroPad: 3,
+        //         prefix: 'Run_Shoot__',
+        //         suffix: '.png'
+        //     }),
+        //     frameRate: 15,
+        //     repeat: -1
+        // });
 
-        this.anims.create({
-            key: 'run',
-            frames: this.anims.generateFrameNames('enemy_run', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Run__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        });
+        // this.anims.create({
+        //     key: 'run',
+        //     frames: this.anims.generateFrameNames('enemy_run', {
+        //         start: 0,
+        //         end: 9,
+        //         zeroPad: 3,
+        //         prefix: 'Run__',
+        //         suffix: '.png'
+        //     }),
+        //     frameRate: 15,
+        //     repeat: -1
+        // });
 
-        this.anims.create({
-            key: 'enemy_bullet_size',
-            frames: this.anims.generateFrameNames('enemy_bullet', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'OrangeScale__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        });
+        // this.anims.create({
+        //     key: 'enemy_bullet_size',
+        //     frames: this.anims.generateFrameNames('enemy_bullet', {
+        //         start: 0,
+        //         end: 9,
+        //         zeroPad: 3,
+        //         prefix: 'OrangeScale__',
+        //         suffix: '.png'
+        //     }),
+        //     frameRate: 15,
+        //     repeat: -1
+        // });
 
-        this.anims.create({
-            key: 'enemy_bullet_spin',
-            frames: this.anims.generateFrameNames('enemy_bullet', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'OrangeSpin__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        });
+        // this.anims.create({
+        //     key: 'enemy_bullet_spin',
+        //     frames: this.anims.generateFrameNames('enemy_bullet', {
+        //         start: 0,
+        //         end: 9,
+        //         zeroPad: 3,
+        //         prefix: 'OrangeSpin__',
+        //         suffix: '.png'
+        //     }),
+        //     frameRate: 15,
+        //     repeat: -1
+        // });
 
-        this.anims.create({
-            key: 'enemy_muzzle',
-            frames: this.anims.generateFrameNames('muzzle', {
-                start: 0,
-                end: 10,
-                zeroPad: 3,
-                prefix: 'OrangeMuzzle__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: 10
-        });
+        // this.anims.create({
+        //     key: 'enemy_muzzle',
+        //     frames: this.anims.generateFrameNames('muzzle', {
+        //         start: 0,
+        //         end: 10,
+        //         zeroPad: 3,
+        //         prefix: 'OrangeMuzzle__',
+        //         suffix: '.png'
+        //     }),
+        //     frameRate: 15,
+        //     repeat: 5
+        // });
 
-        enemyRun = this.add.sprite( width / 2, height - 100, 'enemy_run').setScale(0.25)
+        er = Enemy.add.sprite( width / 2, height - 100, 'enemy_run')
         enemyRun.play('run_shoot')
 
-        enemyBullet = this.add.sprite( width / 1.5, height - 100, 'enemy_bullet').setScale(0.25)
+        enemyBullet = Enemy.add.sprite( width / 1.5, height - 100, 'enemy_bullet')
         enemyBullet.play('enemy_bullet_spin')
 
-        enemyMuzzle = this.add.sprite( enemyRun.x + 72 , height - 93, 'muzzle').setScale(0.25)
+        enemyMuzzle = Enemy.add.sprite( enemyRun.x + 72 , height - 93, 'muzzle')
         enemyMuzzle.play('enemy_muzzle')
-        //enemyMuzzle.once(Phaser.Animations.Events.SPRITE_ANIMATION_COMPLETE, () => {enemyMuzzle.setVisible(false)})
+        
         
     }
 
