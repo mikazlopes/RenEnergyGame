@@ -1,0 +1,615 @@
+{
+	"frames": {
+		"Crouch_Aim__000.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"sourceSize": {
+				"w": 528,
+				"h": 398
+			}
+		},
+		"Crouch_Aim__001.png": {
+			"frame": {
+				"x": 528,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"sourceSize": {
+				"w": 528,
+				"h": 398
+			}
+		},
+		"Crouch_Aim__002.png": {
+			"frame": {
+				"x": 1056,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"sourceSize": {
+				"w": 528,
+				"h": 398
+			}
+		},
+		"Crouch_Aim__003.png": {
+			"frame": {
+				"x": 1584,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"sourceSize": {
+				"w": 528,
+				"h": 398
+			}
+		},
+		"Crouch_Aim__004.png": {
+			"frame": {
+				"x": 2112,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"sourceSize": {
+				"w": 528,
+				"h": 398
+			}
+		},
+		"Crouch_Aim__005.png": {
+			"frame": {
+				"x": 2640,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"sourceSize": {
+				"w": 528,
+				"h": 398
+			}
+		},
+		"Crouch_Aim__006.png": {
+			"frame": {
+				"x": 3168,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"sourceSize": {
+				"w": 528,
+				"h": 398
+			}
+		},
+		"Crouch_Aim__007.png": {
+			"frame": {
+				"x": 3696,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"sourceSize": {
+				"w": 528,
+				"h": 398
+			}
+		},
+		"Crouch_Aim__008.png": {
+			"frame": {
+				"x": 4224,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"sourceSize": {
+				"w": 528,
+				"h": 398
+			}
+		},
+		"Crouch_Aim__009.png": {
+			"frame": {
+				"x": 4752,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 528,
+				"h": 398
+			},
+			"sourceSize": {
+				"w": 528,
+				"h": 398
+			}
+		},
+		"Crouch_Shoot__000.png": {
+			"frame": {
+				"x": 5280,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"sourceSize": {
+				"w": 542,
+				"h": 395
+			}
+		},
+		"Crouch_Shoot__001.png": {
+			"frame": {
+				"x": 5822,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"sourceSize": {
+				"w": 542,
+				"h": 395
+			}
+		},
+		"Crouch_Shoot__002.png": {
+			"frame": {
+				"x": 6364,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"sourceSize": {
+				"w": 542,
+				"h": 395
+			}
+		},
+		"Crouch_Shoot__003.png": {
+			"frame": {
+				"x": 6906,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"sourceSize": {
+				"w": 542,
+				"h": 395
+			}
+		},
+		"Crouch_Shoot__004.png": {
+			"frame": {
+				"x": 7448,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"sourceSize": {
+				"w": 542,
+				"h": 395
+			}
+		},
+		"Crouch_Shoot__005.png": {
+			"frame": {
+				"x": 7990,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"sourceSize": {
+				"w": 542,
+				"h": 395
+			}
+		},
+		"Crouch_Shoot__006.png": {
+			"frame": {
+				"x": 8532,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"sourceSize": {
+				"w": 542,
+				"h": 395
+			}
+		},
+		"Crouch_Shoot__007.png": {
+			"frame": {
+				"x": 9074,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"sourceSize": {
+				"w": 542,
+				"h": 395
+			}
+		},
+		"Crouch_Shoot__008.png": {
+			"frame": {
+				"x": 9616,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"sourceSize": {
+				"w": 542,
+				"h": 395
+			}
+		},
+		"Crouch_Shoot__009.png": {
+			"frame": {
+				"x": 10158,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 542,
+				"h": 395
+			},
+			"sourceSize": {
+				"w": 542,
+				"h": 395
+			}
+		},
+		"Crouch__000.png": {
+			"frame": {
+				"x": 10700,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"sourceSize": {
+				"w": 502,
+				"h": 468
+			}
+		},
+		"Crouch__001.png": {
+			"frame": {
+				"x": 11202,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"sourceSize": {
+				"w": 502,
+				"h": 468
+			}
+		},
+		"Crouch__002.png": {
+			"frame": {
+				"x": 11704,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"sourceSize": {
+				"w": 502,
+				"h": 468
+			}
+		},
+		"Crouch__003.png": {
+			"frame": {
+				"x": 12206,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"sourceSize": {
+				"w": 502,
+				"h": 468
+			}
+		},
+		"Crouch__004.png": {
+			"frame": {
+				"x": 12708,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"sourceSize": {
+				"w": 502,
+				"h": 468
+			}
+		},
+		"Crouch__005.png": {
+			"frame": {
+				"x": 13210,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"sourceSize": {
+				"w": 502,
+				"h": 468
+			}
+		},
+		"Crouch__006.png": {
+			"frame": {
+				"x": 13712,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"sourceSize": {
+				"w": 502,
+				"h": 468
+			}
+		},
+		"Crouch__007.png": {
+			"frame": {
+				"x": 14214,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"sourceSize": {
+				"w": 502,
+				"h": 468
+			}
+		},
+		"Crouch__008.png": {
+			"frame": {
+				"x": 14716,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"sourceSize": {
+				"w": 502,
+				"h": 468
+			}
+		},
+		"Crouch__009.png": {
+			"frame": {
+				"x": 15218,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 502,
+				"h": 468
+			},
+			"sourceSize": {
+				"w": 502,
+				"h": 468
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 15720,
+			"h": 468
+		},
+		"scale": "1"
+	}
+}
