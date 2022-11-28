@@ -70,7 +70,7 @@ export default class Intro extends Phaser.Scene{
         var i
         var numInimigos = 2
 
-        this.input.mouse.onMouseDown('leftButtonReleased',() => {this.scene.start('game')})
+        this.input.once('pointerdown', () => {this.scene.start('mapa')})
 
         //arquivar tamanho da cena para usar no posicionamento dos objetos
         width = this.scale.width;
