@@ -35,9 +35,10 @@ let tempViana, tempRec, tempText
 let entraViana = false
 let apareceRec = false
 let apareceTexto = false
+let comecaInimigos = false
 
-//variavel para objeto Inimigo nos varios estador
-// let enemyRun, enemyBullet, enemyMuzzle
+//variavel para objeto Inimigo nos varios estados
+let enemyRun, enemyBullet, enemyMuzzle, enemies, muzzles, bullets
 
 
 export default class Intro extends Phaser.Scene{
@@ -51,14 +52,15 @@ export default class Intro extends Phaser.Scene{
 
         this.load.image('background', 'assets/background.png')
         this.load.image('cidade', 'assets/viana.png')
-        // this.load.atlas('enemy_run', 'assets/spritesheets/enemy_run_spritesheet.png', 'assets/spritesheets/enemy_run_spritesheet.json')
-        // this.load.atlas('enemy_bullet', 'assets/spritesheets/enemy_bullet_spritesheet.png', 'assets/spritesheets/enemy_bullet_spritesheet.json')
-        // this.load.atlas('muzzle', 'assets/spritesheets/muzzle_spritesheet.png', 'assets/spritesheets/muzzle_spritesheet.json')
+        this.load.atlas('enemy_run', 'assets/spritesheets/enemy_run_spritesheet.png', 'assets/spritesheets/enemy_run_spritesheet.json')
+        this.load.atlas('enemy_bullet', 'assets/spritesheets/enemy_bullet_spritesheet.png', 'assets/spritesheets/enemy_bullet_spritesheet.json')
+        this.load.atlas('muzzle', 'assets/spritesheets/muzzle_spritesheet.png', 'assets/spritesheets/muzzle_spritesheet.json')
     }
 
     create(){
 
-        let er = new Enemy (this, width / 2, height / 2, 'enemy_run')
+        var i
+        var numInimigos = 2
 
         //arquivar tamanho da cena para usar no posicionamento dos objetos
         width = this.scale.width;
@@ -88,81 +90,120 @@ export default class Intro extends Phaser.Scene{
         //atrasa mostrar a primeira parte da historia
         tempText = this.time.delayedCall(7000, this.moveText, [], this)
 
-        // this.anims.create({
-        //     key: 'run_shoot',
-        //     frames: this.anims.generateFrameNames('enemy_run', {
-        //         start: 0,
-        //         end: 9,
-        //         zeroPad: 3,
-        //         prefix: 'Run_Shoot__',
-        //         suffix: '.png'
-        //     }),
-        //     frameRate: 15,
-        //     repeat: -1
-        // });
+       
+       //prepara as animacoes para os inimigos
+        this.anims.create({
+            key: 'run_shoot',
+            frames: this.anims.generateFrameNames('enemy_run', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Run_Shoot__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        });
 
-        // this.anims.create({
-        //     key: 'run',
-        //     frames: this.anims.generateFrameNames('enemy_run', {
-        //         start: 0,
-        //         end: 9,
-        //         zeroPad: 3,
-        //         prefix: 'Run__',
-        //         suffix: '.png'
-        //     }),
-        //     frameRate: 15,
-        //     repeat: -1
-        // });
+        this.anims.create({
+            key: 'run',
+            frames: this.anims.generateFrameNames('enemy_run', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Run__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        });
 
-        // this.anims.create({
-        //     key: 'enemy_bullet_size',
-        //     frames: this.anims.generateFrameNames('enemy_bullet', {
-        //         start: 0,
-        //         end: 9,
-        //         zeroPad: 3,
-        //         prefix: 'OrangeScale__',
-        //         suffix: '.png'
-        //     }),
-        //     frameRate: 15,
-        //     repeat: -1
-        // });
+        this.anims.create({
+            key: 'enemy_bullet_size',
+            frames: this.anims.generateFrameNames('enemy_bullet', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'OrangeScale__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        });
 
-        // this.anims.create({
-        //     key: 'enemy_bullet_spin',
-        //     frames: this.anims.generateFrameNames('enemy_bullet', {
-        //         start: 0,
-        //         end: 9,
-        //         zeroPad: 3,
-        //         prefix: 'OrangeSpin__',
-        //         suffix: '.png'
-        //     }),
-        //     frameRate: 15,
-        //     repeat: -1
-        // });
+        this.anims.create({
+            key: 'enemy_bullet_spin',
+            frames: this.anims.generateFrameNames('enemy_bullet', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'OrangeSpin__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        });
 
-        // this.anims.create({
-        //     key: 'enemy_muzzle',
-        //     frames: this.anims.generateFrameNames('muzzle', {
-        //         start: 0,
-        //         end: 10,
-        //         zeroPad: 3,
-        //         prefix: 'OrangeMuzzle__',
-        //         suffix: '.png'
-        //     }),
-        //     frameRate: 15,
-        //     repeat: 5
-        // });
+        this.anims.create({
+            key: 'enemy_muzzle',
+            frames: this.anims.generateFrameNames('muzzle', {
+                start: 0,
+                end: 10,
+                zeroPad: 3,
+                prefix: 'OrangeMuzzle__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: 0
+        });
 
-        er = Enemy.add.sprite( width / 2, height - 100, 'enemy_run')
-        enemyRun.play('run_shoot')
-
-        enemyBullet = Enemy.add.sprite( width / 1.5, height - 100, 'enemy_bullet')
-        enemyBullet.play('enemy_bullet_spin')
-
-        enemyMuzzle = Enemy.add.sprite( enemyRun.x + 72 , height - 93, 'muzzle')
-        enemyMuzzle.play('enemy_muzzle')
+        //bloco em que cria os objetos dos inimigos e executa as animacoes 
+        enemyRun = this.add.group({
+            key: 'enemy_run',
+            repeat: 2,
+            setXY:{
+                x: - 400,
+                y: height - 190,
+                stepX: 120,
+                stepY: 60
+            }
+        })
         
-        
+        Phaser.Actions.ScaleXY(enemyRun.getChildren(), -0.75, -0.75)
+        enemies = enemyRun.getChildren()
+
+        enemyMuzzle = this.add.group({
+            key: 'muzzle',
+            repeat: 2,
+            setXY:{
+                x: enemies[0].x + 72,
+                y: enemies[0].y + 7,
+                stepX:  120,
+                stepY: 60
+            }
+        })
+
+        Phaser.Actions.ScaleXY(enemyMuzzle.getChildren(), -0.75, -0.75)
+        muzzles = enemyMuzzle.getChildren()
+
+        enemyBullet= this.add.group({
+            key: 'enemy_bullet',
+            repeat: 2,
+            setXY:{
+                x: muzzles[0].x + 12,
+                y: muzzles[0].y,
+                stepX:  120,
+                stepY: 60
+            }
+        })
+
+        Phaser.Actions.ScaleXY(enemyBullet.getChildren(), -0.75, -0.75)
+        bullets = enemyBullet.getChildren()
+
+        for (i = 0; i < enemies.length; i++){
+            enemies[i].play('run')
+        }
+
     }
 
     update(){
@@ -174,8 +215,26 @@ export default class Intro extends Phaser.Scene{
         if (apareceRec){this.moveRec()}
 
         //manipula a entrada do primeiro paragrafo da historia
-        if (apareceTexto){
-            this.moveText()
+        if (apareceTexto){this.moveText()}
+
+        if (comecaInimigos){this.moveInimigos()}
+
+        if (enemies[0].x == width / 4){
+            
+            this.inimigoDispara()
+        }
+
+        if (enemies[0].x > width / 4 ){
+            
+            var speed = 1
+            var bulletSpeed = 4
+            var i
+
+            for (i = 0; i < enemies.length; i++){
+
+                muzzles[i].x += speed
+                bullets[i].x += bulletSpeed
+            }
             
         }
         
@@ -220,7 +279,8 @@ export default class Intro extends Phaser.Scene{
 
         }else{
             apareceTexto = false
-            tempText = this.time.addEvent({ delay: 10000, callback: this.mostraTexto, callbackScope: this, loop: true});
+            tempText = this.time.addEvent({ delay: 10000, callback: this.mostraTexto, callbackScope: this, loop: true})
+            tempText = this.time.addEvent({ delay: 9000, callback: this.moveInimigos, callbackScope: this, loop: false})
             
         }
     }
@@ -237,5 +297,38 @@ export default class Intro extends Phaser.Scene{
             tempText.remove()
         }
 
+    }
+
+    moveInimigos(){
+
+        var speed = 1
+        var i
+
+        if (enemies[0].x < width + 400){
+
+            comecaInimigos = true
+            for (i = 0; i < enemies.length; i++){
+                enemies[i].x += speed
+            }
+
+        }else{
+            
+            comecaInimigos = false
+        }
+    }
+
+    inimigoDispara(){
+
+        var i
+        console.log('executou')
+        for (i = 0; i < enemies.length; i++){
+            
+            enemies[i].play('run_shoot')
+            muzzles[i].setPosition(enemies[i].x + 72, enemies[i].y +7)
+            muzzles[i].play('enemy_muzzle')
+            bullets[i].setPosition(muzzles[i].x +12, muzzles[i].y)
+            bullets[i].play('enemy_bullet_spin')
+
+        }
     }
 }
