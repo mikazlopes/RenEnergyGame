@@ -23,7 +23,7 @@ let content = [
     "The Mayor decided to send Jack and Jill to get the machine parts back to reactivate their solar, wind, geothermal, and hydraulic power sources and bring energy back to Viana.",
     "Help Jack and Jill on their adventure!"
 ]
-
+ //index para o array com o conteudo
 let index = 1
 
 //variaveis para armazenar as dimensoes do stage
@@ -36,6 +36,10 @@ let entraViana = false
 let apareceRec = false
 let apareceTexto = false
 let comecaInimigos = false
+let comecaHerois = false
+
+//variaveis para os herois em varios estados
+let jack, jill
 
 //variavel para objeto Inimigo nos varios estados
 let enemyRun, enemyBullet, enemyMuzzle, enemies, muzzles, bullets
@@ -55,6 +59,10 @@ export default class Intro extends Phaser.Scene{
         this.load.atlas('enemy_run', 'assets/spritesheets/enemy_run_spritesheet.png', 'assets/spritesheets/enemy_run_spritesheet.json')
         this.load.atlas('enemy_bullet', 'assets/spritesheets/enemy_bullet_spritesheet.png', 'assets/spritesheets/enemy_bullet_spritesheet.json')
         this.load.atlas('muzzle', 'assets/spritesheets/muzzle_spritesheet.png', 'assets/spritesheets/muzzle_spritesheet.json')
+        this.load.atlas('jack_run', 'assets/spritesheets/jack_run_spritesheet.png', 'assets/spritesheets/jack_run_spritesheet.json')
+        this.load.atlas('jill_run', 'assets/spritesheets/jill_run_spritesheet.png', 'assets/spritesheets/jill_run_spritesheet.json')
+        this.load.atlas('jack_idle', 'assets/spritesheets/jack_idle_spritesheet.png', 'assets/spritesheets/jack_idle_spritesheet.json')
+        this.load.atlas('jill_idle', 'assets/spritesheets/jill_idle_spritesheet.png', 'assets/spritesheets/jill_idle_spritesheet.json')
     }
 
     create(){
@@ -119,6 +127,32 @@ export default class Intro extends Phaser.Scene{
         });
 
         this.anims.create({
+            key: 'run',
+            frames: this.anims.generateFrameNames('jack_run', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Run__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'run',
+            frames: this.anims.generateFrameNames('jill_run', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Run__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        });
+
+        this.anims.create({
             key: 'enemy_bullet_size',
             frames: this.anims.generateFrameNames('enemy_bullet', {
                 start: 0,
@@ -158,6 +192,12 @@ export default class Intro extends Phaser.Scene{
         });
 
         //bloco em que cria os objetos dos inimigos e executa as animacoes 
+
+        jack = this.add.sprite(300, height - 250, 'jack_run').setScale(0.25)
+        jill = this.add.sprite(500, height - 250, 'jill_run').setScale(0.25)
+        jack.play('run')
+        jill.play('run')
+
         enemyRun = this.add.group({
             key: 'enemy_run',
             repeat: 2,
@@ -237,6 +277,22 @@ export default class Intro extends Phaser.Scene{
             }
             
         }
+
+        if (index == 3){
+
+            this.moveInimigos()
+        }
+        
+        if (index == 1){
+
+            this.moveInimigos()
+        }
+
+        if (comecaHerois){
+
+            this.moveHerois()
+
+        }
         
     }
 
@@ -280,7 +336,7 @@ export default class Intro extends Phaser.Scene{
         }else{
             apareceTexto = false
             tempText = this.time.addEvent({ delay: 10000, callback: this.mostraTexto, callbackScope: this, loop: true})
-            tempText = this.time.addEvent({ delay: 9000, callback: this.moveInimigos, callbackScope: this, loop: false})
+            //tempText = this.time.addEvent({ delay: 9000, callback: this.moveInimigos, callbackScope: this, loop: false})
             
         }
     }
@@ -330,5 +386,25 @@ export default class Intro extends Phaser.Scene{
             bullets[i].play('enemy_bullet_spin')
 
         }
+    }
+
+    moveHerois(){
+
+        var speed = 1
+        var i
+
+        if (jack.x < (width /2) - 100 || jill.x > (width / 2) + 100){
+
+            comecaHerois = true
+            
+            jack.x += speed
+            jill.x -= speed
+    
+
+        }else{
+            
+            comecaHerois = false
+        }
+
     }
 }
