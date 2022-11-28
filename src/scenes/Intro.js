@@ -1,6 +1,5 @@
 import Phaser from '../lib/phaser.js'
 
-import Enemy from '../game/Enemies.js'
 
 //variavel onde fica a sprite da cidade e rectangulo
 let viana, r1
@@ -21,7 +20,8 @@ let content = [
     "They stole parts of the machines that provided different types of renewable energy.",
     "Viana’s Mayor asked them to return the parts, but they refused.", 
     "The Mayor decided to send Jack and Jill to get the machine parts back to reactivate their solar, wind, geothermal, and hydraulic power sources and bring energy back to Viana.",
-    "Help Jack and Jill on their adventure!"
+    "Help Jack and Jill on their adventure!. Click anywhere to continue"
+    
 ]
  //index para o array com o conteudo
 let index = 1
@@ -31,7 +31,7 @@ let width, height
 
 //variaveis para controlar movimento do texto da historia e outras animacoes
 let textHist
-let tempViana, tempRec, tempText
+let tempViana, tempRec, tempText, tempInimigos, tempHerois
 let entraViana = false
 let apareceRec = false
 let apareceTexto = false
@@ -70,6 +70,8 @@ export default class Intro extends Phaser.Scene{
         var i
         var numInimigos = 2
 
+        this.input.mouse.onMouseDown('leftButtonReleased',() => {this.scene.start('game')})
+
         //arquivar tamanho da cena para usar no posicionamento dos objetos
         width = this.scale.width;
         height = this.scale.height;
@@ -101,7 +103,7 @@ export default class Intro extends Phaser.Scene{
        
        //prepara as animacoes para os inimigos
         this.anims.create({
-            key: 'run_shoot',
+            key: 'enemy_run_shoot',
             frames: this.anims.generateFrameNames('enemy_run', {
                 start: 0,
                 end: 9,
@@ -114,7 +116,7 @@ export default class Intro extends Phaser.Scene{
         });
 
         this.anims.create({
-            key: 'run',
+            key: 'enemy_run',
             frames: this.anims.generateFrameNames('enemy_run', {
                 start: 0,
                 end: 9,
@@ -127,7 +129,7 @@ export default class Intro extends Phaser.Scene{
         });
 
         this.anims.create({
-            key: 'run',
+            key: 'jack_run',
             frames: this.anims.generateFrameNames('jack_run', {
                 start: 0,
                 end: 9,
@@ -140,12 +142,38 @@ export default class Intro extends Phaser.Scene{
         });
 
         this.anims.create({
-            key: 'run',
+            key: 'jack_idle',
+            frames: this.anims.generateFrameNames('jack_idle', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Idle__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'jill_run',
             frames: this.anims.generateFrameNames('jill_run', {
                 start: 0,
                 end: 9,
                 zeroPad: 3,
                 prefix: 'Run__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        });
+
+        this.anims.create({
+            key: 'jill_idle',
+            frames: this.anims.generateFrameNames('jill_idle', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Idle__',
                 suffix: '.png'
             }),
             frameRate: 15,
@@ -193,14 +221,15 @@ export default class Intro extends Phaser.Scene{
 
         //bloco em que cria os objetos dos inimigos e executa as animacoes 
 
-        jack = this.add.sprite(300, height - 250, 'jack_run').setScale(0.25)
-        jill = this.add.sprite(500, height - 250, 'jill_run').setScale(0.25)
-        jack.play('run')
-        jill.play('run')
+        jack = this.add.sprite( -300, height - 150, 'jack_run').setScale(0.25)
+        jill = this.add.sprite( width + 300, height - 150, 'jill_run').setScale(0.25)
+        jill.flipX = true
+        jack.play('jack_run')
+        jill.play('jill_run')
 
         enemyRun = this.add.group({
             key: 'enemy_run',
-            repeat: 2,
+            repeat: numInimigos,
             setXY:{
                 x: - 400,
                 y: height - 190,
@@ -214,7 +243,7 @@ export default class Intro extends Phaser.Scene{
 
         enemyMuzzle = this.add.group({
             key: 'muzzle',
-            repeat: 2,
+            repeat: numInimigos,
             setXY:{
                 x: enemies[0].x + 72,
                 y: enemies[0].y + 7,
@@ -228,7 +257,7 @@ export default class Intro extends Phaser.Scene{
 
         enemyBullet= this.add.group({
             key: 'enemy_bullet',
-            repeat: 2,
+            repeat: numInimigos,
             setXY:{
                 x: muzzles[0].x + 12,
                 y: muzzles[0].y,
@@ -241,7 +270,7 @@ export default class Intro extends Phaser.Scene{
         bullets = enemyBullet.getChildren()
 
         for (i = 0; i < enemies.length; i++){
-            enemies[i].play('run')
+            enemies[i].play('enemy_run')
         }
 
     }
@@ -278,16 +307,11 @@ export default class Intro extends Phaser.Scene{
             
         }
 
-        if (index == 3){
+        // if (index == 3){
 
-            this.moveInimigos()
-        }
+        //     this.moveInimigos()
+        // }
         
-        if (index == 1){
-
-            this.moveInimigos()
-        }
-
         if (comecaHerois){
 
             this.moveHerois()
@@ -335,8 +359,7 @@ export default class Intro extends Phaser.Scene{
 
         }else{
             apareceTexto = false
-            tempText = this.time.addEvent({ delay: 10000, callback: this.mostraTexto, callbackScope: this, loop: true})
-            //tempText = this.time.addEvent({ delay: 9000, callback: this.moveInimigos, callbackScope: this, loop: false})
+            tempText = this.time.addEvent({ delay: 7000, callback: this.mostraTexto, callbackScope: this, loop: true})
             
         }
     }
@@ -351,6 +374,16 @@ export default class Intro extends Phaser.Scene{
         }else{
 
             tempText.remove()
+        }
+
+        if (index == 10){
+
+            this.moveInimigos()
+        }
+
+        if (index == 13){
+
+            this.moveHerois()
         }
 
     }
@@ -379,7 +412,7 @@ export default class Intro extends Phaser.Scene{
         console.log('executou')
         for (i = 0; i < enemies.length; i++){
             
-            enemies[i].play('run_shoot')
+            enemies[i].play('enemy_run_shoot')
             muzzles[i].setPosition(enemies[i].x + 72, enemies[i].y +7)
             muzzles[i].play('enemy_muzzle')
             bullets[i].setPosition(muzzles[i].x +12, muzzles[i].y)
@@ -404,6 +437,8 @@ export default class Intro extends Phaser.Scene{
         }else{
             
             comecaHerois = false
+            jack.play('jack_idle')
+            jill.play('jill_idle')
         }
 
     }
