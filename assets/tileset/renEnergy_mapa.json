@@ -50,7 +50,7 @@
             6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398, 6395, 6396, 6397, 6398],
          "height":45,
          "id":4,
-         "name":"baseRelva",
+         "name":"base_relva",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -106,8 +106,14 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":45,
          "id":8,
-         "name":"baseAgua",
+         "name":"base_agua",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -218,7 +224,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11477, 11446, 11478, 11479, 11478, 11479, 11478, 11479, 11478, 11479, 11478, 11479, 11478, 11479, 11478, 11479, 11478, 11479, 11478],
          "height":45,
          "id":19,
-         "name":"baseDeserto",
+         "name":"base_deserto",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -274,7 +280,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":45,
          "id":22,
-         "name":"baseNeve",
+         "name":"base_neve",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -386,7 +392,7 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":45,
          "id":21,
-         "name":"baseEstrada",
+         "name":"base_estrada",
          "opacity":1,
          "type":"tilelayer",
          "visible":true,
@@ -498,8 +504,14 @@
             0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":45,
          "id":26,
-         "name":"base_lago",
+         "name":"obj_buraco",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -556,6 +568,12 @@
          "id":23,
          "name":"obj_neve",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -612,6 +630,12 @@
          "id":20,
          "name":"obj_deserto",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -668,6 +692,12 @@
          "id":12,
          "name":"obj_montanhas",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -724,6 +754,12 @@
          "id":30,
          "name":"obj_lago",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -780,6 +816,12 @@
          "id":13,
          "name":"obj_santaLuzia",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":false
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -836,6 +878,12 @@
          "id":14,
          "name":"obj_cidades",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -892,6 +940,12 @@
          "id":24,
          "name":"obj_arvores",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -948,6 +1002,12 @@
          "id":32,
          "name":"obj_autum",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -1004,6 +1064,12 @@
          "id":27,
          "name":"obj_sinais",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -1060,6 +1126,12 @@
          "id":25,
          "name":"obj_cliffs",
          "opacity":1,
+         "properties":[
+                {
+                 "name":"collide",
+                 "type":"bool",
+                 "value":true
+                }],
          "type":"tilelayer",
          "visible":true,
          "width":80,
@@ -1076,11 +1148,11 @@
         {
          "columns":48,
          "firstgid":1,
-         "image":"Beautiful_World1.png",
+         "image":"tiles_mapa5.png",
          "imageheight":768,
          "imagewidth":768,
          "margin":0,
-         "name":"Beautiful_World1",
+         "name":"tiles_mapa5",
          "spacing":0,
          "tilecount":2304,
          "tileheight":16,
@@ -1089,11 +1161,11 @@
         {
          "columns":48,
          "firstgid":2305,
-         "image":"Beautiful_World2 better cliffs.png",
+         "image":"tiles_mapa6.png",
          "imageheight":768,
          "imagewidth":768,
          "margin":0,
-         "name":"Beautiful_World2 better cliffs",
+         "name":"tiles_mapa6",
          "spacing":0,
          "tilecount":2304,
          "tileheight":16,
@@ -1102,11 +1174,11 @@
         {
          "columns":48,
          "firstgid":4609,
-         "image":"Beautiful_World3.png",
+         "image":"tiles_mapa7.png",
          "imageheight":768,
          "imagewidth":768,
          "margin":0,
-         "name":"Beautiful_World3",
+         "name":"tiles_mapa7",
          "spacing":0,
          "tilecount":2304,
          "tileheight":16,
@@ -1115,11 +1187,11 @@
         {
          "columns":48,
          "firstgid":6913,
-         "image":"Beautiful_World_4.png",
+         "image":"tiles_mapa3.png",
          "imageheight":768,
          "imagewidth":768,
          "margin":0,
-         "name":"Beautiful_World_4",
+         "name":"tiles_mapa3",
          "spacing":0,
          "tilecount":2304,
          "tileheight":16,
@@ -1128,11 +1200,11 @@
         {
          "columns":24,
          "firstgid":9217,
-         "image":"Beautiful_World_A5b.png",
+         "image":"tiles_mapa4.png",
          "imageheight":768,
          "imagewidth":384,
          "margin":0,
-         "name":"Beautiful_World_A5b",
+         "name":"tiles_mapa4",
          "spacing":0,
          "tilecount":1152,
          "tileheight":16,
@@ -1141,11 +1213,11 @@
         {
          "columns":32,
          "firstgid":10369,
-         "image":"A1 Round Redo.png",
+         "image":"tiles_mapa1.png",
          "imageheight":384,
          "imagewidth":512,
          "margin":0,
-         "name":"A1 Round Redo",
+         "name":"tiles_mapa1",
          "spacing":0,
          "tilecount":768,
          "tileheight":16,
@@ -1472,15 +1544,19 @@
         {
          "columns":32,
          "firstgid":11137,
-         "image":"A2 Round Redo.png",
+         "image":"tiles_mapa2.png",
          "imageheight":384,
          "imagewidth":512,
          "margin":0,
-         "name":"A2 Round Redo",
+         "name":"tiles_mapa2",
          "spacing":0,
          "tilecount":768,
          "tileheight":16,
          "tilewidth":16
+        }, 
+        {
+         "firstgid":11905,
+         "source":":\/automap-tiles.tsx"
         }],
  "tilewidth":16,
  "type":"map",

@@ -1,10 +1,11 @@
 {
-    "activeFile": "",
+    "activeFile": "renEnergy.tmx",
     "expandedProjectPaths": [
     ],
     "fileStates": {
         "": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "#Beautiful_World1": {
             "scaleInDock": 1
@@ -22,8 +23,70 @@
         "#Beautiful_World_A5b": {
             "scaleInDock": 1
         },
+        "/Users/miguellopes/Downloads/03_MAPMAN_FINAL 2/assets/map/map.tmx": {
+            "scale": 1.83,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 240.1639344262295,
+                "y": 240.43715846994533
+            }
+        },
+        "/Users/miguellopes/Downloads/03_MAPMAN_FINAL 2/assets/map/map.tmx#spritesheet": {
+            "scaleInDock": 1
+        },
+        ":/automap-tiles.tsx": {
+            "scaleInDock": 1
+        },
+        "renEnergy.tmx": {
+            "scale": 0.97,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 739.6907216494847,
+                "y": 329.8969072164949
+            }
+        },
         "renEnergy.tmx#A1 Round Redo": {
+            "scaleInDock": 1,
             "scaleInEditor": 2.26
+        },
+        "renEnergy.tmx#A2 Round Redo": {
+            "scaleInDock": 1
+        },
+        "renEnergy.tmx#Beautiful_World1": {
+            "scaleInDock": 0.8415
+        },
+        "renEnergy.tmx#Beautiful_World2 better cliffs": {
+            "scaleInDock": 1
+        },
+        "renEnergy.tmx#Beautiful_World3": {
+            "scaleInDock": 0.9731
+        },
+        "renEnergy.tmx#Beautiful_World_4": {
+            "scaleInDock": 1
+        },
+        "renEnergy.tmx#Beautiful_World_A5b": {
+            "scaleInDock": 1
+        },
+        "renEnergy.tmx#tiles_mapa1": {
+            "scaleInDock": 1
+        },
+        "renEnergy.tmx#tiles_mapa2": {
+            "scaleInDock": 1
+        },
+        "renEnergy.tmx#tiles_mapa3": {
+            "scaleInDock": 1
+        },
+        "renEnergy.tmx#tiles_mapa4": {
+            "scaleInDock": 1
+        },
+        "renEnergy.tmx#tiles_mapa5": {
+            "scaleInDock": 0.8415
+        },
+        "renEnergy.tmx#tiles_mapa6": {
+            "scaleInDock": 1
+        },
+        "renEnergy.tmx#tiles_mapa7": {
+            "scaleInDock": 0.9731
         }
     },
     "last.exportedFilePath": "/Users/miguellopes/Documents/Developer/phasergame/RenEnergyGame/assets/tileset",
@@ -36,9 +99,13 @@
     "map.tileWidth": 16,
     "map.width": 80,
     "openFiles": [
+        "renEnergy.tmx"
     ],
     "project": "renEnergy.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
+        "renEnergy.tmx",
+        "/Users/miguellopes/Downloads/03_MAPMAN_FINAL 2/assets/map/map.tmx"
     ],
     "tileset.embedInMap": true,
     "tileset.tileSize": {
