@@ -54,7 +54,7 @@ export default class Intro extends Phaser.Scene{
 
     preload(){
 
-        this.load.image('background', 'assets/background.png')
+        this.load.image('background', 'assets/intro_background.png')
         this.load.image('cidade', 'assets/viana.png')
         this.load.atlas('enemy_run', 'assets/spritesheets/enemy_run_spritesheet.png', 'assets/spritesheets/enemy_run_spritesheet.json')
         this.load.atlas('enemy_bullet', 'assets/spritesheets/enemy_bullet_spritesheet.png', 'assets/spritesheets/enemy_bullet_spritesheet.json')
