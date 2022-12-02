@@ -2,9 +2,30 @@ import Phaser from '../lib/phaser.js'
 
 
 export default class Mapa extends Phaser.Scene{
-    constructor(){
     
-        super('mapa')
+    
+    
+    constructor(){
+
+    /** @type {Phaser.Physics.Arcade.StaticGroup} */
+
+	/** @type {Phaser.Physics.Arcade.Sprite} */
+	
+	/** @type {Phaser.Types.Input.Keyboard.CursorKeys} */
+	
+	/** @type {Phaser.Physics.Arcade.Group} */
+    
+        // configura physics para esta cena
+        super({
+            key: 'mapa',
+            physics: {
+                default: 'arcade',
+                arcade: {
+                    debug: true,
+                    gravity: { y: 0 }
+                }
+              }
+        })
     
     }
 
@@ -23,11 +44,20 @@ export default class Mapa extends Phaser.Scene{
         this.load.tilemapTiledJSON('mapa', 'assets/tileset/renEnergy_mapa.json')
 
         this.load.atlas('jack_walk', 'assets/spritesheets/jack_walk_spritesheet.png', 'assets/spritesheets/jack_walk_spritesheet.json')
+        this.load.atlas('jack_idle', 'assets/spritesheets/jack_idle_spritesheet.png', 'assets/spritesheets/jack_idle_spritesheet.json')
 
     }
 
     create(){
 
+        this.playerSelected = 'jack'
+        this.difficulty = 'easy'
+        this.speed = 70
+        this.width = this.scale.width
+        this.height = this.scale.height
+
+
+       // adiciona os tilesets para o mapa
         var mundo = this.make.tilemap({key: 'mapa'})
 
         var tile1 = mundo.addTilesetImage('tiles_mapa1', 'tiles_mapa1');
@@ -38,10 +68,10 @@ export default class Mapa extends Phaser.Scene{
         var tile6 = mundo.addTilesetImage('tiles_mapa6', 'tiles_mapa6');
         var tile7 = mundo.addTilesetImage('tiles_mapa7', 'tiles_mapa7');
     
-
+        // adiciona os tilesets a um array para poderem ser carregados nas layers, uma layer pode conter elementos de varios tilesets
         var tiles = [tile1, tile2, tile3, tile4, tile5, tile6, tile7]
         
-
+        // cria as varias layers
         var baseRelva = mundo.createLayer('base_relva', tiles, 0, 0)
         var baseAgua = mundo.createLayer('base_agua', tiles, 0, 0)
         var baseAguaPonte = mundo.createLayer('base_agua_ponte', tiles, 0, 0)
@@ -63,6 +93,7 @@ export default class Mapa extends Phaser.Scene{
         var objSinais = mundo.createLayer('obj_sinais', tiles, 0, 0)
         var objCliffs = mundo.createLayer('obj_cliffs', tiles, 0, 0)
 
+        // define que layers contem objetos com colisoes
         objArvores.setCollisionByExclusion(-1)
         objBuraco.setCollisionByExclusion(-1)
         objNeve.setCollisionByExclusion(-1)
@@ -76,6 +107,7 @@ export default class Mapa extends Phaser.Scene{
         objCliffs.setCollisionByExclusion(-1)
         baseAgua.setCollisionByExclusion(-1)
 
+        // carrega essas layers numa array para ser facil invocar no Physics
         var obstaculos = [  objArvores, 
                         objAutumn, 
                         objBuraco, 
@@ -90,9 +122,10 @@ export default class Mapa extends Phaser.Scene{
                         objSinais,
                         baseAgua]
 
+        // cria as animacoes
         this.anims.create({
-            key: 'jack_walk',
-            frames: this.anims.generateFrameNames('jack_walk', {
+            key: this.playerSelected + '_walk',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_walk', {
                 start: 0,
                 end: 9,
                 zeroPad: 3,
@@ -101,34 +134,126 @@ export default class Mapa extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
+        })
+
+        this.anims.create({
+            key: this.playerSelected + '_idle',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_idle', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Idle__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
         });
 
-        this.jack = this.physics.add.sprite( 700, 200, 'jack_walk').setScale(0.07)
-        this.jack.play('jack_walk')
+        //insere o jogador 
+
+        /** @type {Phaser.Physics.Arcade.Sprite} */
+        this.player = this.physics.add.sprite( 700, 200, this.playerSelected + '_idle').setScale(0.07)
+        this.player.play(this.playerSelected + '_idle')
 
         this.cursors = this.input.keyboard.createCursorKeys();
 
-        this.physics.add.collider(this.jack, obstaculos)
+        this.physics.add.collider(this.player, obstaculos)
+
+        // Criacao de areas com inimigos que despoleta um turn based combat
+
+        this.zonas = this.physics.add.group({classType: Phaser.GameObjects.Zone})
+
+        this.physics.world.bounds.width = mundo.widthInPixels;
+        this.physics.world.bounds.height = mundo.heightInPixels;
+        this.player.setCollideWorldBounds(true);
+
+        this.zonas = this.physics.add.group({classType: Phaser.GameObjects.Zone})
+
+        for ( var i = 0; i < 30; i++ ) {
+            var x = Phaser.Math.RND.between( 500, this.physics.world.bounds.width );
+            var y = Phaser.Math.RND.between( 100, this.physics.world.bounds.height );
+            
+            // -- parâmetros (x, y, width, height)
+            this.zonas.create(x, y, 20, 20);
+        }
+
+
+        this.physics.add.overlap(this.player, this.zonas, this.colisaoInimigo, false, this)
+
         
+        
+    }
+
+    colisaoInimigo(player, zona){
+
+        console.log('colidiu')
+
+        zona.x = Phaser.Math.RND.between(500 , this.physics.world.bounds.width)
+        zona.y = Phaser.Math.RND.between(100, this.physics.world.bounds.height)
+
+
     }
 
     update(){
 
-        this.jack.body.setVelocity(0)
+        //evitar que as areas dos inimigos estejam muito juntas
+        var areas = this.zonas.getChildren()
+
+        for (var i = 0; i < areas.length; i++){
+            for (var j = 0; j < areas.length; j++){
+              
+                if (i != j){
+
+                    if (Phaser.Math.Distance.Between(areas[i].x,areas[i].y, areas[j].x, areas[j].y) < 50){
+
+                        areas[i].x = Phaser.Math.RND.between( 500, this.physics.world.bounds.width );
+                        areas[i].y = Phaser.Math.RND.between( 100, this.physics.world.bounds.height );
+                        console.log('executou')
+
+                    }
+                }
+            }
+        }
+        
+        this.player.body.setVelocity(0)
+
 
         if (this.cursors.left.isDown){
-            this.jack.body.setVelocityX(-50)
-            this.jack.flipX = true
+            this.player.body.setVelocityX(- this.speed)
+            
         }else if (this.cursors.right.isDown){
-            this.jack.body.setVelocityX(50)
-            this.jack.flipX = false
+            this.player.body.setVelocityX(this.speed)
         }
 
         if (this.cursors.up.isDown){
-            this.jack.body.setVelocityY(-50)
+            this.player.body.setVelocityY(- this.speed)
+           
         }else if (this.cursors.down.isDown){
-            this.jack.body.setVelocityY(50)
+            this.player.body.setVelocityY(this.speed)
+           
         }
+
+        if (this.cursors.left.isDown){
+            this.player.play(this.playerSelected + '_walk',true)
+            this.player.flipX = true
+        
+        }else if (this.cursors.right.isDown){
+           
+            this.player.play(this.playerSelected + '_walk', true)
+            this.player.flipX = false
+        
+        } else if (this.cursors.up.isDown){
+           
+            this.player.play(this.playerSelected + '_walk', true)
+            this.player.flipX = true
+        
+        }
+        else if (this.cursors.down.isDown){
+           
+            this.player.play(this.playerSelected + '_walk', true)
+            this.player.flipX = false
+        
+        } else {this.player.play(this.playerSelected + '_idle', true)}
 
     }
 }
