@@ -84,18 +84,6 @@ export default class Floresta extends Phaser.Scene{
         // define que layers contem objetos com colisoes
         chao.setCollisionByExclusion(-1)
         
-        this.anims.create({
-            key: this.playerSelected + '_idle',
-            frames: this.anims.generateFrameNames(this.playerSelected + '_idle', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Idle__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
 
         this.anims.create({
             key: this.playerSelected + '_idle_aim',
@@ -137,12 +125,12 @@ export default class Floresta extends Phaser.Scene{
         })
 
         this.anims.create({
-            key: 'enemy_bullet_spin',
-            frames: this.anims.generateFrameNames('enemy_bullet', {
+            key: this.playerSelected + '_run_aim',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_run', {
                 start: 0,
                 end: 9,
                 zeroPad: 3,
-                prefix: 'OrangeSpin__',
+                prefix: 'Run_Shoot__',
                 suffix: '.png'
             }),
             frameRate: 15,
@@ -174,6 +162,7 @@ export default class Floresta extends Phaser.Scene{
         inimigo.play('enemy_idle_aim')
 
         this.balas = new CriaBalas(this)
+        this.balas.playAnimation('enemy_bullet_spin')
 
         console.log(this.balas)
     
@@ -186,6 +175,9 @@ export default class Floresta extends Phaser.Scene{
 
         this.physics.add.collider(this.player, chao)
         this.physics.add.collider(osInimigos, chao)
+
+        // acrescentar uma funcao para tirar as balas quando acertam num inimigo
+        this.physics.add.collider(this.balas, osInimigos, this.acertouInimigo)
 
 
         //this.physics.moveToObject(inimigo,this.player, 100)
@@ -217,29 +209,32 @@ export default class Floresta extends Phaser.Scene{
         
         }
 
-        if (this.cursors.left.isDown){
-            this.player.play(this.playerSelected + '_walk',true) 
+        if (this.cursors.left.isDown && this.inputKeys.isDown || this.cursors.right.isDown && this.inputKeys.isDown){
+            var estado = 'run'
+            this.disparouBala(estado)
+            
+        } else if (this.cursors.left.isDown){
             this.flipaHitBox('Esquerda')
         
         }else if (this.cursors.right.isDown){
            
-            this.player.play(this.playerSelected + '_walk', true)
+            this.player.play(this.playerSelected + '_run', true)
             this.flipaHitBox('Direita')
         
         } else if (this.cursors.up.isDown){
            
-            this.player.play(this.playerSelected + '_walk', true)
+            this.player.play(this.playerSelected + '_run', true)
             //this.player.flipX = true
         
         }
         else if (this.cursors.down.isDown){
            
-            this.player.play(this.playerSelected + '_walk', true)
+            this.player.play(this.playerSelected + '_run', true)
             this.player.flipX = false
         
         } else if (this.inputKeys.isDown){
-
-            this.disparouBala()
+            var estado = 'idle'
+            this.disparouBala(estado)
             
         } else {this.player.play(this.playerSelected + '_idle', true)}
 
@@ -249,29 +244,44 @@ export default class Floresta extends Phaser.Scene{
     // chama funcao do jogador que corrige a Hitbox
     flipaHitBox(sentido){
 
+        this.player.play(this.playerSelected + '_run',true) 
         eval('this.player.vai' + sentido + '()')
 
     }
 
-    disparouBala(){
+    disparouBala(estado){
 
         if (this.time.now > this.balaIntervalo){
+
             
-            this.player.play(this.playerSelected + '_idle_aim', true)
+            this.player.play(this.playerSelected + '_' + estado +'_aim', true)
+
+            console.log(this.playerSelected + '_' + estado +'_aim')
+    
             
             if (this.player.flipX){
 
-            this.balas.disparouBala(this.player.x - 50, this.player.y, 'esquerda')
+                this.balas.disparouBala(this.player.x - 60, this.player.y, 'esquerda')
 
-        }else{
-            this.balas.disparouBala(this.player.x + 50, this.player.y, 'direita')
-        }
+            }else{
+            
+                this.balas.disparouBala(this.player.x + 60, this.player.y, 'direita')
+        
+            }
             
         this.balaIntervalo = this.time.now + 200
             
         }
 
         
+
+    }
+
+    acertouInimigo(aBala, oInimigo){
+
+        aBala.setVisible(false)
+        aBala.setActive(false)
+        oInimigo.setVelocityX(0)
 
     }
 }

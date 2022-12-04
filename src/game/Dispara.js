@@ -19,8 +19,9 @@ export default class Bala extends Phaser.Physics.Arcade.Sprite
 		this.setScale(0.2)
         this.setActive(true)
 		this.setVisible(true)
+        this.body.setSize(this.width, this.height, true)
         this.body.setAllowGravity(false)
-        console.log(direcao)
+        
 		if (direcao == 'esquerda'){
             this.setVelocityX(-500)
         }else{
