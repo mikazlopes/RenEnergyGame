@@ -136,6 +136,7 @@ export default class Floresta extends Phaser.Scene{
             frameRate: 15,
             repeat: -1
         })
+
         
         
         //insere o jogador 
@@ -164,7 +165,19 @@ export default class Floresta extends Phaser.Scene{
         this.balas = new CriaBalas(this)
         this.balas.playAnimation('enemy_bullet_spin')
 
-        console.log(this.balas)
+        // this.muzzle = this.add.group({
+        //     key: 'muzzle',
+        //     repeat: this.difficulty,
+        //     setXY:{
+        //         x: enemies[0].x + 72,
+        //         y: enemies[0].y + 7,
+        //         stepX:  120,
+        //         stepY: 60
+        //     }
+        // })
+
+
+        this.muzzle = this.add.sprite(100, 100, 'muzzle').setScale(0.25).setVisible(false)      
     
 
         // teclas para mover o heroi
@@ -192,12 +205,29 @@ export default class Floresta extends Phaser.Scene{
     update(){
 
         this.player.body.setVelocityX(0)
+        
 
         if (this.cursors.left.isDown){
+            
             this.player.body.setVelocityX(- this.speedH)
+
+            if (this.inputKeys.isUp){
+
+                this.muzzle.setVisible(false)
+                this.muzzle.stop('muzzle')
+
+            }
             
         }else if (this.cursors.right.isDown){
+            
             this.player.body.setVelocityX(this.speedH)
+
+            if (this.inputKeys.isUp){
+
+                this.muzzle.setVisible(false)
+                this.muzzle.stop('muzzle')
+
+            }
         }
 
         if (this.cursors.up.isDown && this.player.body.onFloor()){
@@ -210,8 +240,21 @@ export default class Floresta extends Phaser.Scene{
         }
 
         if (this.cursors.left.isDown && this.inputKeys.isDown || this.cursors.right.isDown && this.inputKeys.isDown){
+            
             var estado = 'run'
             this.disparouBala(estado)
+
+            if (this.cursors.left.isDown){
+
+                this.muzzle.setX(this.player.x - 70)
+                this.muzzle.setY(this.player.y)
+
+            }else if (this.cursors.right.isDown){
+
+                this.muzzle.setX(this.player.x + 70)
+                this.muzzle.setY(this.player.y)
+
+            }   
             
         } else if (this.cursors.left.isDown){
             this.flipaHitBox('Esquerda')
@@ -224,7 +267,7 @@ export default class Floresta extends Phaser.Scene{
         } else if (this.cursors.up.isDown){
            
             this.player.play(this.playerSelected + '_run', true)
-            //this.player.flipX = true
+            
         
         }
         else if (this.cursors.down.isDown){
@@ -233,11 +276,16 @@ export default class Floresta extends Phaser.Scene{
             this.player.flipX = false
         
         } else if (this.inputKeys.isDown){
+            
             var estado = 'idle'
             this.disparouBala(estado)
-            
-        } else {this.player.play(this.playerSelected + '_idle', true)}
 
+        }else{
+
+            this.player.play(this.playerSelected + '_idle', true)
+            this.muzzle.setVisible(false)
+            this.muzzle.stop('muzzle')
+        }
 
     }
 
@@ -262,10 +310,20 @@ export default class Floresta extends Phaser.Scene{
             if (this.player.flipX){
 
                 this.balas.disparouBala(this.player.x - 60, this.player.y, 'esquerda')
+                this.muzzle.setX(this.player.x - 70)
+                this.muzzle.setY(this.player.y)
+                this.muzzle.flipX = true
+                this.muzzle.setVisible(true)
+                this.muzzle.play('muzzle', true)
 
             }else{
             
                 this.balas.disparouBala(this.player.x + 60, this.player.y, 'direita')
+                this.muzzle.setX(this.player.x + 70)
+                this.muzzle.setY(this.player.y)
+                this.muzzle.flipX = false
+                this.muzzle.setVisible(true)
+                this.muzzle.play('muzzle', true)
         
             }
             

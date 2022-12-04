@@ -207,7 +207,7 @@ export default class Intro extends Phaser.Scene{
         })
 
         this.anims.create({
-            key: 'enemy_muzzle',
+            key: 'muzzle',
             frames: this.anims.generateFrameNames('muzzle', {
                 start: 0,
                 end: 10,
@@ -414,7 +414,7 @@ export default class Intro extends Phaser.Scene{
             
             enemies[i].play('enemy_run_shoot')
             muzzles[i].setPosition(enemies[i].x + 72, enemies[i].y +7)
-            muzzles[i].play('enemy_muzzle')
+            muzzles[i].play('muzzle')
             bullets[i].setPosition(muzzles[i].x +12, muzzles[i].y)
             bullets[i].play('enemy_bullet_spin')
 
