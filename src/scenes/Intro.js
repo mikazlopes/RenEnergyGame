@@ -48,14 +48,14 @@ let enemyRun, enemyBullet, enemyMuzzle, enemies, muzzles, bullets
 export default class Intro extends Phaser.Scene{
     constructor(){
     
-        super('intro')
+        super('Intro')
     
     }
 
     preload(){
 
-        this.load.image('background', 'assets/intro_background.png')
-        this.load.image('cidade', 'assets/viana.png')
+        this.load.image('background', 'assets//backgrounds/intro_background.png')
+        this.load.image('cidade', 'assets/backgrounds/viana.png')
         this.load.atlas('enemy_run', 'assets/spritesheets/enemy_run_spritesheet.png', 'assets/spritesheets/enemy_run_spritesheet.json')
         this.load.atlas('enemy_bullet', 'assets/spritesheets/enemy_bullet_spritesheet.png', 'assets/spritesheets/enemy_bullet_spritesheet.json')
         this.load.atlas('muzzle', 'assets/spritesheets/muzzle_spritesheet.png', 'assets/spritesheets/muzzle_spritesheet.json')
@@ -70,7 +70,7 @@ export default class Intro extends Phaser.Scene{
         var i
         var numInimigos = 2
 
-        this.input.once('pointerdown', () => {this.scene.start('mapa')})
+        this.input.once('pointerdown', () => {this.scene.start('Mapa')})
 
         //arquivar tamanho da cena para usar no posicionamento dos objetos
         width = this.scale.width;
@@ -113,7 +113,7 @@ export default class Intro extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
-        });
+        })
 
         this.anims.create({
             key: 'enemy_run',
@@ -126,7 +126,7 @@ export default class Intro extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
-        });
+        })
 
         this.anims.create({
             key: 'jack_run',
@@ -139,7 +139,7 @@ export default class Intro extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
-        });
+        })
 
         this.anims.create({
             key: 'jack_idle',
@@ -152,7 +152,7 @@ export default class Intro extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
-        });
+        })
 
         this.anims.create({
             key: 'jill_run',
@@ -165,7 +165,7 @@ export default class Intro extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
-        });
+        })
 
         this.anims.create({
             key: 'jill_idle',
@@ -178,7 +178,7 @@ export default class Intro extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
-        });
+        })
 
         this.anims.create({
             key: 'enemy_bullet_size',
@@ -191,7 +191,7 @@ export default class Intro extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
-        });
+        })
 
         this.anims.create({
             key: 'enemy_bullet_spin',
@@ -204,7 +204,7 @@ export default class Intro extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
-        });
+        })
 
         this.anims.create({
             key: 'enemy_muzzle',
@@ -217,7 +217,7 @@ export default class Intro extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: 0
-        });
+        })
 
         //bloco em que cria os objetos dos inimigos e executa as animacoes 
 

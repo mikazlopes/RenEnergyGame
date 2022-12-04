@@ -4,12 +4,14 @@ import Intro from './scenes/Intro.js'
 
 import Mapa from './scenes/Mapa.js'
 
+import Floresta from './scenes/Floresta.js'
+
 
 export default new Phaser.Game({
     type: Phaser.AUTO,
     width: 1280,
     height: 720,
-    scene: Mapa
+    scene: [Intro , Mapa, Floresta]
     })
 
 

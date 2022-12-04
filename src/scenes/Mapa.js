@@ -17,7 +17,7 @@ export default class Mapa extends Phaser.Scene{
     
         // configura physics para esta cena
         super({
-            key: 'mapa',
+            key: 'Mapa',
             physics: {
                 default: 'arcade',
                 arcade: {
@@ -27,6 +27,18 @@ export default class Mapa extends Phaser.Scene{
               }
         })
     
+    }
+
+    init(){
+
+        // Usado para importar que jogador foi escolhido e a dificuldade
+        this.playerSelected = 'jack'
+        this.difficulty = 'easy'
+        this.speed = 70
+
+        // Guardar as dimensoes da scene numa variavel
+        this.width = this.scale.width
+        this.height = this.scale.height
     }
 
     preload(){
@@ -43,18 +55,12 @@ export default class Mapa extends Phaser.Scene{
         
         this.load.tilemapTiledJSON('mapa', 'assets/tileset/renEnergy_mapa.json')
 
-        this.load.atlas('jack_walk', 'assets/spritesheets/jack_walk_spritesheet.png', 'assets/spritesheets/jack_walk_spritesheet.json')
-        this.load.atlas('jack_idle', 'assets/spritesheets/jack_idle_spritesheet.png', 'assets/spritesheets/jack_idle_spritesheet.json')
+        this.load.atlas(this.playerSelected + '_walk', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.json')
+        this.load.atlas(this.playerSelected + '_idle', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.json')
 
     }
 
     create(){
-
-        this.playerSelected = 'jack'
-        this.difficulty = 'easy'
-        this.speed = 70
-        this.width = this.scale.width
-        this.height = this.scale.height
 
 
        // adiciona os tilesets para o mapa
@@ -147,7 +153,7 @@ export default class Mapa extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
-        });
+        })
 
         //insere o jogador 
 
@@ -186,10 +192,13 @@ export default class Mapa extends Phaser.Scene{
 
     colisaoInimigo(player, zona){
 
-        console.log('colidiu')
 
-        zona.x = Phaser.Math.RND.between(500 , this.physics.world.bounds.width)
-        zona.y = Phaser.Math.RND.between(100, this.physics.world.bounds.height)
+        // zona.x = Phaser.Math.RND.between(500 , this.physics.world.bounds.width)
+        // zona.y = Phaser.Math.RND.between(100, this.physics.world.bounds.height)
+
+        this.scene.start('Floresta')
+
+        
 
 
     }

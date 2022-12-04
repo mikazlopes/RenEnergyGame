@@ -1,8 +1,208 @@
 {
 	"frames": {
-		"Idle__000.png": {
+		"Idle_Aim__000.png": {
 			"frame": {
 				"x": 0,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"sourceSize": {
+				"w": 524,
+				"h": 454
+			}
+		},
+		"Idle_Aim__001.png": {
+			"frame": {
+				"x": 524,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"sourceSize": {
+				"w": 524,
+				"h": 454
+			}
+		},
+		"Idle_Aim__002.png": {
+			"frame": {
+				"x": 1048,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"sourceSize": {
+				"w": 524,
+				"h": 454
+			}
+		},
+		"Idle_Aim__003.png": {
+			"frame": {
+				"x": 1572,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"sourceSize": {
+				"w": 524,
+				"h": 454
+			}
+		},
+		"Idle_Aim__004.png": {
+			"frame": {
+				"x": 2096,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"sourceSize": {
+				"w": 524,
+				"h": 454
+			}
+		},
+		"Idle_Aim__005.png": {
+			"frame": {
+				"x": 2620,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"sourceSize": {
+				"w": 524,
+				"h": 454
+			}
+		},
+		"Idle_Aim__006.png": {
+			"frame": {
+				"x": 3144,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"sourceSize": {
+				"w": 524,
+				"h": 454
+			}
+		},
+		"Idle_Aim__007.png": {
+			"frame": {
+				"x": 3668,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"sourceSize": {
+				"w": 524,
+				"h": 454
+			}
+		},
+		"Idle_Aim__008.png": {
+			"frame": {
+				"x": 4192,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"sourceSize": {
+				"w": 524,
+				"h": 454
+			}
+		},
+		"Idle_Aim__009.png": {
+			"frame": {
+				"x": 4716,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 524,
+				"h": 454
+			},
+			"sourceSize": {
+				"w": 524,
+				"h": 454
+			}
+		},
+		"Idle__000.png": {
+			"frame": {
+				"x": 5240,
 				"y": 0,
 				"w": 499,
 				"h": 510
@@ -22,7 +222,7 @@
 		},
 		"Idle__001.png": {
 			"frame": {
-				"x": 499,
+				"x": 5739,
 				"y": 0,
 				"w": 499,
 				"h": 510
@@ -42,7 +242,7 @@
 		},
 		"Idle__002.png": {
 			"frame": {
-				"x": 998,
+				"x": 6238,
 				"y": 0,
 				"w": 499,
 				"h": 510
@@ -62,7 +262,7 @@
 		},
 		"Idle__003.png": {
 			"frame": {
-				"x": 1497,
+				"x": 6737,
 				"y": 0,
 				"w": 499,
 				"h": 510
@@ -82,7 +282,7 @@
 		},
 		"Idle__004.png": {
 			"frame": {
-				"x": 1996,
+				"x": 7236,
 				"y": 0,
 				"w": 499,
 				"h": 510
@@ -102,7 +302,7 @@
 		},
 		"Idle__005.png": {
 			"frame": {
-				"x": 2495,
+				"x": 7735,
 				"y": 0,
 				"w": 499,
 				"h": 510
@@ -122,7 +322,7 @@
 		},
 		"Idle__006.png": {
 			"frame": {
-				"x": 2994,
+				"x": 8234,
 				"y": 0,
 				"w": 499,
 				"h": 510
@@ -142,7 +342,7 @@
 		},
 		"Idle__007.png": {
 			"frame": {
-				"x": 3493,
+				"x": 8733,
 				"y": 0,
 				"w": 499,
 				"h": 510
@@ -162,7 +362,7 @@
 		},
 		"Idle__008.png": {
 			"frame": {
-				"x": 3992,
+				"x": 9232,
 				"y": 0,
 				"w": 499,
 				"h": 510
@@ -182,7 +382,7 @@
 		},
 		"Idle__009.png": {
 			"frame": {
-				"x": 4491,
+				"x": 9731,
 				"y": 0,
 				"w": 499,
 				"h": 510
@@ -207,7 +407,7 @@
 		"image": "spritesheet.png",
 		"format": "RGBA8888",
 		"size": {
-			"w": 4990,
+			"w": 10230,
 			"h": 510
 		},
 		"scale": "1"
