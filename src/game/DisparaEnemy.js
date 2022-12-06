@@ -1,6 +1,6 @@
 import Phaser from '../lib/phaser.js'
 
-export default class Bala extends Phaser.Physics.Arcade.Sprite
+export default class BalaEnemy extends Phaser.Physics.Arcade.Sprite
 {
     /**
     * @param {Phaser.Scene} scene
@@ -9,7 +9,7 @@ export default class Bala extends Phaser.Physics.Arcade.Sprite
     */
 
      constructor(scene, x, y) {
-		super(scene, x, y, 'bala')
+		super(scene, x, y, 'balaEnemy')
         scene.physics.world.enable(this)
         this.setTexture('enemy_bullet')
 	}
@@ -28,6 +28,13 @@ export default class Bala extends Phaser.Physics.Arcade.Sprite
             this.setVelocityX(500)
         }
 	}
+
+    acertouHeroi(){
+
+        this.setActive(false)
+        this.setVisible(false)
+
+    }
 
     preUpdate(time, delta) {
 		super.preUpdate(time, delta)

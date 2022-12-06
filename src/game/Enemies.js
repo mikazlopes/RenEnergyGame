@@ -1,5 +1,8 @@
 import Phaser from '../lib/phaser.js'
 
+import MuzzlesEnemy from './MuzzlesEnemy.js'
+
+
 export default class Enemy extends Phaser.Physics.Arcade.Sprite
 {
     /**
@@ -16,14 +19,48 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
         scene.add.existing(this)
         this.setScale(0.2)
         this.flipX = true
-        //this.body.setSize(280, 450, true)
-        //this.body.setOffset(0, -8)      
- 
+        this.health = 100
+        this.damage = 0.05
+        this.play('enemy_idle')
+
+        this.muzzle = new MuzzlesEnemy(scene, this.x, this.y)
+
+        this.shootTimer = this.scene.time.addEvent({
+            delay: 1000,
+            callback: this.scene.disparouBalaEnemy,
+            args: [this, 'idle'],
+            callbackScope: this.scene,
+            loop: true
+        })
+
+
+
+    }
+
+    inimigoAcoes(player){
+
         
     }
-    
-    // recomendado 
-    // preUpdate(time, delta) {        
-	// 	super.preUpdate(time, delta)       
-    // }  
+
+
+   
+
+    inimigoEnergia(){
+
+
+    }
+
+    inimigoDispara(x, y, direcao){
+
+        const sentido = direcao
+
+        this.muzzle.dispara(x, y, sentido, this)
+        
+        
+
+    }
+
+
+
+   
 }

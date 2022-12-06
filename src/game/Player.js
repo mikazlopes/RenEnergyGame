@@ -15,7 +15,9 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         scene.physics.world.enable(this)
         this.setScale(0.2)
         this.body.setSize(280, 450, true)
-        this.body.setOffset(0, -2)      
+        this.body.setOffset(0, -2)    
+        
+
 
     }
 
@@ -29,10 +31,21 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
     vaiDireita(){
 
         this.flipX = false
-        this.setScale(0.2)
         this.body.setSize(280, 450, true)
         this.body.setOffset(0, -2)   
     }
+
+    calculaDano(){
+
+        
+        this.anims.stop()
+        this.play(this.scene.playerSelected + '_hurt', true)
+        
+        this.setTintFill(0xffffff) 
+       
+        
+    }
+
     
     // para investigar mais tarde
     preUpdate(time, delta) {        
