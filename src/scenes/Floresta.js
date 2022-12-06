@@ -44,6 +44,7 @@ export default class Floresta extends Phaser.Scene{
         this.speedH = 250
         this.speedV = 400
         this.balaIntervalohero = 0
+        
     
     
 
@@ -239,7 +240,9 @@ export default class Floresta extends Phaser.Scene{
         
         this.physics.add.collider(this.balashero, this.osInimigos, this.acertouInimigo)
 
-        this.physics.add.collider(this.balasenemy, this.player, this.acertouHeroi)
+        this.heroiColisaoTemp = this.physics.add.collider(this.balasenemy, this.player, this.acertouHeroi)
+
+        console.log(this.heroiColisaoTemp)
 
 
         //this.physics.moveToObject(inimigo,this.player, 100)
@@ -334,6 +337,7 @@ export default class Floresta extends Phaser.Scene{
             this.disparouBalaHero(this.player, estado)
             
         } else if (this.cursors.left.isDown){
+            
             this.flipaHitBox('Esquerda')
 
             if (this.cursors.up.isDown){
@@ -396,7 +400,7 @@ export default class Floresta extends Phaser.Scene{
 
         }else{
 
-            if (this.player.body.onFloor()){
+            if (this.player.body.onFloor() && this.player.estado == 'ok'){
 
                 this.player.play(this.playerSelected + '_idle', true)
             
@@ -419,7 +423,7 @@ export default class Floresta extends Phaser.Scene{
     }
 
 
-    // chama funcao do jogador que corrige a Hitbox
+    // Funcao do jogador que corrige a Hitbox
     flipaHitBox(sentido){
 
         if (this.player.body.onFloor()){
@@ -436,7 +440,9 @@ export default class Floresta extends Phaser.Scene{
         if (this.time.now > this.balaIntervalohero){
             
             if (estado != 'jump'){
+               
                 personagem.play(this.playerSelected + '_' + estado +'_aim', true)
+
             }else{
 
                 personagem.play(this.playerSelected + '_' + estado, true)
@@ -506,7 +512,7 @@ export default class Floresta extends Phaser.Scene{
 
     acertouInimigo(aBalaHeroi, oInimigo){
 
-        console.log(aBalaHeroi)
+        
         aBalaHeroi.setVisible(false)
         aBalaHeroi.setActive(false)
         oInimigo.setVelocityX(0)

@@ -15,8 +15,14 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         scene.physics.world.enable(this)
         this.setScale(0.2)
         this.body.setSize(280, 450, true)
-        this.body.setOffset(0, -2)    
+        this.body.setOffset(0, -2)
         
+        this.health = 100
+        this.damage = 0.05
+        
+        this.estado = 'ok'
+        
+
 
 
     }
@@ -38,12 +44,29 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
     calculaDano(){
 
         
-        this.anims.stop()
-        this.play(this.scene.playerSelected + '_hurt', true)
+        this.estado = 'hurt'
+        this.play(this.scene.playerSelected + '_hurt', false)
+        this.disableInteractive(this)
+
+        this.jogadorFlasha()
         
-        this.setTintFill(0xffffff) 
-       
-        
+    }
+
+   jogadorFlasha(cor){
+
+        this.body.enable = false
+        this.setTintFill(0xffffff)
+        this.mudaCor = this.scene.time.addEvent({delay: 100, repeat: 0, callback: this.setTintFill,args: [0xFF0000], callbackScope: this})
+        this.mudaCor = this.scene.time.addEvent({delay: 100, repeat: 0, callback: this.jogadorRecupera, callbackScope: this})
+
+    }
+
+    jogadorRecupera(){
+
+        this.mudaCor = this.scene.time.addEvent({delay: 100, repeat: 0, callback: this.clearTint, callbackScope: this})
+        this.estado = 'ok'
+        this.body.enable = true
+
     }
 
     
