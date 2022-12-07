@@ -14,6 +14,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
 
     constructor(scene, x, y, texture){
 
+       //parametros do Inimigo que inclui dano e energia
         super(scene, x, y, texture)
         scene.physics.world.enable(this)
         scene.add.existing(this)
@@ -25,11 +26,13 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
 
         this.body.setVelocityX(0)
         
-
+        // Estados do inimigo que permitem controlar animacoes
         this.estado = 'ok'
 
+        // objeto que cria e mostra o Muzzle da arma
         this.muzzle = new MuzzlesEnemy(scene, this.x, this.y)
 
+        //define o intervalo em que o inimigo dispara
         this.shootTimer = this.scene.time.addEvent({
             delay: 1000,
             callback: this.scene.disparouBalaEnemy,
@@ -100,7 +103,67 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
 
     }
 
-    inimigoAcoes(player){
+    inimigoAcoes(jogador){
+
+        if (jogador.x > this.x){
+
+            this.flipX = false
+
+        }else{
+
+            this.flipX = true
+        }
+
+        var dist = Phaser.Math.Distance.BetweenPoints(jogador, this)
+        
+        var distV = jogador.y - this.y
+
+        if (dist < 700 && dist > 80 && this.estado != 'dead' && this.body.onFloor()){
+            
+            this.play('enemy_idle_aim')
+            this.anims.playAfterRepeat('enemy_idle', true)
+
+            if ( distV < - 10 && this.body.onFloor()){
+
+                this.body.velocity.y = -250
+                this.play('enemy_jump_shoot', true)
+            }
+
+                
+                
+                if (!this.body.onFloor()){
+
+                    this.body.setSize(this.width, this.height, true)
+                    this.play('enemy_jump_shoot', true)
+
+                }
+                
+                if (this.body.onFloor()){
+
+                    this.anims.playAfterRepeat('enemy_idle', true)
+                    
+                }
+
+        }else if (dist <= 80 && this.estado != 'dead'){
+            
+            this.play('enemy_melee', true)
+            this.anims.playAfterRepeat('enemy_idle', true)
+
+            
+        }
+
+        if (this.flipX && !this.body.onFloor()){
+                    
+            this.muzzle.x = this.x - 45
+            this.muzzle.y = this.y + 5
+            console.log(this.muzzle.x)
+
+        }else if (!this.flipX && !this.body.onFloor()){
+            
+            this.muzzle.x = this.x + 45
+            this.muzzle.y = this.y + 5
+        }
+         
 
         
     }
@@ -126,9 +189,10 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
     // corre funcoes antes to update
     preUpdate(time, delta) {        
 		super.preUpdate(time, delta)  
+
         
-        
-    }  
 
    
+    }
+
 }

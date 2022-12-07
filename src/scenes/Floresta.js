@@ -123,7 +123,7 @@ export default class Floresta extends Phaser.Scene{
         })
 
         this.anims.create({
-            key: this.playerSelected + '_crouch',
+            key: this.playerSelected + '_crouch_aim',
             frames: this.anims.generateFrameNames(this.playerSelected + '_crouch', {
                 start: 0,
                 end: 9,
@@ -341,162 +341,52 @@ export default class Floresta extends Phaser.Scene{
 
     update(){
 
-        var estado
 
         this.player.body.setVelocityX(0)
 
         this.osInimigos.getChildren().forEach(this.inimigoReage, this)
         
-
-        
-        if (this.cursors.left.isDown){
-            
-            this.player.body.setVelocityX(- this.speedH)
-
-            if (this.inputKeys.isUp){
-
-                
-
-                if (this.heroMuzzle != null){
-                    this.heroMuzzle.setVisible(false)
-                    
-                }
-
-            }
-            
-        }else if (this.cursors.right.isDown){
-            
-            this.player.body.setVelocityX(this.speedH)
-
-            if (this.inputKeys.isUp){
-
-                
-
-                if (this.heroMuzzle != null){
-                    this.heroMuzzle.setVisible(false)
-                    
-                }
-            }
-        }
-
-        if (this.cursors.up.isDown && this.player.body.onFloor()){
-
-            this.player.body.velocity.y = - 250
-            
-            if (this.heroMuzzle != null){
-                
-                this.heroMuzzle.setVisible(false)
-                
-            }
-            
-        }else if (this.cursors.down.isDown && !this.player.body.onFloor()){
-            
-            this.player.body.velocity.y = + 250
-
-        
-        }
-
+  
         if ((this.cursors.left.isDown && this.inputKeys.isDown || this.cursors.right.isDown && this.inputKeys.isDown || this.cursors.up.isDown && this.inputKeys.isDown) && !this.player.isDead){
             
-            if (this.player.body.onFloor){
-                estado = 'run'
+            if (this.cursors.left.isDown){
+                this.player.vaiEsquerda()
+            }else if (this.cursors.right.isDown){
+                this.player.vaiDireita()
+            }else if (this.cursors.up.isDown){
+                this.player.vaiCima()
+            }else if (this.cursors.down.isDown){
+                this.player.vaiBaixo()
             }
+
             
-            if (this.player.flipX){
-                
-                this.heroMuzzle.setX(this.player.x - 70)
-                this.heroMuzzle.setY(this.player.y)
-
-            }else{
-
-                this.heroMuzzle.setX(this.player.x + 70)
-                this.heroMuzzle.setY(this.player.y)
-            } 
-            
-            if (this.cursors.up.isDown){
-                
-                estado = 'jump'
-
-                this.player.play(this.playerSelected + '_jump', true) 
-
-            }  
-
-            this.disparouBalaHero(this.player, estado)
+    
             
         } else if (this.cursors.left.isDown && !this.player.isDead){
             
-            this.flipaHitBox('Esquerda')
-
-            if (this.cursors.up.isDown){
-           
-                this.player.play(this.playerSelected + '_jump', true)
-                
-                if (this.heroMuzzle != null){
-                    this.heroMuzzle.setX(this.player.x + 70)
-                    this.heroMuzzle.setY(this.player.y)
-                
-                }       
-            
-            }
+            this.player.vaiEsquerda()
 
         }else if (this.cursors.right.isDown && !this.player.isDead){
            
-                
-            this.flipaHitBox('Direita')
-
-            if (this.cursors.up.isDown){
-           
-                this.player.play(this.playerSelected + '_jump', true) 
-                
-                if (this.heroMuzzle != null){
-                    this.heroMuzzle.setX(this.player.x + 70)
-                    this.heroMuzzle.setY(this.player.y)
-                
-                }   
-            }
+            this.player.vaiDireita()
         
-        }else if (this.cursors.up.isDown && !this.player.isDead){
+        }else if (this.cursors.up.isDown && this.player.body.onFloor() && !this.player.isDead){
            
-            this.player.play(this.playerSelected + '_jump', true)       
+            this.player.vaiCima()     
         
         }
         else if (this.cursors.down.isDown && !this.player.isDead){
            
-            this.player.play(this.playerSelected + '_jump', true)
-            this.player.flipX = false
+            this.player.vaiBaixo()
         
         } else if (this.inputKeys.isDown && !this.player.isDead){
-            
-            var estado = 'idle'
 
-            this.disparouBalaHero(this.player, estado)
-
-            this.heroMuzzle.setY(this.player.y)
-
-            if (!this.player.flipX){
-            
-                this.heroMuzzle.setX(this.player.x + 70)
-            
-
-            }else if (this.player.flipX){
-
-                this.heroMuzzle.setX(this.player.x - 70)
-                
-
-            }
+            this.player.estaDisparar()
 
         }else{
 
-            if (this.player.body.onFloor() && this.player.estado == 'ok' && !this.player.isDead){
+            this.player.estaParado()
 
-                this.player.play(this.playerSelected + '_idle', true)
-            
-            }
-            
-            if (this.heroMuzzle != null){
-                this.heroMuzzle.setVisible(false)
-            }
-            
         }
 
         /** @type {Phaser.Input.Keyboard.KeyboardPlugin.checkDown} */
@@ -559,7 +449,7 @@ export default class Floresta extends Phaser.Scene{
                 
             }
             
-        this.balaIntervalohero = this.time.now + 200
+        this.balaIntervalohero = this.time.now + 100
             
         }
     }
@@ -569,12 +459,8 @@ export default class Floresta extends Phaser.Scene{
         personagem.body.setVelocityX(0)
 
         var dist = Phaser.Math.Distance.BetweenPoints(this.player, personagem)
-        
-        var distV = this.player.y - personagem.y
 
-        if (dist < 700 && dist > 100 && personagem.estado != 'dead' && personagem.body.onFloor()){
-            
-            personagem.play('enemy_idle_aim')
+        if (dist < 700 && dist > 100 && personagem.estado != 'dead' && personagem.estado != 'hurt'){
             
             
             if (personagem.flipX){
@@ -586,10 +472,8 @@ export default class Floresta extends Phaser.Scene{
             
                 this.balasenemy.disparouBala(personagem.x + 60, personagem.y, "direita")
                 personagem.inimigoDispara(personagem.x + 52, personagem.y + 3, "direita")
-
                
             }
-
             
         }
     }
@@ -627,37 +511,9 @@ export default class Floresta extends Phaser.Scene{
 
     inimigoReage(inimigo){
 
+        if (inimigo.estado != 'hurt' && inimigo.estado != 'dead'){
 
-        if (this.player.x > inimigo.x){
-
-            inimigo.flipX = false
-
-        }else{
-
-            inimigo.flipX = true
-        }
-
-        var dist = Phaser.Math.Distance.BetweenPoints(this.player, inimigo)
-        
-        var distV = this.player.y - inimigo.y
-
-        if (dist < 700 && dist > 100 && inimigo.estado != 'dead' && inimigo.body.onFloor()){
-            
-            inimigo.play('enemy_idle_aim')
-            inimigo.anims.playAfterRepeat('enemy_idle', true)
-
-            if ( distV < - 10 && inimigo.body.onFloor()){
-
-                inimigo.body.velocity.y = -250
-                inimigo.play('enemy_jump_shoot', false)
-                inimigo.anims.playAfterRepeat('enemy_idle', true)
-            }
-
-        }else if (dist <= 100 && inimigo.estado != 'dead'){
-            
-            inimigo.play('enemy_melee', true)
-            inimigo.anims.playAfterRepeat('enemy_idle', true)
-
+            inimigo.inimigoAcoes(this.player)
         }
 
     }

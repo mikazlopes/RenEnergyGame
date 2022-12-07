@@ -46,7 +46,7 @@ export default class MuzzlesEnemy extends Phaser.GameObjects.Sprite
         
         if (this.sentido == 'esquerda'){
 
-            this.setX(this.inimigo.x - 52)
+            this.setX(this.inimigo.x - 50)
             this.setY(this.inimigo.y + 3)
 
         }else{
