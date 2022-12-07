@@ -63,8 +63,14 @@ export default class Floresta extends Phaser.Scene{
 
         this.load.atlas(this.playerSelected + '_idle', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.json')
         this.load.atlas(this.playerSelected + '_jump', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.json')
-        this.load.atlas('enemy_idle', 'assets/spritesheets/enemy_idle_spritesheet.png', 'assets/spritesheets/enemy_idle_spritesheet.json')
+        this.load.atlas(this.playerSelected + '_dead', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.json')
         this.load.atlas(this.playerSelected + '_hurt', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.json')
+        this.load.atlas(this.playerSelected + '_crouch', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.json')
+        this.load.atlas('enemy_idle', 'assets/spritesheets/enemy_idle_spritesheet.png', 'assets/spritesheets/enemy_idle_spritesheet.json')
+        this.load.atlas('enemy_hurt', 'assets/spritesheets/enemy_hurt_spritesheet.png', 'assets/spritesheets/enemy_hurt_spritesheet.json')
+        this.load.atlas('enemy_dead', 'assets/spritesheets/enemy_dead_spritesheet.png', 'assets/spritesheets/enemy_dead_spritesheet.json')
+        this.load.atlas('enemy_jump', 'assets/spritesheets/enemy_jump_spritesheet.png', 'assets/spritesheets/enemy_jump_spritesheet.json')
+        this.load.atlas('enemy_melee', 'assets/spritesheets/enemy_melee_spritesheet.png', 'assets/spritesheets/enemy_melee_spritesheet.json')
         this.load.atlas('hero_bullet', 'assets/spritesheets/hero_bullet_spritesheet.png', 'assets/spritesheets/hero_bullet_spritesheet.json')
 
     }
@@ -113,7 +119,20 @@ export default class Floresta extends Phaser.Scene{
                 suffix: '.png'
             }),
             frameRate: 15,
-            repeat: 0
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: this.playerSelected + '_crouch',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_crouch', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Crouch_Aim__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
         })
 
         this.anims.create({
@@ -140,6 +159,58 @@ export default class Floresta extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_jump_shoot',
+            frames: this.anims.generateFrameNames('enemy_jump', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Jump_Shoot__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_melee',
+            frames: this.anims.generateFrameNames('enemy_melee', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Melee__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_hurt',
+            frames: this.anims.generateFrameNames('enemy_hurt', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Hurt__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: 0
+        })
+
+        this.anims.create({
+            key: 'enemy_dead',
+            frames: this.anims.generateFrameNames('enemy_dead', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Dead__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: 0
         })
 
         this.anims.create({
@@ -194,6 +265,19 @@ export default class Floresta extends Phaser.Scene{
             repeat: -1
         })
 
+        this.anims.create({
+            key: this.playerSelected + '_dead',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_dead', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Dead__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: 0
+        })
+
         
         
         //insere o jogador 
@@ -224,7 +308,7 @@ export default class Floresta extends Phaser.Scene{
         
         for (var i = 0; i < this.difficulty; i++ ){
             var xOffset = 400 * i
-            this.osInimigos.add(new Enemy(this, 300 + xOffset, 300, 'enemy_idle'))
+            this.osInimigos.add(new Enemy(this, 700 + xOffset, 300, 'enemy_idle'))
         }    
 
         // teclas para mover o heroi
@@ -238,11 +322,11 @@ export default class Floresta extends Phaser.Scene{
 
         // acrescentar uma funcao para tirar as balas e calcula energia quando acertam num inimigo ou no heroi
         
-        this.physics.add.collider(this.balashero, this.osInimigos, this.acertouInimigo)
+        this.physics.add.collider(this.balashero, this.osInimigos, this.acertouInimigo, false, this)
 
-        this.heroiColisaoTemp = this.physics.add.collider(this.balasenemy, this.player, this.acertouHeroi)
+        this.physics.add.collider(this.balasenemy, this.player, this.acertouHeroi, false, this)
 
-        console.log(this.heroiColisaoTemp)
+        this.physics.add.collider(this.osInimigos, this.player, this.colidiram, false, this)
 
 
         //this.physics.moveToObject(inimigo,this.player, 100)
@@ -260,6 +344,8 @@ export default class Floresta extends Phaser.Scene{
         var estado
 
         this.player.body.setVelocityX(0)
+
+        this.osInimigos.getChildren().forEach(this.inimigoReage, this)
         
 
         
@@ -303,13 +389,14 @@ export default class Floresta extends Phaser.Scene{
                 
             }
             
-        }else if (this.cursors.down.isDown){
+        }else if (this.cursors.down.isDown && !this.player.body.onFloor()){
             
-            // adicionar animacao para agachar
+            this.player.body.velocity.y = + 250
+
         
         }
 
-        if (this.cursors.left.isDown && this.inputKeys.isDown || this.cursors.right.isDown && this.inputKeys.isDown || this.cursors.up.isDown && this.inputKeys.isDown){
+        if ((this.cursors.left.isDown && this.inputKeys.isDown || this.cursors.right.isDown && this.inputKeys.isDown || this.cursors.up.isDown && this.inputKeys.isDown) && !this.player.isDead){
             
             if (this.player.body.onFloor){
                 estado = 'run'
@@ -336,7 +423,7 @@ export default class Floresta extends Phaser.Scene{
 
             this.disparouBalaHero(this.player, estado)
             
-        } else if (this.cursors.left.isDown){
+        } else if (this.cursors.left.isDown && !this.player.isDead){
             
             this.flipaHitBox('Esquerda')
 
@@ -352,7 +439,7 @@ export default class Floresta extends Phaser.Scene{
             
             }
 
-        }else if (this.cursors.right.isDown){
+        }else if (this.cursors.right.isDown && !this.player.isDead){
            
                 
             this.flipaHitBox('Direita')
@@ -368,17 +455,17 @@ export default class Floresta extends Phaser.Scene{
                 }   
             }
         
-        }else if (this.cursors.up.isDown){
+        }else if (this.cursors.up.isDown && !this.player.isDead){
            
             this.player.play(this.playerSelected + '_jump', true)       
         
         }
-        else if (this.cursors.down.isDown){
+        else if (this.cursors.down.isDown && !this.player.isDead){
            
-            this.player.play(this.playerSelected + '_run', true)
+            this.player.play(this.playerSelected + '_jump', true)
             this.player.flipX = false
         
-        } else if (this.inputKeys.isDown){
+        } else if (this.inputKeys.isDown && !this.player.isDead){
             
             var estado = 'idle'
 
@@ -400,7 +487,7 @@ export default class Floresta extends Phaser.Scene{
 
         }else{
 
-            if (this.player.body.onFloor() && this.player.estado == 'ok'){
+            if (this.player.body.onFloor() && this.player.estado == 'ok' && !this.player.isDead){
 
                 this.player.play(this.playerSelected + '_idle', true)
             
@@ -477,14 +564,15 @@ export default class Floresta extends Phaser.Scene{
         }
     }
 
-    disparouBalaEnemy(personagem, estado){
+    disparouBalaEnemy(personagem, posicao){
 
-       
+        personagem.body.setVelocityX(0)
+
         var dist = Phaser.Math.Distance.BetweenPoints(this.player, personagem)
         
         var distV = this.player.y - personagem.y
 
-        if (dist < 700){
+        if (dist < 700 && dist > 100 && personagem.estado != 'dead' && personagem.body.onFloor()){
             
             personagem.play('enemy_idle_aim')
             
@@ -502,56 +590,76 @@ export default class Floresta extends Phaser.Scene{
                
             }
 
-            if ( distV < - 10 && personagem.body.onFloor()){
-
-                personagem.body.velocity.y = -250
-            }
             
-        } 
+        }
+    }
+
+    destroiInimigo(personagem){
+
+        personagem.shootTimer.reset()
+        personagem.destroy()
+
     }
 
     acertouInimigo(aBalaHeroi, oInimigo){
 
-        
-        aBalaHeroi.setVisible(false)
-        aBalaHeroi.setActive(false)
-        oInimigo.setVelocityX(0)
-
-        
+        oInimigo.body.setVelocityX(0)
+        aBalaHeroi.acertouInimigo()
+        oInimigo.calculaDano(aBalaHeroi.dano) 
 
     }
 
     acertouHeroi(oHeroi, aBalaInimigo){
         
-        
+        this.cameras.main.shake(50)
         aBalaInimigo.acertouHeroi()
-        oHeroi.calculaDano()
+        oHeroi.calculaDano(aBalaInimigo.dano)
 
     }
 
-    inimigoReage(individuo){
+    colidiram(heroiColidiu, inimigoColidiu){
+
+        this.cameras.main.shake(50)
+        heroiColidiu.calculaDano(inimigoColidiu.meele)
 
 
-        var dist = Phaser.Math.Distance.BetweenPoints(this.player, individuo)
+    }
 
-        var distV = this.player.y - individuo.y
-
-
-        if (dist < 500){
+    inimigoReage(inimigo){
 
 
-            individuo.inimigoDispara('idle', this.balaIntervalohero)
+        if (this.player.x > inimigo.x){
 
-            //this.time.addEvent({ delay: 1000, callback: this.disparouBalaEnemy(individuo, 'idle'), callbackScope: this, loop: false})
+            inimigo.flipX = false
 
-            if ( distV < - 10 && individuo.body.onFloor()){
+        }else{
 
-                individuo.body.velocity.y = -250
+            inimigo.flipX = true
+        }
+
+        var dist = Phaser.Math.Distance.BetweenPoints(this.player, inimigo)
+        
+        var distV = this.player.y - inimigo.y
+
+        if (dist < 700 && dist > 100 && inimigo.estado != 'dead' && inimigo.body.onFloor()){
+            
+            inimigo.play('enemy_idle_aim')
+            inimigo.anims.playAfterRepeat('enemy_idle', true)
+
+            if ( distV < - 10 && inimigo.body.onFloor()){
+
+                inimigo.body.velocity.y = -250
+                inimigo.play('enemy_jump_shoot', false)
+                inimigo.anims.playAfterRepeat('enemy_idle', true)
             }
+
+        }else if (dist <= 100 && inimigo.estado != 'dead'){
+            
+            inimigo.play('enemy_melee', true)
+            inimigo.anims.playAfterRepeat('enemy_idle', true)
 
         }
 
-        this.balaIntervaloenemy = this.time.now + 500
     }
 
     inimigoAcao(){

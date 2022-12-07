@@ -12,6 +12,8 @@ export default class BalaEnemy extends Phaser.Physics.Arcade.Sprite
 		super(scene, x, y, 'balaEnemy')
         scene.physics.world.enable(this)
         this.setTexture('enemy_bullet')
+
+        this.dano = 10
 	}
 
 	dispara(x, y, direcao) {
@@ -19,6 +21,7 @@ export default class BalaEnemy extends Phaser.Physics.Arcade.Sprite
 		this.setScale(0.2)
         this.setActive(true)
 		this.setVisible(true)
+        this.body.enable = true
         this.body.setSize(this.width, this.height, true)
         this.body.setAllowGravity(false)
         
@@ -31,8 +34,9 @@ export default class BalaEnemy extends Phaser.Physics.Arcade.Sprite
 
     acertouHeroi(){
 
-        this.setActive(false)
+        this.body.enable = false
         this.setVisible(false)
+        this.setActive(false)
 
     }
 

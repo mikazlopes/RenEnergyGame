@@ -21,6 +21,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         this.damage = 0.05
         
         this.estado = 'ok'
+
+        this.isDead = false
         
 
 
@@ -41,15 +43,41 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         this.body.setOffset(0, -2)   
     }
 
-    calculaDano(){
+    calculaDano(damage){
 
+        console.log(this.health)
+
+        this.health = this.health - damage
+        
+        if(this.health > 0){
         
         this.estado = 'hurt'
-        this.play(this.scene.playerSelected + '_hurt', false)
+        this.play(this.scene.playerSelected + '_hurt', true)
         this.disableInteractive(this)
-
         this.jogadorFlasha()
+
+        }else{
+
+            this.jogadorMorreu()
+
+        }
         
+    }
+
+    jogadorMorreu(){
+
+        this.estado = 'dead'
+        this.isDead = true
+        console.log(this.estado)
+        this.body.enable = false
+        this.play(this.scene.playerSelected + '_dead', true)
+        this.on('animationcomplete', () => {
+            this.setActive(false)
+            this.setVisible(false)
+        })
+
+        this.scene.cameras.main.fadeOut(1000, 0, 0, 0)
+
     }
 
    jogadorFlasha(cor){
@@ -70,9 +98,11 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
     }
 
     
-    // para investigar mais tarde
+    // corre funcoes antes to update
     preUpdate(time, delta) {        
-		super.preUpdate(time, delta)       
+		super.preUpdate(time, delta)  
+        
+        
     }  
     
 }

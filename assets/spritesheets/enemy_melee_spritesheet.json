@@ -1,0 +1,215 @@
+{
+	"frames": {
+		"Melee__000.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"sourceSize": {
+				"w": 375,
+				"h": 488
+			}
+		},
+		"Melee__001.png": {
+			"frame": {
+				"x": 375,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"sourceSize": {
+				"w": 375,
+				"h": 488
+			}
+		},
+		"Melee__002.png": {
+			"frame": {
+				"x": 750,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"sourceSize": {
+				"w": 375,
+				"h": 488
+			}
+		},
+		"Melee__003.png": {
+			"frame": {
+				"x": 1125,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"sourceSize": {
+				"w": 375,
+				"h": 488
+			}
+		},
+		"Melee__004.png": {
+			"frame": {
+				"x": 1500,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"sourceSize": {
+				"w": 375,
+				"h": 488
+			}
+		},
+		"Melee__005.png": {
+			"frame": {
+				"x": 1875,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"sourceSize": {
+				"w": 375,
+				"h": 488
+			}
+		},
+		"Melee__006.png": {
+			"frame": {
+				"x": 2250,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"sourceSize": {
+				"w": 375,
+				"h": 488
+			}
+		},
+		"Melee__007.png": {
+			"frame": {
+				"x": 2625,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"sourceSize": {
+				"w": 375,
+				"h": 488
+			}
+		},
+		"Melee__008.png": {
+			"frame": {
+				"x": 3000,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"sourceSize": {
+				"w": 375,
+				"h": 488
+			}
+		},
+		"Melee__009.png": {
+			"frame": {
+				"x": 3375,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 375,
+				"h": 488
+			},
+			"sourceSize": {
+				"w": 375,
+				"h": 488
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 3750,
+			"h": 488
+		},
+		"scale": "1"
+	}
+}

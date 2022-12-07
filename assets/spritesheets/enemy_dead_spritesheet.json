@@ -1,0 +1,215 @@
+{
+	"frames": {
+		"Dead__000.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"sourceSize": {
+				"w": 535,
+				"h": 527
+			}
+		},
+		"Dead__001.png": {
+			"frame": {
+				"x": 535,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"sourceSize": {
+				"w": 535,
+				"h": 527
+			}
+		},
+		"Dead__002.png": {
+			"frame": {
+				"x": 1070,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"sourceSize": {
+				"w": 535,
+				"h": 527
+			}
+		},
+		"Dead__003.png": {
+			"frame": {
+				"x": 1605,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"sourceSize": {
+				"w": 535,
+				"h": 527
+			}
+		},
+		"Dead__004.png": {
+			"frame": {
+				"x": 2140,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"sourceSize": {
+				"w": 535,
+				"h": 527
+			}
+		},
+		"Dead__005.png": {
+			"frame": {
+				"x": 2675,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"sourceSize": {
+				"w": 535,
+				"h": 527
+			}
+		},
+		"Dead__006.png": {
+			"frame": {
+				"x": 3210,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"sourceSize": {
+				"w": 535,
+				"h": 527
+			}
+		},
+		"Dead__007.png": {
+			"frame": {
+				"x": 3745,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"sourceSize": {
+				"w": 535,
+				"h": 527
+			}
+		},
+		"Dead__008.png": {
+			"frame": {
+				"x": 4280,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"sourceSize": {
+				"w": 535,
+				"h": 527
+			}
+		},
+		"Dead__009.png": {
+			"frame": {
+				"x": 4815,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 535,
+				"h": 527
+			},
+			"sourceSize": {
+				"w": 535,
+				"h": 527
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 5350,
+			"h": 527
+		},
+		"scale": "1"
+	}
+}

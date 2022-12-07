@@ -12,6 +12,8 @@ export default class BalaHero extends Phaser.Physics.Arcade.Sprite
 		super(scene, x, y, 'balaHero')
         scene.physics.world.enable(this)
         this.setTexture('hero_bullet')
+
+        this.dano = 10
 	}
 
 	dispara(x, y, direcao) {
@@ -19,6 +21,7 @@ export default class BalaHero extends Phaser.Physics.Arcade.Sprite
 		this.setScale(0.2)
         this.setActive(true)
 		this.setVisible(true)
+        this.body.enable = true
         this.body.setSize(this.width, this.height, true)
         this.body.setAllowGravity(false)
         
@@ -28,6 +31,14 @@ export default class BalaHero extends Phaser.Physics.Arcade.Sprite
             this.setVelocityX(500)
         }
 	}
+
+    acertouInimigo(){
+
+        this.body.enable = false
+        this.setVisible(false)
+        this.setActive(false)
+
+    }
 
     preUpdate(time, delta) {
 		super.preUpdate(time, delta)
