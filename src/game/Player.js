@@ -1,5 +1,7 @@
 import Phaser from '../lib/phaser.js'
 
+import MuzzlesHero from './MuzzlesHero.js'
+
 export default class Jogador extends Phaser.Physics.Arcade.Sprite
 {
     /**
@@ -16,6 +18,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         this.setScale(0.2)
         this.body.setSize(280, 450, true)
         this.body.setOffset(0, -2)
+        this.muzzle = new MuzzlesHero(this.scene, this.x, this.y)
         
         this.health = 100
         this.damage = 0.05
@@ -39,6 +42,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         if (this.body.onFloor() && this.scene.inputKeys.isUp && this.scene.cursors.up.isUp){
 
             this.play(this.scene.playerSelected + '_run', true)
+            this.muzzle.setVisible(false)
         }
         
         this.body.setVelocityX(- this.scene.speedH)
@@ -48,11 +52,9 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             if (this.scene.cursors.up.isDown && this.body.onFloor()){
             
                 this.vaiCima()
-            
-                if (this.scene.heroMuzzle != null){
-                    this.scene.heroMuzzle.setVisible(false)
+                this.muzzle.setVisible(false)
                     
-                }
+                
             }
 
         }
@@ -62,6 +64,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             if(this.body.onFloor()){
                 
                 this.movimento = 'run'
+                this.body.setSize(this.width - 232, this.height - 30, true)
+                this.body.setOffset(200, -2)
 
             } else if (!this.body.onFloor()){
 
@@ -73,13 +77,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             
                 this.vaiCima()
                 
-                if (this.scene.heroMuzzle != null){
-                    this.scene.heroMuzzle.setX(this.x - 70)
-                    this.scene.heroMuzzle.setY(this.y)
-                    this.scene.heroMuzzle.setVisible(true)
+                this.muzzle.setVisible(true)
                 
-                }       
-            
             }
 
             this.scene.disparouBalaHero(this, this.movimento)
@@ -89,12 +88,13 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
     vaiDireita(){
 
         this.flipX = false
-        this.body.setSize(280, 450, true)
-        this.body.setOffset(0, -2)   
+        this.body.setSize(300, 450, true)
+        this.body.setOffset(50, -2)   
 
         if (this.body.onFloor() && this.scene.inputKeys.isUp && this.scene.cursors.up.isUp){
 
             this.play(this.scene.playerSelected + '_run', true)
+            this.muzzle.setVisible(false)
         }
 
         this.body.setVelocityX(this.scene.speedH)
@@ -105,10 +105,9 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             
                 this.vaiCima()
             
-                if (this.scene.heroMuzzle != null){
-                    this.scene.heroMuzzle.setVisible(false)
+                this.muzzle.setVisible(false)
                     
-                }
+                
             }
 
         }
@@ -128,12 +127,6 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             if (this.scene.cursors.up.isDown && this.body.onFloor()){
             
                 this.vaiCima()
-                
-                if (this.scene.heroMuzzle != null){
-                    this.scene.heroMuzzle.setX(this.x + 70)
-                    this.scene.heroMuzzle.setY(this.y)
-                
-                }       
             
             }
 
@@ -151,16 +144,15 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
         this.play(this.scene.playerSelected + '_jump', true) 
             
-        if (this.scene.heroMuzzle != null){
+        
+       this.muzzle.setVisible(false)
             
-            this.scene.heroMuzzle.setVisible(false)
-            
-        }
+        
 
         if (this.scene.inputKeys.isDown){
 
             this.movimento = 'jump'
-            this.scene.heroMuzzle.setVisible(true)
+            this.muzzle.setVisible(true)
             this.scene.disparouBalaHero(this, this.movimento)
 
         }
@@ -194,7 +186,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             if (this.scene.inputKeys.isDown){
 
                 this.movimento = 'crouch'
-                this.scene.heroMuzzle.setVisible(true)
+                this.muzzle.setVisible(true)
                 this.scene.disparouBalaHero(this, this.movimento)  
             
             }
@@ -204,66 +196,15 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     }
 
-    vaiEsquerdaDispara(){
-
-        this.flipX = true
-        this.body.setSize(this.width - 232, this.height - 50, true)
-        this.body.setOffset(200, -2)
-        
-        this.movimento = 'run'
-        this.scene.heroMuzzle.setX(this.x - 70)
-        this.scene.heroMuzzle.setY(this.y)
-    
-                
-    }
-
-    correSaltaDispara(){
-
-        // if (this.body.onFloor()){
-        //     this.movimento = 'run'
-        // }
-        
-        if (this.flipX && this.body.onFloor()){
-            this.movimento = 'run'
-            this.scene.heroMuzzle.setX(this.x - 70)
-            this.scene.heroMuzzle.setY(this.y)
-            this.vaiEsquerda()
-
-        }else if (!this.flipX && this.body.onFloor()){
-            this.movimento = 'run'
-            this.scene.heroMuzzle.setX(this.x + 70)
-            this.scene.heroMuzzle.setY(this.y)
-            this.vaiDireita()
-
-        }
-
-        if (this.scene.cursors.up.isDown){
-            
-            this.movimento = 'jump'
-
-            if (this.body.onFloor()){
-
-                this.vaiCima()
-
-            }
-            
-            //this.play(this.scene.playerSelected + '_jump', true) 
-
-        }  
-
-        this.scene.disparouBalaHero(this, this.movimento)
-    }
-
     estaDisparar(){
 
         this.movimento = 'idle'
 
 
-        this.scene.heroMuzzle.setY(this.y)
+       this.muzzle.setY(this.y)
 
         if (!this.flipX){
         
-            this.scene.heroMuzzle.setX(this.x + 70)
             this.body.setSize(280, 450, true)
             this.body.setOffset(0, 0)   
             
@@ -271,9 +212,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
         }else if (this.flipX){
 
-            this.scene.heroMuzzle.setX(this.x - 70)
-            this.body.setSize(this.width - 232, this.height - 50, true)
-            this.body.setOffset(200, 0)
+            this.body.setSize(this.width - 232, this.height - 35, true)
+            this.body.setOffset(200, 20)
             
         }
 
@@ -303,10 +243,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         
         }
         
-        if (this.scene.heroMuzzle != null){
-            this.scene.heroMuzzle.setVisible(false)
-        }
-        
+       this.muzzle.setVisible(false)
+          
     }
 
     calculaDano(damage){
@@ -361,6 +299,14 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         this.estado = 'ok'
         this.body.enable = true
 
+    }
+
+    heroiDispara(x, y, direcao){
+
+        const sentido = direcao
+
+        this.muzzle.dispara(x, y, sentido, this)
+        
     }
 
     

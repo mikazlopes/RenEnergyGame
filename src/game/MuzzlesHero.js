@@ -19,7 +19,7 @@ export default class MuzzlesHero extends Phaser.GameObjects.Sprite
 
 	dispara(x, y, direcao, quem) {
 		
-        this.inimigo = quem
+        this.heroi = quem
         this.sentido = direcao
         this.setScale(0.2)
         this.setActive(true)
@@ -46,14 +46,24 @@ export default class MuzzlesHero extends Phaser.GameObjects.Sprite
         
         if (this.sentido == 'esquerda'){
 
-            this.setX(this.inimigo.x - 50)
-            this.setY(this.inimigo.y + 3)
+            this.setX(this.heroi.x - 70)
+            this.setY(this.heroi.y + 3)
 
         }else{
             
-            this.setX(this.inimigo.x + 52)
-            this.setY(this.inimigo.y + 3)
+            this.setX(this.heroi.x + 70)
+            this.setY(this.heroi.y + 3)
 
+        }
+
+        if (this.scene.cursors.left.isDown && this.scene.cursors.up.isUp && this.heroi.body.onFloor()){
+
+            this.setX(this.heroi.x - 80)
+            this.setY(this.heroi.y)
+        } else if (this.scene.cursors.right.isDown && this.scene.cursors.up.isUp && this.heroi.body.onFloor()){
+
+            this.setX(this.heroi.x + 80)
+            this.setY(this.heroi.y)
         }
 		
 	}

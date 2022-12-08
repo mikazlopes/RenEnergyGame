@@ -20,8 +20,10 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
         scene.add.existing(this)
         this.setScale(0.2)
         this.flipX = true
+        
         this.health = 100
         this.meele = 30
+        
         this.play('enemy_idle')
 
         this.body.setVelocityX(0)
@@ -30,7 +32,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
         this.estado = 'ok'
 
         // objeto que cria e mostra o Muzzle da arma
-        this.muzzle = new MuzzlesEnemy(scene, this.x, this.y)
+        this.muzzle = new MuzzlesEnemy(this.scene, this.x, this.y)
 
         //define o intervalo em que o inimigo dispara
         this.shootTimer = this.scene.time.addEvent({
@@ -156,7 +158,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
                     
             this.muzzle.x = this.x - 45
             this.muzzle.y = this.y + 5
-            console.log(this.muzzle.x)
+
 
         }else if (!this.flipX && !this.body.onFloor()){
             
@@ -167,9 +169,6 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
 
         
     }
-
-
-   
 
     inimigoEnergia(){
 
@@ -182,8 +181,6 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
 
         this.muzzle.dispara(x, y, sentido, this)
         
-        
-
     }
 
     // corre funcoes antes to update

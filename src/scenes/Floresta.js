@@ -301,10 +301,6 @@ export default class Floresta extends Phaser.Scene{
         this.balasenemy = new CriaBalasEnemy(this)
         this.balasenemy.playAnimation('enemy_bullet_spin')
 
-        //cria muzzle para a arma do heroi
-        this.heroMuzzle = this.add.sprite(-100, -100, 'hero_muzzle').setVisible(false).setScale(0.2)
-
-
         // Insere Inimigos mediante a dificuldade escolhida
         /** @type {Phaser.Physics.Arcade.Group} */
         
@@ -431,29 +427,18 @@ export default class Floresta extends Phaser.Scene{
            
             if (personagem.flipX){
 
-                this.balashero.disparouBala(personagem.x - 60, personagem.y, "esquerda")
+                this.balashero.disparouBala(personagem.x - 70, personagem.y, "esquerda")
+                personagem.heroiDispara(personagem.x - 70, personagem.y, "esquerda")
 
-                this.heroMuzzle.setActive(true)
-                this.heroMuzzle.setVisible(true)
-                this.heroMuzzle.setX(personagem.x - 70)
-                this.heroMuzzle.setY(personagem.y)
-                this.heroMuzzle.flipX = true
-                this.heroMuzzle.play("hero_muzzle", true)
                 
             }else{
             
-                this.balashero.disparouBala(personagem.x + 60, personagem.y, "direita")
-                this.heroMuzzle.setActive(true)
-                this.heroMuzzle.setVisible(true)
-                this.heroMuzzle.setX(personagem.x + 70)
-                this.heroMuzzle.setY(personagem.y)
-                this.heroMuzzle.flipX = false
-                this.heroMuzzle.play("hero_muzzle", true)
-                
+                this.balashero.disparouBala(personagem.x + 70, personagem.y, "direita")
+                personagem.heroiDispara(personagem.x + 70, personagem.y, "direita")
                 
             }
             
-        this.balaIntervalohero = this.time.now + 100
+        this.balaIntervalohero = this.time.now + 200
             
         }
     }
