@@ -29,7 +29,11 @@ export default class Floresta extends Phaser.Scene{
                 default: 'arcade',
                 arcade: {
                     debug: true,
+                    tileBias: 32,
+                    fps: 30,
+                    fixedStep: true,
                     gravity: { y: 300 }
+                    
                 }
               }
         })

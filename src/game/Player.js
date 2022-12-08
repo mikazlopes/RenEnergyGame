@@ -181,24 +181,24 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
                 
                 this.body.setSize(this.width - 232, this.height, true)
-                this.body.setOffset(200, 0)
-                
+                this.body.setOffset(200, -5)
+  
 
             }else if (!this.flipX){
 
                 this.body.setSize(280, this.height, true)
-                this.body.setOffset(0, 0)   
-
+                this.body.setOffset(0, -5)   
+                    
             }
-
-            this.refreshBody()
-
+            
             if (this.scene.inputKeys.isDown){
 
                 this.movimento = 'crouch'
                 this.scene.heroMuzzle.setVisible(true)
-                this.scene.disparouBalaHero(this, this.movimento)
+                this.scene.disparouBalaHero(this, this.movimento)  
+            
             }
+
 
         }
 
@@ -264,11 +264,16 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         if (!this.flipX){
         
             this.scene.heroMuzzle.setX(this.x + 70)
+            this.body.setSize(280, 450, true)
+            this.body.setOffset(0, 0)   
+            
         
 
         }else if (this.flipX){
 
             this.scene.heroMuzzle.setX(this.x - 70)
+            this.body.setSize(this.width - 232, this.height - 50, true)
+            this.body.setOffset(200, 0)
             
         }
 
