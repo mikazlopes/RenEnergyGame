@@ -64,12 +64,13 @@ export default class Cidade2 extends Phaser.Scene{
         this.load.image('spike', 'assets/tileset/cidade2/spike.png')
         this.load.image('door', 'assets/tileset/cidade2/door.png')
         this.load.image('movel', 'assets/tileset/cidade2/movel.png')
+        this.load.image('fundoCidade2', 'assets/backgrounds/cidade2.jpg')
         this.load.tilemapTiledJSON('cidade2', 'assets/tileset/cidade2/cidade2.json')
     }
 
     create(){
 
-        //this.add.tileSprite(0, 0, 1280, 640, 'fundo_floresta').setOrigin(0.0)
+        this.add.tileSprite(0, 0, 3291, 1280, 'fundoCidade2').setOrigin(0.0).setScrollFactor(0.2)
 
         var cidade2 = this.make.tilemap({key: 'cidade2'})
 
@@ -79,37 +80,6 @@ export default class Cidade2 extends Phaser.Scene{
         let plataformasFixas = cidade2.createStaticLayer('fixos', cidade2Tiles, 0, 0)
         let sinais = cidade2.createLayer('sinais', cidade2Tiles, 0, 0)
 
-        
-        //let spikesLayer =  cidade2.getObjectLayer('spikes')['objects']
-
-        
-    //     this.spikeGroup = this.physics.add.staticGroup()
-
-    //    spikesLayer.forEach((object) => {
-            
-    //         let spikeSprite = this.spikeGroup.create(object.x, object.y, 'spike')
-    //         spikeSprite.setScale(object.width/64, object.height/64)
-    //         spikeSprite.setOrigin(0)
-    //         spikeSprite.body.width = object.width
-    //         spikeSprite.body.height = object.height
-    //         console.log(spikeSprite)
-
-    //     })
-
-    //     this.spikeGroup.refresh()
-
-        
-        
-
-
-       
-
-        // spikes.forEach(object => {let obj = this.spikeGroup.create(object.x,object.y,'spike')
-        // obj.setOrigin(0,0)
-        // obj.setSize(64,64)
-        // })
-
-        
         
 
         plataformasFixas.setCollisionByExclusion(-1)

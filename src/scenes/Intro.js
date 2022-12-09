@@ -10,11 +10,9 @@ let content = [
     "Welcome to Viana, a beautiful city entirely powered by clean, renewable energy.", 
     "All the building's lights and devices run on wind, solar, hydraulic, or geothermal energy.", 
     "These fuels are renewable (never end) and clean; they do not generate any pollution.", 
-    "The people of Viana are happy because of this.",
     "Close to Viana are other cities that do not run on clean, renewable energy. ", 
     "They run on fossil power sources such as oil and coal, these energies are not clean and not renewable, meaning one day they will end.",
     "They also generate lots of pollution which makes everyone unhappy. ",
-    "These cities are inhabited by people that are jealous of Viana’s power sources and unhappy because their cities are filled with polluted air.",
     "Their energy sources, aside from not clean will end someday, leaving them in the dark.",
     "Instead of asking the Vianenses to teach them how to use clean, renewable energy, they decided to attack Viana.", 
     "They stole parts of the machines that provided different types of renewable energy.",
@@ -295,7 +293,7 @@ export default class Intro extends Phaser.Scene{
 
         if (enemies[0].x > width / 4 ){
             
-            var speed = 1
+            var speed = 2
             var bulletSpeed = 4
             var i
 
@@ -307,10 +305,6 @@ export default class Intro extends Phaser.Scene{
             
         }
 
-        // if (index == 3){
-
-        //     this.moveInimigos()
-        // }
         
         if (comecaHerois){
 
@@ -366,6 +360,8 @@ export default class Intro extends Phaser.Scene{
 
     mostraTexto(){
 
+        // Controla a entrada dos inimigos e herois baseado onde esta o array do texto
+
         index++
 
         if (index < content.length){
@@ -376,12 +372,12 @@ export default class Intro extends Phaser.Scene{
             tempText.remove()
         }
 
-        if (index == 10){
+        if (index == 8){
 
             this.moveInimigos()
         }
 
-        if (index == 13){
+        if (index == 10){
 
             this.moveHerois()
         }
@@ -390,7 +386,7 @@ export default class Intro extends Phaser.Scene{
 
     moveInimigos(){
 
-        var speed = 1
+        var speed = 2
         var i
 
         if (enemies[0].x < width + 400){
