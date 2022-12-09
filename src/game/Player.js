@@ -20,7 +20,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         this.body.setOffset(0, -2)
         this.muzzle = new MuzzlesHero(this.scene, this.x, this.y)
         
-        this.health = 100
+        this.health = 1000
         this.damage = 0.05
         
         this.estado = 'ok'
@@ -247,7 +247,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
           
     }
 
-    calculaDano(damage){
+    calculaDano(damage, origem){
 
         console.log(this.health)
 
@@ -258,7 +258,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         this.estado = 'hurt'
         this.play(this.scene.playerSelected + '_hurt', true)
         this.disableInteractive(this)
-        this.jogadorFlasha()
+        this.jogadorFlasha(origem)
 
         }else{
 
@@ -284,9 +284,14 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     }
 
-   jogadorFlasha(cor){
+   jogadorFlasha(origin){
 
-        this.body.enable = false
+        if (origin == 'inimigo'){
+            
+            this.body.enable = false
+            console.log('executou')
+        }
+        
         this.setTintFill(0xffffff)
         this.mudaCor = this.scene.time.addEvent({delay: 100, repeat: 0, callback: this.setTintFill,args: [0xFF0000], callbackScope: this})
         this.mudaCor = this.scene.time.addEvent({delay: 100, repeat: 0, callback: this.jogadorRecupera, callbackScope: this})

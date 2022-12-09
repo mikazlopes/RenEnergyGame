@@ -341,6 +341,7 @@ export default class Floresta extends Phaser.Scene{
 
     update(){
 
+        // Bloco de codigo comum para controlo do herois e comportamento dos inimigos
 
         this.player.body.setVelocityX(0)
 
@@ -388,6 +389,8 @@ export default class Floresta extends Phaser.Scene{
             this.player.estaParado()
 
         }
+
+        //fim do bloco para todos os updates
 
         /** @type {Phaser.Input.Keyboard.KeyboardPlugin.checkDown} */
        
@@ -493,11 +496,6 @@ export default class Floresta extends Phaser.Scene{
 
             inimigo.inimigoAcoes(this.player)
         }
-
-    }
-
-    inimigoAcao(){
-
 
     }
 

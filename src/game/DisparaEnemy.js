@@ -40,10 +40,18 @@ export default class BalaEnemy extends Phaser.Physics.Arcade.Sprite
 
     }
 
+    acertouParede(){
+
+        this.body.enable = false
+        this.setVisible(false)
+        this.setActive(false)
+
+    }
+
     preUpdate(time, delta) {
 		super.preUpdate(time, delta)
  
-		if (this.x < 0 || this.x > 1300) {
+		if (this.x < 0 || this.x > 6000) {
 			this.setActive(false)
 			this.setVisible(false)
 		}
