@@ -138,7 +138,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
         if (this.body.onFloor()){
             
-            this.body.velocity.y = - 250
+            this.body.velocity.y = - 450
         
         }
 

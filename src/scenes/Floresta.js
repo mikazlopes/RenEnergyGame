@@ -32,7 +32,7 @@ export default class Floresta extends Phaser.Scene{
                     tileBias: 32,
                     fps: 30,
                     fixedStep: true,
-                    gravity: { y: 300 }
+                    gravity: { y: 500 }
                     
                 }
               }
@@ -395,22 +395,11 @@ export default class Floresta extends Phaser.Scene{
         //testar delay das teclas
         let teclado = this.input.keyboard
 
-        if (teclado.checkDown(teclado.addKey('A'), 200)){console.log('Carregou')}
+        if (teclado.checkDown(teclado.addKey('A'), 200)){this.scene.start('Cidade2')}
        
     }
 
 
-    // Funcao do jogador que corrige a Hitbox
-    flipaHitBox(sentido){
-
-        if (this.player.body.onFloor()){
-
-            this.player.play(this.playerSelected + '_run', true)
-        }
-
-        eval('this.player.vai' + sentido + '()')
-
-    }
 
     disparouBalaHero(personagem, estado){
 
