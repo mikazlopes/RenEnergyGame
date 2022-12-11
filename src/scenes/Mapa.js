@@ -29,31 +29,37 @@ export default class Mapa extends Phaser.Scene{
     
     }
 
-    init(){
+    init(data){
 
         // Usado para importar que jogador foi escolhido e a dificuldade
-        this.playerSelected = 'jack'
+        
+        console.log(data)
+
+        this.playerPosx = data.positionx
+        this.playerPosy = data.positiony        
+        this.playerSelected = data.heroi
         this.difficulty = 'easy'
         this.speed = 70
 
         // Guardar as dimensoes da scene numa variavel
         this.width = this.scale.width
         this.height = this.scale.height
+
     }
 
     preload(){
 
         
 
-        this.load.image('tiles_mapa1', 'assets/tileset/tiles_mapa1.png')
-        this.load.image('tiles_mapa2', 'assets/tileset/tiles_mapa2.png')
-        this.load.image('tiles_mapa3', 'assets/tileset/tiles_mapa3.png')
-        this.load.image('tiles_mapa4', 'assets/tileset/tiles_mapa4.png')
-        this.load.image('tiles_mapa5', 'assets/tileset/tiles_mapa5.png')
-        this.load.image('tiles_mapa6', 'assets/tileset/tiles_mapa6.png')
-        this.load.image('tiles_mapa7', 'assets/tileset/tiles_mapa7.png')
+        // this.load.image('tiles_mapa1', 'assets/tileset/tiles_mapa1.png')
+        // this.load.image('tiles_mapa2', 'assets/tileset/tiles_mapa2.png')
+        // this.load.image('tiles_mapa3', 'assets/tileset/tiles_mapa3.png')
+        // this.load.image('tiles_mapa4', 'assets/tileset/tiles_mapa4.png')
+        // this.load.image('tiles_mapa5', 'assets/tileset/tiles_mapa5.png')
+        // this.load.image('tiles_mapa6', 'assets/tileset/tiles_mapa6.png')
+        // this.load.image('tiles_mapa7', 'assets/tileset/tiles_mapa7.png')
         
-        this.load.tilemapTiledJSON('mapa', 'assets/tileset/renEnergy_mapa.json')
+        // this.load.tilemapTiledJSON('mapa', 'assets/tileset/renEnergy_mapa.json')
 
         this.load.atlas(this.playerSelected + '_walk', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.json')
         this.load.atlas(this.playerSelected + '_idle', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.json')
@@ -161,6 +167,10 @@ export default class Mapa extends Phaser.Scene{
         this.player = this.physics.add.sprite( 700, 200, this.playerSelected + '_idle').setScale(0.07)
         this.player.play(this.playerSelected + '_idle')
 
+        //Posiciona o jogador baseado na ultima accao
+        this.player.x = this.playerPosx
+        this.player.y= this.playerPosy
+
         this.cursors = this.input.keyboard.createCursorKeys();
 
         this.physics.add.collider(this.player, obstaculos)
@@ -183,8 +193,11 @@ export default class Mapa extends Phaser.Scene{
             this.zonas.create(x, y, 20, 20);
         }
 
+        this.zonaCidade2 = this.physics.add.sprite(1160, 205).setOrigin(0, 0).setSize(100,100).setVisible(true)
 
-        this.physics.add.overlap(this.player, this.zonas, this.colisaoInimigo, false, this)
+        console.log(this.zonaCidade2)
+
+        this.physics.add.overlap(this.player, this.zonaCidade2, this.colisaoCidade, false, this)
 
         
         
@@ -197,10 +210,16 @@ export default class Mapa extends Phaser.Scene{
         // zona.y = Phaser.Math.RND.between(100, this.physics.world.bounds.height)
 
         this.scene.start('Floresta')
+ 
+    }
 
-        
+    colisaoCidade(player, zona){
 
+        if (zona.x == 1160){
 
+            this.scene.start('Cidade2')
+
+        }
     }
 
     update(){
@@ -264,5 +283,8 @@ export default class Mapa extends Phaser.Scene{
         
         } else {this.player.play(this.playerSelected + '_idle', true)}
 
+        
+       
     }
 }
+
