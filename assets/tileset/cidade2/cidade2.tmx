@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.2" orientation="orthogonal" renderorder="right-down" width="100" height="20" tilewidth="64" tileheight="64" infinite="0" nextlayerid="18" nextobjectid="36">
  <editorsettings>
-  <export target="cidade2.json" format="json"/>
+  <export target="cidade1.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" name="tilesCidade2" tilewidth="64" tileheight="64" tilecount="100" columns="20">
   <image source="Tileset.png" width="1280" height="320"/>
@@ -29,7 +29,7 @@
   </tile>
  </tileset>
  <imagelayer id="13" name="fundo" visible="0">
-  <image source="../../backgrounds/cidade2.jpg" width="3540" height="1377"/>
+  <image source="../../backgrounds/cidade1.jpg" width="3540" height="1377"/>
  </imagelayer>
  <layer id="1" name="fixos" width="100" height="20">
   <properties>

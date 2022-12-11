@@ -6,14 +6,26 @@ import Mapa from './scenes/Mapa.js'
 
 import Floresta from './scenes/Floresta.js'
 
-import Cidade2 from './scenes/Cidade1.js'
+import Cidade1 from './scenes/Cidade1.js'
+
+import Cidade2 from './scenes/Cidade2.js'
+
+import Loading from './scenes/Loading.js'
+
+import Loading2 from './scenes/Loading2.js'
+
+import Menu from './scenes/Menu.js'
+
+import Seleciona from './scenes/SelectPlayer.js'
+
+
 
 
 export default new Phaser.Game({
     type: Phaser.AUTO,
     width: 1280,
     height: 720,
-    scene: [Intro , Mapa, Floresta, Cidade2]
+    scene: [Loading, Intro , Menu,  Seleciona, Loading2, Mapa, Floresta, Cidade2]
     })
 
 

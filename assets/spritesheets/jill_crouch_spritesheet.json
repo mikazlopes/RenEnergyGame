@@ -1,0 +1,415 @@
+{
+	"frames": {
+		"Crouch_Aim__000.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"sourceSize": {
+				"w": 474,
+				"h": 413
+			}
+		},
+		"Crouch_Aim__001.png": {
+			"frame": {
+				"x": 474,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"sourceSize": {
+				"w": 474,
+				"h": 413
+			}
+		},
+		"Crouch_Aim__002.png": {
+			"frame": {
+				"x": 948,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"sourceSize": {
+				"w": 474,
+				"h": 413
+			}
+		},
+		"Crouch_Aim__003.png": {
+			"frame": {
+				"x": 1422,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"sourceSize": {
+				"w": 474,
+				"h": 413
+			}
+		},
+		"Crouch_Aim__004.png": {
+			"frame": {
+				"x": 1896,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"sourceSize": {
+				"w": 474,
+				"h": 413
+			}
+		},
+		"Crouch_Aim__005.png": {
+			"frame": {
+				"x": 2370,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"sourceSize": {
+				"w": 474,
+				"h": 413
+			}
+		},
+		"Crouch_Aim__006.png": {
+			"frame": {
+				"x": 2844,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"sourceSize": {
+				"w": 474,
+				"h": 413
+			}
+		},
+		"Crouch_Aim__007.png": {
+			"frame": {
+				"x": 3318,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"sourceSize": {
+				"w": 474,
+				"h": 413
+			}
+		},
+		"Crouch_Aim__008.png": {
+			"frame": {
+				"x": 3792,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"sourceSize": {
+				"w": 474,
+				"h": 413
+			}
+		},
+		"Crouch_Aim__009.png": {
+			"frame": {
+				"x": 4266,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 474,
+				"h": 413
+			},
+			"sourceSize": {
+				"w": 474,
+				"h": 413
+			}
+		},
+		"Crouch__000.png": {
+			"frame": {
+				"x": 4740,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"sourceSize": {
+				"w": 492,
+				"h": 448
+			}
+		},
+		"Crouch__001.png": {
+			"frame": {
+				"x": 5232,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"sourceSize": {
+				"w": 492,
+				"h": 448
+			}
+		},
+		"Crouch__002.png": {
+			"frame": {
+				"x": 5724,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"sourceSize": {
+				"w": 492,
+				"h": 448
+			}
+		},
+		"Crouch__003.png": {
+			"frame": {
+				"x": 6216,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"sourceSize": {
+				"w": 492,
+				"h": 448
+			}
+		},
+		"Crouch__004.png": {
+			"frame": {
+				"x": 6708,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"sourceSize": {
+				"w": 492,
+				"h": 448
+			}
+		},
+		"Crouch__005.png": {
+			"frame": {
+				"x": 7200,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"sourceSize": {
+				"w": 492,
+				"h": 448
+			}
+		},
+		"Crouch__006.png": {
+			"frame": {
+				"x": 7692,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"sourceSize": {
+				"w": 492,
+				"h": 448
+			}
+		},
+		"Crouch__007.png": {
+			"frame": {
+				"x": 8184,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"sourceSize": {
+				"w": 492,
+				"h": 448
+			}
+		},
+		"Crouch__008.png": {
+			"frame": {
+				"x": 8676,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"sourceSize": {
+				"w": 492,
+				"h": 448
+			}
+		},
+		"Crouch__009.png": {
+			"frame": {
+				"x": 9168,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 492,
+				"h": 448
+			},
+			"sourceSize": {
+				"w": 492,
+				"h": 448
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 9660,
+			"h": 448
+		},
+		"scale": "1"
+	}
+}

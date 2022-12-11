@@ -9,7 +9,7 @@ import CriaBalasHero from '../game/GrupoBalasHero.js'
 import CriaBalasEnemy from '../game/GrupoBalasEnemy.js'
 
 
-export default class Cidade2 extends Phaser.Scene{
+export default class Cidade1 extends Phaser.Scene{
      
     constructor(){
 
@@ -24,7 +24,7 @@ export default class Cidade2 extends Phaser.Scene{
     
         // configura physics para esta cena
         super({
-            key: 'Cidade2',
+            key: 'Cidade1',
             physics: {
                 default: 'arcade',
                 arcade: {
@@ -61,12 +61,12 @@ export default class Cidade2 extends Phaser.Scene{
     preload(){
 
 
-        this.load.image('tilesCidade2', 'assets/tileset/cidade2/Tileset.png')
-        this.load.image('spike', 'assets/tileset/cidade2/spike.png')
-        this.load.image('door', 'assets/tileset/cidade2/door.png')
-        this.load.image('movel', 'assets/tileset/cidade2/movel.png')
-        this.load.image('fundoCidade2', 'assets/backgrounds/cidade2.jpg')
-        this.load.tilemapTiledJSON('cidade2', 'assets/tileset/cidade2/cidade2.json')
+        this.load.image('tilesCidade2', 'assets/tileset/cidade1/Tileset.png')
+        this.load.image('spike', 'assets/tileset/cidade1/spike.png')
+        this.load.image('door', 'assets/tileset/cidade1/door.png')
+        this.load.image('movel', 'assets/tileset/cidade1/movel.png')
+        this.load.image('fundoCidade2', 'assets/backgrounds/cidade1.jpg')
+        this.load.tilemapTiledJSON('cidade1', 'assets/tileset/cidade1/cidade1.json')
     }
 
     create(){
@@ -77,18 +77,18 @@ export default class Cidade2 extends Phaser.Scene{
 
         /** @type {Phaser.Tilemaps.Parsers.Tiled} */
 
-        var cidade2 = this.make.tilemap({key: 'cidade2'})
+        var cidade1 = this.make.tilemap({key: 'cidade1'})
 
-        let cidade2Tiles = cidade2.addTilesetImage("tilesCidade2", 'tilesCidade2')
+        let cidade1Tiles = cidade1.addTilesetImage("tilesCidade2", 'tilesCidade2')
 
 
-        let plataformasFixas = cidade2.createLayer('fixos', cidade2Tiles, 0, 0)
-        let sinais = cidade2.createLayer('sinais', cidade2Tiles, 0, 0)
-        let portaJanelas = cidade2.createLayer('porta_janelas', cidade2Tiles, 0, 0)
-        let spikesLayer = cidade2.createLayer('spikes', cidade2Tiles, 0, 0)
+        let plataformasFixas = cidade1.createLayer('fixos', cidade1Tiles, 0, 0)
+        let sinais = cidade1.createLayer('sinais', cidade1Tiles, 0, 0)
+        let portaJanelas = cidade1.createLayer('porta_janelas', cidade1Tiles, 0, 0)
+        let spikesLayer = cidade1.createLayer('spikes', cidade1Tiles, 0, 0)
          
         // Insere a(s) porta(s) da layer de objetos do Tiled
-        let portaLayer = cidade2.getObjectLayer('porta')['objects'] 
+        let portaLayer = cidade1.getObjectLayer('porta')['objects'] 
         this.portas = this.physics.add.staticGroup()
 
         portaLayer.forEach(object => {
@@ -100,7 +100,7 @@ export default class Cidade2 extends Phaser.Scene{
 
 
         // Insere is os objetos da layer do Tiled 
-        let picosLayer = cidade2.getObjectLayer('picos')['objects']
+        let picosLayer = cidade1.getObjectLayer('picos')['objects']
         this.picosObjTile = this.physics.add.staticGroup()
 
         picosLayer.forEach(object => {
@@ -161,11 +161,11 @@ export default class Cidade2 extends Phaser.Scene{
         //tecla para dispaara
         this.inputKeys = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
-        this.physics.world.bounds.width = cidade2.widthInPixels
-        this.physics.world.bounds.height = cidade2.heightInPixels;
+        this.physics.world.bounds.width = cidade1.widthInPixels
+        this.physics.world.bounds.height = cidade1.heightInPixels;
         this.player.setCollideWorldBounds()
 
-        this.cameras.main.setBounds(0, 0, cidade2.widthInPixels, cidade2.heightInPixels)
+        this.cameras.main.setBounds(0, 0, cidade1.widthInPixels, cidade1.heightInPixels)
         this.cameras.main.startFollow(this.player)
 
         
@@ -184,6 +184,8 @@ export default class Cidade2 extends Phaser.Scene{
         //overlap com os picos ou a porta
 
         this.physics.add.overlap(this.player, this.picosObjTile, this.nosSpikes, false, this)
+
+        this.physics.add.overlap(this.player, portaLayer, this.voltaMapa, false, this)
 
         //verificar posicao do heroi
         this.cord = this.add.text(this.player.x, this.plataformasMoveis.y - 200, this.game.input.mousePointer.x + ' ' + this.game.input.mousePointer.y, {align: 'center', color: '#00ff00', fontSize: 20} )
@@ -357,13 +359,6 @@ export default class Cidade2 extends Phaser.Scene{
 
     }
 
-    nosSpikes(){
-
-        // envia a origem do dano de modo a permitir ao jogador conseguir saltar fora dos picos
-
-        this.player.calculaDano(5, 'spikes')
-    }
-
     colidiram(heroiColidiu, inimigoColidiu){
 
         this.cameras.main.shake(50)
@@ -389,7 +384,22 @@ export default class Cidade2 extends Phaser.Scene{
     }
 
     // Fim do bloco de funcoes comuns
-    
 
+    nosSpikes(){
+
+        // envia a origem do dano de modo a permitir ao jogador conseguir saltar fora dos picos
+
+        this.player.calculaDano(5, 'spikes')
+    }
+    
+    //se o Boss do nivel morreu o overlap causa o jogador voltar ao Mapa
+    voltaMapa(){
+
+        if (this.bossDead){
+
+            this.scene.start('Mapa', { id: 0, position: 'cidade1' })
+        }
+        
+    }
 
 }

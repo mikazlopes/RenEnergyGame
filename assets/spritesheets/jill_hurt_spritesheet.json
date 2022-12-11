@@ -1,0 +1,215 @@
+{
+	"frames": {
+		"Hurt__000.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"sourceSize": {
+				"w": 494,
+				"h": 568
+			}
+		},
+		"Hurt__001.png": {
+			"frame": {
+				"x": 494,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"sourceSize": {
+				"w": 494,
+				"h": 568
+			}
+		},
+		"Hurt__002.png": {
+			"frame": {
+				"x": 988,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"sourceSize": {
+				"w": 494,
+				"h": 568
+			}
+		},
+		"Hurt__003.png": {
+			"frame": {
+				"x": 1482,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"sourceSize": {
+				"w": 494,
+				"h": 568
+			}
+		},
+		"Hurt__004.png": {
+			"frame": {
+				"x": 1976,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"sourceSize": {
+				"w": 494,
+				"h": 568
+			}
+		},
+		"Hurt__005.png": {
+			"frame": {
+				"x": 2470,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"sourceSize": {
+				"w": 494,
+				"h": 568
+			}
+		},
+		"Hurt__006.png": {
+			"frame": {
+				"x": 2964,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"sourceSize": {
+				"w": 494,
+				"h": 568
+			}
+		},
+		"Hurt__007.png": {
+			"frame": {
+				"x": 3458,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"sourceSize": {
+				"w": 494,
+				"h": 568
+			}
+		},
+		"Hurt__008.png": {
+			"frame": {
+				"x": 3952,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"sourceSize": {
+				"w": 494,
+				"h": 568
+			}
+		},
+		"Hurt__009.png": {
+			"frame": {
+				"x": 4446,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 494,
+				"h": 568
+			},
+			"sourceSize": {
+				"w": 494,
+				"h": 568
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 4940,
+			"h": 568
+		},
+		"scale": "1"
+	}
+}

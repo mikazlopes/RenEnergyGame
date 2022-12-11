@@ -4,7 +4,7 @@
  "layers":[
         {
          "id":13,
-         "image":"..\/..\/backgrounds\/cidade2.jpg",
+         "image":"..\/..\/backgrounds\/cidade1.jpg",
          "name":"fundo",
          "opacity":1,
          "type":"imagelayer",

@@ -52,15 +52,15 @@ export default class Intro extends Phaser.Scene{
 
     preload(){
 
-        this.load.image('background', 'assets//backgrounds/intro_background.png')
-        this.load.image('cidade', 'assets/backgrounds/viana.png')
-        this.load.atlas('enemy_run', 'assets/spritesheets/enemy_run_spritesheet.png', 'assets/spritesheets/enemy_run_spritesheet.json')
-        this.load.atlas('enemy_bullet', 'assets/spritesheets/enemy_bullet_spritesheet.png', 'assets/spritesheets/enemy_bullet_spritesheet.json')
-        this.load.atlas('muzzle', 'assets/spritesheets/muzzle_spritesheet.png', 'assets/spritesheets/muzzle_spritesheet.json')
-        this.load.atlas('jack_run', 'assets/spritesheets/jack_run_spritesheet.png', 'assets/spritesheets/jack_run_spritesheet.json')
-        this.load.atlas('jill_run', 'assets/spritesheets/jill_run_spritesheet.png', 'assets/spritesheets/jill_run_spritesheet.json')
-        this.load.atlas('jack_idle', 'assets/spritesheets/jack_idle_spritesheet.png', 'assets/spritesheets/jack_idle_spritesheet.json')
-        this.load.atlas('jill_idle', 'assets/spritesheets/jill_idle_spritesheet.png', 'assets/spritesheets/jill_idle_spritesheet.json')
+        // this.load.image('background', 'assets//backgrounds/intro_background.png')
+        // this.load.image('cidade', 'assets/backgrounds/viana.png')
+        // this.load.atlas('enemy_run', 'assets/spritesheets/enemy_run_spritesheet.png', 'assets/spritesheets/enemy_run_spritesheet.json')
+        // this.load.atlas('enemy_bullet', 'assets/spritesheets/enemy_bullet_spritesheet.png', 'assets/spritesheets/enemy_bullet_spritesheet.json')
+        // this.load.atlas('muzzle', 'assets/spritesheets/muzzle_spritesheet.png', 'assets/spritesheets/muzzle_spritesheet.json')
+        // this.load.atlas('jack_run', 'assets/spritesheets/jack_run_spritesheet.png', 'assets/spritesheets/jack_run_spritesheet.json')
+        // this.load.atlas('jill_run', 'assets/spritesheets/jill_run_spritesheet.png', 'assets/spritesheets/jill_run_spritesheet.json')
+        // this.load.atlas('jack_idle', 'assets/spritesheets/jack_idle_spritesheet.png', 'assets/spritesheets/jack_idle_spritesheet.json')
+        // this.load.atlas('jill_idle', 'assets/spritesheets/jill_idle_spritesheet.png', 'assets/spritesheets/jill_idle_spritesheet.json')
     }
 
     create(){
@@ -68,14 +68,13 @@ export default class Intro extends Phaser.Scene{
         var i
         var numInimigos = 2
 
-        this.input.once('pointerdown', () => {this.scene.start('Mapa')})
 
         //arquivar tamanho da cena para usar no posicionamento dos objetos
         width = this.scale.width;
         height = this.scale.height;
 
         //adiciona o background
-        this.add.sprite(0,0,'background').setOrigin(0,0)
+        this.add.sprite(0 , 0,'intro_background').setOrigin(0,0)
         
         //rectangulo com alpha para efeito visual
         r1 = this.add.rectangle( 0, 0, width, height, 0xffffff, 0).setOrigin(0,0)
@@ -271,6 +270,7 @@ export default class Intro extends Phaser.Scene{
             enemies[i].play('enemy_run')
         }
 
+
     }
 
     update(){
@@ -311,6 +311,10 @@ export default class Intro extends Phaser.Scene{
             this.moveHerois()
 
         }
+
+
+        let teclado = this.input.keyboard
+        if (teclado.checkDown(teclado.addKey('A'), 200)){this.scene.start('Menu', { id: 0, positionx: 650, positiony: 160 })}
         
     }
 

@@ -198,7 +198,15 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     estaDisparar(){
 
-        this.movimento = 'idle'
+        if (this.body.onFloor()){
+
+            this.movimento = 'idle'
+        
+        }else if(!this.body.onFloor()){
+
+            this.movimento = 'jump'
+
+        }
 
 
        this.muzzle.setY(this.y)

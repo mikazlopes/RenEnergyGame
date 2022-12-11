@@ -59,23 +59,23 @@ export default class Floresta extends Phaser.Scene{
     
     preload(){
 
-        this.load.image('fundo_floresta', 'assets/backgrounds/2d_tb_forest_background.png')
+        // this.load.image('fundo_floresta', 'assets/backgrounds/2d_tb_forest_background.png')
         
-        this.load.image('tiles_floresta', 'assets/tileset/tiles_forest.png')
+        // this.load.image('tiles_floresta', 'assets/tileset/tiles_forest.png')
         
-        this.load.tilemapTiledJSON('floresta', 'assets/tileset/2d_tb_forest.json')
+        // this.load.tilemapTiledJSON('floresta', 'assets/tileset/2d_tb_forest.json')
 
         this.load.atlas(this.playerSelected + '_idle', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.json')
         this.load.atlas(this.playerSelected + '_jump', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.json')
         this.load.atlas(this.playerSelected + '_dead', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.json')
         this.load.atlas(this.playerSelected + '_hurt', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.json')
         this.load.atlas(this.playerSelected + '_crouch', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.json')
-        this.load.atlas('enemy_idle', 'assets/spritesheets/enemy_idle_spritesheet.png', 'assets/spritesheets/enemy_idle_spritesheet.json')
-        this.load.atlas('enemy_hurt', 'assets/spritesheets/enemy_hurt_spritesheet.png', 'assets/spritesheets/enemy_hurt_spritesheet.json')
-        this.load.atlas('enemy_dead', 'assets/spritesheets/enemy_dead_spritesheet.png', 'assets/spritesheets/enemy_dead_spritesheet.json')
-        this.load.atlas('enemy_jump', 'assets/spritesheets/enemy_jump_spritesheet.png', 'assets/spritesheets/enemy_jump_spritesheet.json')
-        this.load.atlas('enemy_melee', 'assets/spritesheets/enemy_melee_spritesheet.png', 'assets/spritesheets/enemy_melee_spritesheet.json')
-        this.load.atlas('hero_bullet', 'assets/spritesheets/hero_bullet_spritesheet.png', 'assets/spritesheets/hero_bullet_spritesheet.json')
+        // this.load.atlas('enemy_idle', 'assets/spritesheets/enemy_idle_spritesheet.png', 'assets/spritesheets/enemy_idle_spritesheet.json')
+        // this.load.atlas('enemy_hurt', 'assets/spritesheets/enemy_hurt_spritesheet.png', 'assets/spritesheets/enemy_hurt_spritesheet.json')
+        // this.load.atlas('enemy_dead', 'assets/spritesheets/enemy_dead_spritesheet.png', 'assets/spritesheets/enemy_dead_spritesheet.json')
+        // this.load.atlas('enemy_jump', 'assets/spritesheets/enemy_jump_spritesheet.png', 'assets/spritesheets/enemy_jump_spritesheet.json')
+        // this.load.atlas('enemy_melee', 'assets/spritesheets/enemy_melee_spritesheet.png', 'assets/spritesheets/enemy_melee_spritesheet.json')
+        // this.load.atlas('hero_bullet', 'assets/spritesheets/hero_bullet_spritesheet.png', 'assets/spritesheets/hero_bullet_spritesheet.json')
 
     }
 
@@ -400,7 +400,7 @@ export default class Floresta extends Phaser.Scene{
 
         if (teclado.checkDown(teclado.addKey('A'), 200)){this.scene.start('Cidade2')}
        
-    }
+        }
 
 
 

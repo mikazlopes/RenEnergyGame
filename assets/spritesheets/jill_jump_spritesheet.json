@@ -1,0 +1,415 @@
+{
+	"frames": {
+		"Jump_Shoot__000.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 520,
+				"h": 500
+			}
+		},
+		"Jump_Shoot__001.png": {
+			"frame": {
+				"x": 520,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 520,
+				"h": 500
+			}
+		},
+		"Jump_Shoot__002.png": {
+			"frame": {
+				"x": 1040,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 520,
+				"h": 500
+			}
+		},
+		"Jump_Shoot__003.png": {
+			"frame": {
+				"x": 1560,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 520,
+				"h": 500
+			}
+		},
+		"Jump_Shoot__004.png": {
+			"frame": {
+				"x": 2080,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 520,
+				"h": 500
+			}
+		},
+		"Jump_Shoot__005.png": {
+			"frame": {
+				"x": 2600,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 520,
+				"h": 500
+			}
+		},
+		"Jump_Shoot__006.png": {
+			"frame": {
+				"x": 3120,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 520,
+				"h": 500
+			}
+		},
+		"Jump_Shoot__007.png": {
+			"frame": {
+				"x": 3640,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 520,
+				"h": 500
+			}
+		},
+		"Jump_Shoot__008.png": {
+			"frame": {
+				"x": 4160,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 520,
+				"h": 500
+			}
+		},
+		"Jump_Shoot__009.png": {
+			"frame": {
+				"x": 4680,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 520,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 520,
+				"h": 500
+			}
+		},
+		"Jump__000.png": {
+			"frame": {
+				"x": 5200,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 508,
+				"h": 500
+			}
+		},
+		"Jump__001.png": {
+			"frame": {
+				"x": 5708,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 508,
+				"h": 500
+			}
+		},
+		"Jump__002.png": {
+			"frame": {
+				"x": 6216,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 508,
+				"h": 500
+			}
+		},
+		"Jump__003.png": {
+			"frame": {
+				"x": 6724,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 508,
+				"h": 500
+			}
+		},
+		"Jump__004.png": {
+			"frame": {
+				"x": 7232,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 508,
+				"h": 500
+			}
+		},
+		"Jump__005.png": {
+			"frame": {
+				"x": 7740,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 508,
+				"h": 500
+			}
+		},
+		"Jump__006.png": {
+			"frame": {
+				"x": 8248,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 508,
+				"h": 500
+			}
+		},
+		"Jump__007.png": {
+			"frame": {
+				"x": 8756,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 508,
+				"h": 500
+			}
+		},
+		"Jump__008.png": {
+			"frame": {
+				"x": 9264,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 508,
+				"h": 500
+			}
+		},
+		"Jump__009.png": {
+			"frame": {
+				"x": 9772,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 508,
+				"h": 500
+			},
+			"sourceSize": {
+				"w": 508,
+				"h": 500
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 10280,
+			"h": 500
+		},
+		"scale": "1"
+	}
+}
