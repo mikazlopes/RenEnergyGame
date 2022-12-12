@@ -122,7 +122,7 @@ export default class Cidade2 extends Phaser.Scene{
       
 
         /** @type {Phaser.Physics.Arcade.Sprite} */
-        this.player = new Jogador(this, 200, 300, this.playerSelected + '_idle')
+        this.player = new Jogador(this, 200, 800, this.playerSelected + '_idle')
         this.add.existing(this.player)
         this.player.play(this.playerSelected + '_idle')
         
@@ -183,7 +183,7 @@ export default class Cidade2 extends Phaser.Scene{
 
         //verificar posicao do heroi
         // usado para debug quando e preciso ver coordenadas x, y
-        this.cord = this.add.text(this.player.x, this.plataformasMoveis.y - 200, this.game.input.mousePointer.x + ' ' + this.game.input.mousePointer.y, {align: 'center', color: '#00ff00', fontSize: 20} )
+        //this.cord = this.add.text(this.player.x, this.plataformasMoveis.y - 200, this.game.input.mousePointer.x + ' ' + this.game.input.mousePointer.y, {align: 'center', color: '#00ff00', fontSize: 20} )
 
 
     }

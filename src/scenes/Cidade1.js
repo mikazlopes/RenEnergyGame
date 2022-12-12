@@ -9,6 +9,8 @@ import CriaBalasHero from '../game/GrupoBalasHero.js'
 import CriaBalasEnemy from '../game/GrupoBalasEnemy.js'
 
 
+// Ainda falta acrescentar esta cidade
+
 export default class Cidade1 extends Phaser.Scene{
      
     constructor(){
