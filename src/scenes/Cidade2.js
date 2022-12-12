@@ -182,6 +182,7 @@ export default class Cidade2 extends Phaser.Scene{
         this.physics.add.overlap(this.player, this.portas, this.voltaMapa, false, this)
 
         //verificar posicao do heroi
+        // usado para debug quando e preciso ver coordenadas x, y
         this.cord = this.add.text(this.player.x, this.plataformasMoveis.y - 200, this.game.input.mousePointer.x + ' ' + this.game.input.mousePointer.y, {align: 'center', color: '#00ff00', fontSize: 20} )
 
 
@@ -263,10 +264,10 @@ export default class Cidade2 extends Phaser.Scene{
         }
 
         
-
-        this.cord.x = this.player.x
-        this.cord.y = this.player.y - 300
-        this.cord.text = this.player.x + ' ' + this.player.y
+        // usado para debug quando e preciso ver coordenadas x, y
+        // this.cord.x = this.player.x
+        // this.cord.y = this.player.y - 300
+        // this.cord.text = this.player.x + ' ' + this.player.y
 
     
 

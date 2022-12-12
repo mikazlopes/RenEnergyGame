@@ -16,8 +16,19 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         super(scene, x, y, texture)
         scene.physics.world.enable(this)
         this.setScale(0.2)
-        this.body.setSize(280, 450, true)
-        this.body.setOffset(0, -2)
+
+        if (this.scene.playerSelected == 'jack'){
+            
+            this.body.setSize(280, 450, true)
+            this.body.setOffset(0, -2)
+
+        }else{
+
+            this.body.setSize(this.width, this.height, true)
+        }
+        
+        
+        
         this.muzzle = new MuzzlesHero(this.scene, this.x, this.y)
         
         this.health = 100
@@ -35,8 +46,19 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
     vaiEsquerda(){
 
         this.flipX = true
-        this.body.setSize(this.width - 232, this.height - 50, true)
-        this.body.setOffset(200, -2)
+
+       
+
+        if (this.scene.playerSelected == 'jack'){
+            
+            this.body.setSize(this.width - 232, this.height - 50, true)
+            this.body.setOffset(200, -2)
+
+    
+        }else{
+    
+                this.body.setSize(this.width, this.height, true)
+        }
 
         if (this.body.onFloor() && this.scene.inputKeys.isUp && this.scene.cursors.up.isUp){
 
@@ -63,8 +85,18 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             if(this.body.onFloor()){
                 
                 this.movimento = 'run'
-                this.body.setSize(this.width - 232, this.height - 30, true)
-                this.body.setOffset(200, -2)
+
+
+                if (this.scene.playerSelected == 'jack'){
+            
+                    this.body.setSize(this.width - 232, this.height - 30, true)
+                    this.body.setOffset(200, -2) 
+        
+            
+                }else{
+            
+                        this.body.setSize(this.width, this.height, true)
+                }
 
             } else if (!this.body.onFloor()){
 
@@ -87,8 +119,18 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
     vaiDireita(){
 
         this.flipX = false
-        this.body.setSize(300, 450, true)
-        this.body.setOffset(50, -2)   
+        
+
+        if (this.scene.playerSelected == 'jack'){
+            
+            this.body.setSize(300, 450, true)
+            this.body.setOffset(50, -2)   
+
+    
+        }else{
+    
+                this.body.setSize(this.width, this.height, true)
+        }
 
         if (this.body.onFloor() && this.scene.inputKeys.isUp && this.scene.cursors.up.isUp){
 
@@ -170,15 +212,34 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
             if (this.flipX){
 
+                  
+                if (this.scene.playerSelected == 'jack'){
+            
+                    this.body.setSize(this.width - 232, this.height, true)
+                    this.body.setOffset(200, -5)
+    
+            
+                }else{
+            
+                        this.body.setSize(this.width, this.height, true)
+                }
+
                 
-                this.body.setSize(this.width - 232, this.height, true)
-                this.body.setOffset(200, -5)
   
 
             }else if (!this.flipX){
 
-                this.body.setSize(280, this.height, true)
-                this.body.setOffset(0, -5)   
+
+                if (this.scene.playerSelected == 'jack'){
+            
+                    this.body.setSize(280, this.height, true)
+                    this.body.setOffset(0, -5)
+    
+            
+                }else{
+            
+                        this.body.setSize(this.width, this.height, true)
+                }
                     
             }
             
@@ -212,15 +273,34 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
         if (!this.flipX){
         
-            this.body.setSize(280, 450, true)
-            this.body.setOffset(0, 0)   
+            
+            if (this.scene.playerSelected == 'jack'){
+            
+                this.body.setSize(280, 450, true)
+                this.body.setOffset(0, 0)
+
+        
+            }else{
+        
+                    this.body.setSize(this.width, this.height, true)
+            }
             
         
 
         }else if (this.flipX){
 
-            this.body.setSize(this.width - 232, this.height - 35, true)
-            this.body.setOffset(200, 20)
+            
+
+            if (this.scene.playerSelected == 'jack'){
+            
+                this.body.setSize(this.width - 232, this.height - 35, true)
+                this.body.setOffset(200, 20)
+
+        
+            }else{
+        
+                    this.body.setSize(this.width, this.height, true)
+            }
             
         }
 
@@ -236,14 +316,31 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             if (this.flipX){
 
                 
+                if (this.scene.playerSelected == 'jack'){
+            
                 this.body.setSize(this.width - 232, this.height - 50, true)
                 this.body.setOffset(200, 0)
+        
+                }else{
+        
+                    this.body.setSize(this.width, this.height, true)
+                }
                 
 
             }else if (!this.flipX){
+  
 
-                this.body.setSize(280, this.height - 50, true)
-                this.body.setOffset(0, 0)   
+                if (this.scene.playerSelected == 'jack'){
+            
+                    this.body.setSize(280, this.height - 50, true)
+                    this.body.setOffset(0, 0)   
+    
+            
+                }else{
+            
+                        this.body.setSize(this.width, this.height, true)
+                }
+
 
             }
 
@@ -256,16 +353,14 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     calculaDano(damage, origem){
 
-        console.log(this.health)
 
         this.health = this.health - damage
         
         if(this.health > 0){
-        
-        this.estado = 'hurt'
-        this.play(this.scene.playerSelected + '_hurt', true)
-        this.disableInteractive(this)
-        this.jogadorFlasha(origem)
+            this.estado = 'hurt'
+            this.play(this.scene.playerSelected + '_hurt', true)  
+            this.disableInteractive(this)
+            this.jogadorFlasha(origem)
 
         }else{
 
@@ -277,18 +372,31 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     jogadorMorreu(){
 
+        if (!this.isDead){
+
+            this.body.enable = false
+        console.log('executou')
         this.estado = 'dead'
         this.isDead = true
-        console.log(this.estado)
-        this.body.enable = false
         this.play(this.scene.playerSelected + '_dead', true)
         this.on('animationcomplete', () => {
             this.setActive(false)
             this.setVisible(false)
         })
 
-        this.scene.cameras.main.fadeOut(1000, 0, 0, 0)
+        // Inicia a funcao que chama a scene para Game over
 
+        this.scene.cameras.main.fadeOut(1000, 0, 0, 0)
+        this.scene.time.addEvent({delay: 1500, repeat: 0, callback: this.gameOver, callbackScope: this.scene})
+
+        }
+        
+
+    }
+
+    gameOver(){
+
+        this.scene.start('GameOver')
     }
 
    jogadorFlasha(origin){

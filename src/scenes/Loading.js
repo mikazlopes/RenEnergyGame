@@ -258,7 +258,7 @@ export default class Loading extends Phaser.Scene{
             repeat: 0
         })
 
-
+        this.scene.stop('Loading')
         this.scene.start('Intro')
 
     }

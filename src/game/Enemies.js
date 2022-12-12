@@ -49,7 +49,6 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
 
     calculaDano(damage){
 
-        console.log(this.health)
         this.health = this.health - damage
         
         if(this.health > 0){

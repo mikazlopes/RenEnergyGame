@@ -18,6 +18,9 @@ import Menu from './scenes/Menu.js'
 
 import Seleciona from './scenes/SelectPlayer.js'
 
+import GameOver from './scenes/GameOver.js'
+
+
 
 
 
@@ -25,8 +28,14 @@ export default new Phaser.Game({
     type: Phaser.AUTO,
     width: 1280,
     height: 720,
-    scene: [Loading, Intro , Menu,  Seleciona, Loading2, Mapa, Floresta, Cidade2]
+    scene: [Loading, Intro , Menu,  Seleciona, Loading2, Mapa, GameOver, Floresta, Cidade2],
+    jackEverUsed: false,
+    jillEverUsed: false
     })
+
+
+    // Propriedades personalizadas do jogo para saber que animacoes carregar
+
 
 
 

@@ -20,11 +20,14 @@ export default class Menu extends Phaser.Scene{
 
     }
 
-    init(){
+    init(data){
 
         // Guardar as dimensoes da scene numa variavel
         this.width = this.scale.width
         this.height = this.scale.height
+        
+        // Saber se e a primeira vez que o jogador joga ou se vem de um Game Over para evitar erro no Loading 2
+        this.gameover = data.gameover
     }
 
     preload(){
@@ -47,7 +50,7 @@ export default class Menu extends Phaser.Scene{
 
          this.joga.on('pointerup', (clica) => {
 
-            this.scene.start('Seleciona')
+            this.scene.start('Seleciona', {gameover: this.gameover})
 
          })
 

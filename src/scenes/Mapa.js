@@ -21,7 +21,7 @@ export default class Mapa extends Phaser.Scene{
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: false,
+                    debug: true,
                     gravity: { y: 0 }
                 }
               }
@@ -34,7 +34,7 @@ export default class Mapa extends Phaser.Scene{
         // Usado para importar que jogador foi escolhido e a dificuldade
         
 
-        //variaveis de outras scenes para dar contexto
+        //variaveis de outras scenes para dar contexto em termos de heroi escolhido e a ultima posicao no mapa
         this.playerPosx = data.positionx
         this.playerPosy = data.positiony        
         this.playerSelected = data.heroi
@@ -55,7 +55,7 @@ export default class Mapa extends Phaser.Scene{
     }
 
     create(){
-
+        
 
        // adiciona os tilesets para o mapa
         var mundo = this.make.tilemap({key: 'mapa'})
@@ -133,7 +133,7 @@ export default class Mapa extends Phaser.Scene{
         this.player.x = this.playerPosx
         this.player.y= this.playerPosy
 
-        this.cursors = this.input.keyboard.createCursorKeys();
+        this.cursors = this.input.keyboard.createCursorKeys()
 
         this.physics.add.collider(this.player, obstaculos)
 
@@ -148,11 +148,12 @@ export default class Mapa extends Phaser.Scene{
         this.zonas = this.physics.add.group({classType: Phaser.GameObjects.Zone})
 
         for ( var i = 0; i < 30; i++ ) {
-            var x = Phaser.Math.RND.between( 500, this.physics.world.bounds.width );
-            var y = Phaser.Math.RND.between( 100, this.physics.world.bounds.height );
+            var x = Phaser.Math.RND.between( 700, this.physics.world.bounds.width )
+            var y = Phaser.Math.RND.between( 100, this.physics.world.bounds.height )
             
             // -- parâmetros (x, y, width, height)
-            this.zonas.create(x, y, 20, 20);
+            this.zonas.create(x, y, 20, 20)
+
         }
 
         //  Zona para a cidade 2 
@@ -217,17 +218,14 @@ export default class Mapa extends Phaser.Scene{
 
         for (var i = 0; i < areas.length; i++){
 
-            if (Phaser.Math.Distance.Between(areas[i].x,areas[i].y, this.player.x, this.player.y) < 50){
-
-            }
             for (var j = 0; j < areas.length; j++){
               
                 if (i != j){
 
                     if (Phaser.Math.Distance.Between(areas[i].x,areas[i].y, areas[j].x, areas[j].y) < 50){
 
-                        areas[i].x = Phaser.Math.RND.between( 500, this.physics.world.bounds.width );
-                        areas[i].y = Phaser.Math.RND.between( 100, this.physics.world.bounds.height );
+                        areas[i].x = Phaser.Math.RND.between( 700, this.physics.world.bounds.width)
+                        areas[i].y = Phaser.Math.RND.between( 100, this.physics.world.bounds.height)
                         
 
                     }

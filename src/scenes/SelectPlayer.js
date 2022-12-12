@@ -3,15 +3,7 @@ import Phaser from '../lib/phaser.js'
 export default class Seleciona extends Phaser.Scene{
      
     constructor(){
-
-    /** @type {Phaser.Physics.Arcade.StaticGroup} */
-
-	/** @type {Phaser.Physics.Arcade.Group} */
-	
-	/** @type {Phaser.Types.Input.Keyboard.CursorKeys} */
-	
-	/** @type {Phaser.Physics.Arcade.Group} */
-
+  
     
         // configura physics para esta cena
         super({
@@ -20,11 +12,13 @@ export default class Seleciona extends Phaser.Scene{
 
     }
 
-    init(){
+    init(data){
 
         // Guardar as dimensoes da scene numa variavel
         this.width = this.scale.width
         this.height = this.scale.height
+
+        this.gameover = data.gameover
     }
 
     preload(){
@@ -46,7 +40,7 @@ export default class Seleciona extends Phaser.Scene{
                 suffix: '.png'
             }),
             frameRate: 15,
-            repeat: 0
+            repeat: -1
         })
 
         this.anims.create({
@@ -107,14 +101,15 @@ export default class Seleciona extends Phaser.Scene{
          })
 
         jack.on('pointerup', (clica) => {
-
+                   
             this.scene.start('Loading2', {heroi: 'jack'})
-
+     
          })
 
          jill.on('pointerup', (clica) => {
 
-            this.scene.start('Loading2', {heroi: 'jill'})
+               
+                this.scene.start('Loading2', {heroi: 'jill'})
 
          })
 
