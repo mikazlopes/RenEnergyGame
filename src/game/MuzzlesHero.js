@@ -46,24 +46,52 @@ export default class MuzzlesHero extends Phaser.GameObjects.Sprite
         
         if (this.sentido == 'esquerda'){
 
-            this.setX(this.heroi.x - 70)
-            this.setY(this.heroi.y + 3)
+            if (this.scene.playerSelected == 'jack'){
+                this.setX(this.heroi.x - 70)
+                this.setY(this.heroi.y + 3)
+            }else{
+
+                this.setX(this.heroi.x - 65)
+                this.setY(this.heroi.y)
+            }
 
         }else{
             
-            this.setX(this.heroi.x + 70)
-            this.setY(this.heroi.y + 3)
+            if (this.scene.playerSelected == 'jack'){
+                this.setX(this.heroi.x + 70)
+                this.setY(this.heroi.y + 3)
+            }else{
+
+                this.setX(this.heroi.x + 65)
+                this.setY(this.heroi.y)
+            }
 
         }
 
         if (this.scene.cursors.left.isDown && this.scene.cursors.up.isUp && this.heroi.body.onFloor()){
 
-            this.setX(this.heroi.x - 80)
-            this.setY(this.heroi.y)
+            if (this.scene.playerSelected == 'jack'){
+                this.setX(this.heroi.x - 80)
+                this.setY(this.heroi.y)
+            }else{
+
+                this.setX(this.heroi.x - 75)
+                this.setY(this.heroi.y)
+            }
+            
         } else if (this.scene.cursors.right.isDown && this.scene.cursors.up.isUp && this.heroi.body.onFloor()){
 
-            this.setX(this.heroi.x + 80)
-            this.setY(this.heroi.y)
+            if (this.scene.playerSelected == 'jack'){
+                this.setX(this.heroi.x + 80)
+                this.setY(this.heroi.y)
+            }else{
+
+                this.setX(this.heroi.x + 75)
+                this.setY(this.heroi.y)
+            }
+        }else if (this.scene.cursors.down.isDown && this.scene.playerSelected == 'jill'){
+
+            this.setY(this.heroi.y + 5)
         }
 		
 	}

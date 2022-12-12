@@ -20,8 +20,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         this.body.setOffset(0, -2)
         this.muzzle = new MuzzlesHero(this.scene, this.x, this.y)
         
-        this.health = 1000
-        this.damage = 0.05
+        this.health = 100
         
         this.estado = 'ok'
         this.movimento = 'idle'

@@ -21,8 +21,8 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
         this.setScale(0.2)
         this.flipX = true
         
-        this.health = 100
-        this.meele = 30
+        this.health = 50
+        this.meele = 20
         
         this.play('enemy_idle')
 

@@ -52,15 +52,7 @@ export default class Intro extends Phaser.Scene{
 
     preload(){
 
-        // this.load.image('background', 'assets//backgrounds/intro_background.png')
-        // this.load.image('cidade', 'assets/backgrounds/viana.png')
-        // this.load.atlas('enemy_run', 'assets/spritesheets/enemy_run_spritesheet.png', 'assets/spritesheets/enemy_run_spritesheet.json')
-        // this.load.atlas('enemy_bullet', 'assets/spritesheets/enemy_bullet_spritesheet.png', 'assets/spritesheets/enemy_bullet_spritesheet.json')
-        // this.load.atlas('muzzle', 'assets/spritesheets/muzzle_spritesheet.png', 'assets/spritesheets/muzzle_spritesheet.json')
-        // this.load.atlas('jack_run', 'assets/spritesheets/jack_run_spritesheet.png', 'assets/spritesheets/jack_run_spritesheet.json')
-        // this.load.atlas('jill_run', 'assets/spritesheets/jill_run_spritesheet.png', 'assets/spritesheets/jill_run_spritesheet.json')
-        // this.load.atlas('jack_idle', 'assets/spritesheets/jack_idle_spritesheet.png', 'assets/spritesheets/jack_idle_spritesheet.json')
-        // this.load.atlas('jill_idle', 'assets/spritesheets/jill_idle_spritesheet.png', 'assets/spritesheets/jill_idle_spritesheet.json')
+       
     }
 
     create(){
@@ -98,124 +90,7 @@ export default class Intro extends Phaser.Scene{
         tempText = this.time.delayedCall(7000, this.moveText, [], this)
 
        
-       //prepara as animacoes para os inimigos
-        this.anims.create({
-            key: 'enemy_run_shoot',
-            frames: this.anims.generateFrameNames('enemy_run', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Run_Shoot__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'enemy_run',
-            frames: this.anims.generateFrameNames('enemy_run', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Run__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'jack_run',
-            frames: this.anims.generateFrameNames('jack_run', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Run__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'jack_idle',
-            frames: this.anims.generateFrameNames('jack_idle', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Idle__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'jill_run',
-            frames: this.anims.generateFrameNames('jill_run', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Run__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'jill_idle',
-            frames: this.anims.generateFrameNames('jill_idle', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Idle__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'enemy_bullet_size',
-            frames: this.anims.generateFrameNames('enemy_bullet', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'OrangeScale__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'enemy_bullet_spin',
-            frames: this.anims.generateFrameNames('enemy_bullet', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'OrangeSpin__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'enemy_muzzle',
-            frames: this.anims.generateFrameNames('muzzle', {
-                start: 0,
-                end: 10,
-                zeroPad: 3,
-                prefix: 'OrangeMuzzle__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: 0
-        })
-
+       
         //bloco em que cria os objetos dos inimigos e executa as animacoes 
 
         jack = this.add.sprite( -300, height - 150, 'jack_run').setScale(0.25)
@@ -270,6 +145,12 @@ export default class Intro extends Phaser.Scene{
             enemies[i].play('enemy_run')
         }
 
+        this.input.on('pointerup', (clica) => {
+
+            this.scene.start('Menu')
+
+        })
+
 
     }
 
@@ -313,8 +194,8 @@ export default class Intro extends Phaser.Scene{
         }
 
 
-        let teclado = this.input.keyboard
-        if (teclado.checkDown(teclado.addKey('A'), 200)){this.scene.start('Menu', { id: 0, positionx: 650, positiony: 160 })}
+        // let teclado = this.input.keyboard
+        // if (teclado.checkDown(teclado.addKey('A'), 200)){this.scene.start('Menu', { id: 0, positionx: 650, positiony: 160 })}
         
     }
 

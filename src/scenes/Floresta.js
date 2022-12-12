@@ -28,7 +28,7 @@ export default class Floresta extends Phaser.Scene{
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: true,
+                    debug: false,
                     tileBias: 32,
                     fps: 30,
                     fixedStep: true,
@@ -40,10 +40,12 @@ export default class Floresta extends Phaser.Scene{
     
     }
 
-    init(){
+    init(data){
 
         // Usado para importar que jogador foi escolhido e a dificuldade
-        this.playerSelected = 'jack'
+        this.playerSelected = data.heroi
+        this.positionX = data.positionX
+        this.positionY = data.positionY
         this.difficulty = 2
         this.speedH = 250
         this.speedV = 400
@@ -59,23 +61,6 @@ export default class Floresta extends Phaser.Scene{
     
     preload(){
 
-        // this.load.image('fundo_floresta', 'assets/backgrounds/2d_tb_forest_background.png')
-        
-        // this.load.image('tiles_floresta', 'assets/tileset/tiles_forest.png')
-        
-        // this.load.tilemapTiledJSON('floresta', 'assets/tileset/2d_tb_forest.json')
-
-        this.load.atlas(this.playerSelected + '_idle', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.json')
-        this.load.atlas(this.playerSelected + '_jump', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.json')
-        this.load.atlas(this.playerSelected + '_dead', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.json')
-        this.load.atlas(this.playerSelected + '_hurt', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.json')
-        this.load.atlas(this.playerSelected + '_crouch', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.json')
-        // this.load.atlas('enemy_idle', 'assets/spritesheets/enemy_idle_spritesheet.png', 'assets/spritesheets/enemy_idle_spritesheet.json')
-        // this.load.atlas('enemy_hurt', 'assets/spritesheets/enemy_hurt_spritesheet.png', 'assets/spritesheets/enemy_hurt_spritesheet.json')
-        // this.load.atlas('enemy_dead', 'assets/spritesheets/enemy_dead_spritesheet.png', 'assets/spritesheets/enemy_dead_spritesheet.json')
-        // this.load.atlas('enemy_jump', 'assets/spritesheets/enemy_jump_spritesheet.png', 'assets/spritesheets/enemy_jump_spritesheet.json')
-        // this.load.atlas('enemy_melee', 'assets/spritesheets/enemy_melee_spritesheet.png', 'assets/spritesheets/enemy_melee_spritesheet.json')
-        // this.load.atlas('hero_bullet', 'assets/spritesheets/hero_bullet_spritesheet.png', 'assets/spritesheets/hero_bullet_spritesheet.json')
 
     }
 
@@ -99,189 +84,6 @@ export default class Floresta extends Phaser.Scene{
         // define que layers contem objetos com colisoes
         chao.setCollisionByExclusion(-1)
         
-        // cria animacoes necessarias para esta cena
-        this.anims.create({
-            key: this.playerSelected + '_idle_aim',
-            frames: this.anims.generateFrameNames(this.playerSelected + '_idle', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Idle_Aim__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: this.playerSelected + '_jump',
-            frames: this.anims.generateFrameNames(this.playerSelected + '_jump', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Jump_Shoot__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: this.playerSelected + '_crouch_aim',
-            frames: this.anims.generateFrameNames(this.playerSelected + '_crouch', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Crouch_Aim__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'enemy_idle',
-            frames: this.anims.generateFrameNames('enemy_idle', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Idle__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'enemy_idle_aim',
-            frames: this.anims.generateFrameNames('enemy_idle', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Idle_Aim__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'enemy_jump_shoot',
-            frames: this.anims.generateFrameNames('enemy_jump', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Jump_Shoot__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'enemy_melee',
-            frames: this.anims.generateFrameNames('enemy_melee', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Melee__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'enemy_hurt',
-            frames: this.anims.generateFrameNames('enemy_hurt', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Hurt__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: 0
-        })
-
-        this.anims.create({
-            key: 'enemy_dead',
-            frames: this.anims.generateFrameNames('enemy_dead', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Dead__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: 0
-        })
-
-        this.anims.create({
-            key: this.playerSelected + '_run_aim',
-            frames: this.anims.generateFrameNames(this.playerSelected + '_run', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Run_Shoot__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: 'hero_muzzle',
-            frames: this.anims.generateFrameNames('muzzle', {
-                start: 0,
-                end: 10,
-                zeroPad: 3,
-                prefix: 'YellowMuzzle__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: 0
-        })
-
-        this.anims.create({
-            key: 'hero_bullet_spin',
-            frames: this.anims.generateFrameNames('hero_bullet', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'YellowSpin__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: this.playerSelected + '_hurt',
-            frames: this.anims.generateFrameNames(this.playerSelected + '_hurt', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Hurt__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: this.playerSelected + '_dead',
-            frames: this.anims.generateFrameNames(this.playerSelected + '_dead', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Dead__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: 0
-        })
-
         
         
         //insere o jogador 
@@ -463,6 +265,13 @@ export default class Floresta extends Phaser.Scene{
 
         personagem.shootTimer.reset()
         personagem.destroy()
+
+        if (this.osInimigos.getLength() == 0){
+
+            this.scene.start('Mapa', { id: 1, positionx: this.positionX, positiony: this.positionY, heroi: this.playerSelected})
+        }
+
+
 
     }
 

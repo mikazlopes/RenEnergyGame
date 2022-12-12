@@ -68,7 +68,6 @@ export default class Loading extends Phaser.Scene{
         assetText.setOrigin(0.5, 0.5)
         
         this.load.on('progress', function (value) {
-            console.log(value)
             percentText.setText(parseInt(value * 100) + '%')
             progressBar.clear()
             progressBar.fillStyle(0xffffff, 1)
@@ -76,11 +75,9 @@ export default class Loading extends Phaser.Scene{
         })
         
         this.load.on('fileprogress', function (file) {
-            console.log(file)
             assetText.setText('Loading asset: ' + file.src)
         })
         this.load.on('complete', function () {
-            console.log('executou')
             progressBar.destroy()
             progressBox.destroy()
             loadingText.destroy()
@@ -118,18 +115,11 @@ export default class Loading extends Phaser.Scene{
         this.load.image('tiles_mapa7', 'assets/tileset/tiles_mapa7.png')
         
         this.load.tilemapTiledJSON('mapa', 'assets/tileset/renEnergy_mapa.json')
-        // this.load.atlas(this.playerSelected + '_walk', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.json')
-        // this.load.atlas(this.playerSelected + '_idle', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.json')
-
+    
 
         this.load.image('fundo_floresta', 'assets/backgrounds/2d_tb_forest_background.png')
         this.load.image('tiles_floresta', 'assets/tileset/tiles_forest.png')   
         this.load.tilemapTiledJSON('floresta', 'assets/tileset/2d_tb_forest.json')
-        // this.load.atlas(this.playerSelected + '_idle', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.json')
-        // this.load.atlas(this.playerSelected + '_jump', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.json')
-        // this.load.atlas(this.playerSelected + '_dead', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.json')
-        // this.load.atlas(this.playerSelected + '_hurt', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.json')
-        // this.load.atlas(this.playerSelected + '_crouch', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.json')
         this.load.atlas('enemy_idle', 'assets/spritesheets/enemy_idle_spritesheet.png', 'assets/spritesheets/enemy_idle_spritesheet.json')
         this.load.atlas('enemy_hurt', 'assets/spritesheets/enemy_hurt_spritesheet.png', 'assets/spritesheets/enemy_hurt_spritesheet.json')
         this.load.atlas('enemy_dead', 'assets/spritesheets/enemy_dead_spritesheet.png', 'assets/spritesheets/enemy_dead_spritesheet.json')
@@ -149,6 +139,125 @@ export default class Loading extends Phaser.Scene{
     }
 
     create(){
+
+        //prepara as animacoes para os inimigos
+        this.anims.create({
+            key: 'enemy_run_shoot',
+            frames: this.anims.generateFrameNames('enemy_run', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Run_Shoot__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_run',
+            frames: this.anims.generateFrameNames('enemy_run', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Run__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'jack_run',
+            frames: this.anims.generateFrameNames('jack_run', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Run__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'jack_idle',
+            frames: this.anims.generateFrameNames('jack_idle', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Idle__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'jill_run',
+            frames: this.anims.generateFrameNames('jill_run', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Run__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'jill_idle',
+            frames: this.anims.generateFrameNames('jill_idle', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Idle__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_bullet_size',
+            frames: this.anims.generateFrameNames('enemy_bullet', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'OrangeScale__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_bullet_spin',
+            frames: this.anims.generateFrameNames('enemy_bullet', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'OrangeSpin__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_muzzle',
+            frames: this.anims.generateFrameNames('muzzle', {
+                start: 0,
+                end: 10,
+                zeroPad: 3,
+                prefix: 'OrangeMuzzle__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: 0
+        })
+
 
         this.scene.start('Intro')
 

@@ -13,7 +13,7 @@ export default class BalaEnemy extends Phaser.Physics.Arcade.Sprite
         scene.physics.world.enable(this)
         this.setTexture('enemy_bullet')
 
-        this.dano = 10
+        this.dano = 5
 	}
 
 	dispara(x, y, direcao) {

@@ -20,6 +20,12 @@ export default class Loading2 extends Phaser.Scene{
 
     }
 
+    init(data){
+
+        this.playerSelected = data.heroi
+        
+    }
+
     preload(){
 
         // Preloader original de https://gamedevacademy.org/creating-a-preloading-screen-in-phaser-3/
@@ -68,7 +74,6 @@ export default class Loading2 extends Phaser.Scene{
         assetText.setOrigin(0.5, 0.5)
         
         this.load.on('progress', function (value) {
-            console.log(value)
             percentText.setText(parseInt(value * 100) + '%')
             progressBar.clear()
             progressBar.fillStyle(0xffffff, 1)
@@ -76,11 +81,9 @@ export default class Loading2 extends Phaser.Scene{
         })
         
         this.load.on('fileprogress', function (file) {
-            console.log(file)
             assetText.setText('Loading asset: ' + file.src)
         })
         this.load.on('complete', function () {
-            console.log('executou')
             progressBar.destroy()
             progressBox.destroy()
             loadingText.destroy()
@@ -89,68 +92,235 @@ export default class Loading2 extends Phaser.Scene{
 
         })
         
-        // Assets para o Intro
-        this.load.image('intro_background', 'assets/backgrounds/intro_background.png')
-        this.load.image('cidade', 'assets/backgrounds/viana.png')
-        this.load.atlas('enemy_run', 'assets/spritesheets/enemy_run_spritesheet.png', 'assets/spritesheets/enemy_run_spritesheet.json')
-        this.load.atlas('enemy_bullet', 'assets/spritesheets/enemy_bullet_spritesheet.png', 'assets/spritesheets/enemy_bullet_spritesheet.json')
-        this.load.atlas('muzzle', 'assets/spritesheets/muzzle_spritesheet.png', 'assets/spritesheets/muzzle_spritesheet.json')
-        this.load.atlas('jack_run', 'assets/spritesheets/jack_run_spritesheet.png', 'assets/spritesheets/jack_run_spritesheet.json')
-        this.load.atlas('jill_run', 'assets/spritesheets/jill_run_spritesheet.png', 'assets/spritesheets/jill_run_spritesheet.json')
-        this.load.atlas('jack_idle', 'assets/spritesheets/jack_idle_spritesheet.png', 'assets/spritesheets/jack_idle_spritesheet.json')
-        this.load.atlas('jill_idle', 'assets/spritesheets/jill_idle_spritesheet.png', 'assets/spritesheets/jill_idle_spritesheet.json')
-        this.load.atlas('jack_happy', 'assets/spritesheets/jack_happy_spritesheet.png', 'assets/spritesheets/jack_happy_spritesheet.json')
-        this.load.atlas('jill_happy', 'assets/spritesheets/jill_happy_spritesheet.png', 'assets/spritesheets/jill_happy_spritesheet.json')
 
-        // Assets para o menu
+        //aassets para os herois
 
-        this.load.image('play_btn', 'assets/menu/play.png')
-
-
-        //aassets para o Mapa
-
-        this.load.image('tiles_mapa1', 'assets/tileset/tiles_mapa1.png')
-        this.load.image('tiles_mapa2', 'assets/tileset/tiles_mapa2.png')
-        this.load.image('tiles_mapa3', 'assets/tileset/tiles_mapa3.png')
-        this.load.image('tiles_mapa4', 'assets/tileset/tiles_mapa4.png')
-        this.load.image('tiles_mapa5', 'assets/tileset/tiles_mapa5.png')
-        this.load.image('tiles_mapa6', 'assets/tileset/tiles_mapa6.png')
-        this.load.image('tiles_mapa7', 'assets/tileset/tiles_mapa7.png')
+        this.load.atlas(this.playerSelected + '_walk', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.json')
+        this.load.atlas(this.playerSelected + '_idle', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.json')
+        this.load.atlas(this.playerSelected + '_jump', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.json')
+        this.load.atlas(this.playerSelected + '_dead', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.json')
+        this.load.atlas(this.playerSelected + '_hurt', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.json')
+        this.load.atlas(this.playerSelected + '_crouch', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.json')
         
-        this.load.tilemapTiledJSON('mapa', 'assets/tileset/renEnergy_mapa.json')
-        // this.load.atlas(this.playerSelected + '_walk', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.json')
-        // this.load.atlas(this.playerSelected + '_idle', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.json')
-
-
-        this.load.image('fundo_floresta', 'assets/backgrounds/2d_tb_forest_background.png')
-        this.load.image('tiles_floresta', 'assets/tileset/tiles_forest.png')   
-        this.load.tilemapTiledJSON('floresta', 'assets/tileset/2d_tb_forest.json')
-        // this.load.atlas(this.playerSelected + '_idle', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.json')
-        // this.load.atlas(this.playerSelected + '_jump', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_jump_spritesheet.json')
-        // this.load.atlas(this.playerSelected + '_dead', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_dead_spritesheet.json')
-        // this.load.atlas(this.playerSelected + '_hurt', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_hurt_spritesheet.json')
-        // this.load.atlas(this.playerSelected + '_crouch', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_crouch_spritesheet.json')
-        this.load.atlas('enemy_idle', 'assets/spritesheets/enemy_idle_spritesheet.png', 'assets/spritesheets/enemy_idle_spritesheet.json')
-        this.load.atlas('enemy_hurt', 'assets/spritesheets/enemy_hurt_spritesheet.png', 'assets/spritesheets/enemy_hurt_spritesheet.json')
-        this.load.atlas('enemy_dead', 'assets/spritesheets/enemy_dead_spritesheet.png', 'assets/spritesheets/enemy_dead_spritesheet.json')
-        this.load.atlas('enemy_jump', 'assets/spritesheets/enemy_jump_spritesheet.png', 'assets/spritesheets/enemy_jump_spritesheet.json')
-        this.load.atlas('enemy_melee', 'assets/spritesheets/enemy_melee_spritesheet.png', 'assets/spritesheets/enemy_melee_spritesheet.json')
-        this.load.atlas('hero_bullet', 'assets/spritesheets/hero_bullet_spritesheet.png', 'assets/spritesheets/hero_bullet_spritesheet.json')
-
-
-        this.load.image('tilesCidade2', 'assets/tileset/cidade2/Tileset.png')
-        this.load.image('spike', 'assets/tileset/cidade2/spike.png')
-        this.load.image('door', 'assets/tileset/cidade2/door.png')
-        this.load.image('movel', 'assets/tileset/cidade2/movel.png')
-        this.load.image('fundoCidade2', 'assets/backgrounds/cidade2.jpg')
-        this.load.tilemapTiledJSON('cidade2', 'assets/tileset/cidade2/cidade2.json')
         
 
     }
 
     create(){
 
-        this.scene.start('Intro')
+        // cria as animacoes
+        this.anims.create({
+            key: this.playerSelected + '_walk',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_walk', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Walk__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: this.playerSelected + '_idle',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_idle', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Idle__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        // cria animacoes necessarias para esta cena
+        this.anims.create({
+            key: this.playerSelected + '_idle_aim',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_idle', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Idle_Aim__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: this.playerSelected + '_jump',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_jump', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Jump_Shoot__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: this.playerSelected + '_crouch_aim',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_crouch', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Crouch_Aim__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_idle',
+            frames: this.anims.generateFrameNames('enemy_idle', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Idle__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_idle_aim',
+            frames: this.anims.generateFrameNames('enemy_idle', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Idle_Aim__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_jump_shoot',
+            frames: this.anims.generateFrameNames('enemy_jump', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Jump_Shoot__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_melee',
+            frames: this.anims.generateFrameNames('enemy_melee', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Melee__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'enemy_hurt',
+            frames: this.anims.generateFrameNames('enemy_hurt', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Hurt__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: 0
+        })
+
+        this.anims.create({
+            key: 'enemy_dead',
+            frames: this.anims.generateFrameNames('enemy_dead', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Dead__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: 0
+        })
+
+        this.anims.create({
+            key: this.playerSelected + '_run_aim',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_run', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Run_Shoot__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'hero_muzzle',
+            frames: this.anims.generateFrameNames('muzzle', {
+                start: 0,
+                end: 10,
+                zeroPad: 3,
+                prefix: 'YellowMuzzle__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: 0
+        })
+
+        this.anims.create({
+            key: 'hero_bullet_spin',
+            frames: this.anims.generateFrameNames('hero_bullet', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'YellowSpin__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: this.playerSelected + '_hurt',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_hurt', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Hurt__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: this.playerSelected + '_dead',
+            frames: this.anims.generateFrameNames(this.playerSelected + '_dead', {
+                start: 0,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'Dead__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: 0
+        })
+
+
+        this.scene.start('Mapa', { id: 0, positionx: 650, positiony: 160, heroi: this.playerSelected, primeira: true})
+
 
     }
 

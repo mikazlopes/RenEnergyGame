@@ -21,7 +21,7 @@ export default class Mapa extends Phaser.Scene{
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: true,
+                    debug: false,
                     gravity: { y: 0 }
                 }
               }
@@ -33,11 +33,13 @@ export default class Mapa extends Phaser.Scene{
 
         // Usado para importar que jogador foi escolhido e a dificuldade
         
-        console.log(data)
 
+        //variaveis de outras scenes para dar contexto
         this.playerPosx = data.positionx
         this.playerPosy = data.positiony        
         this.playerSelected = data.heroi
+        this.cidade = data.cidade
+        this.instrucoes = data.primeira
         this.difficulty = 'easy'
         this.speed = 70
 
@@ -50,20 +52,6 @@ export default class Mapa extends Phaser.Scene{
     preload(){
 
         
-
-        // this.load.image('tiles_mapa1', 'assets/tileset/tiles_mapa1.png')
-        // this.load.image('tiles_mapa2', 'assets/tileset/tiles_mapa2.png')
-        // this.load.image('tiles_mapa3', 'assets/tileset/tiles_mapa3.png')
-        // this.load.image('tiles_mapa4', 'assets/tileset/tiles_mapa4.png')
-        // this.load.image('tiles_mapa5', 'assets/tileset/tiles_mapa5.png')
-        // this.load.image('tiles_mapa6', 'assets/tileset/tiles_mapa6.png')
-        // this.load.image('tiles_mapa7', 'assets/tileset/tiles_mapa7.png')
-        
-        // this.load.tilemapTiledJSON('mapa', 'assets/tileset/renEnergy_mapa.json')
-
-        this.load.atlas(this.playerSelected + '_walk', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_walk_spritesheet.json')
-        this.load.atlas(this.playerSelected + '_idle', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.png', 'assets/spritesheets/' + this.playerSelected + '_idle_spritesheet.json')
-
     }
 
     create(){
@@ -134,32 +122,6 @@ export default class Mapa extends Phaser.Scene{
                         objSinais,
                         baseAgua]
 
-        // cria as animacoes
-        this.anims.create({
-            key: this.playerSelected + '_walk',
-            frames: this.anims.generateFrameNames(this.playerSelected + '_walk', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Walk__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
-
-        this.anims.create({
-            key: this.playerSelected + '_idle',
-            frames: this.anims.generateFrameNames(this.playerSelected + '_idle', {
-                start: 0,
-                end: 9,
-                zeroPad: 3,
-                prefix: 'Idle__',
-                suffix: '.png'
-            }),
-            frameRate: 15,
-            repeat: -1
-        })
 
         //insere o jogador 
 
@@ -193,12 +155,41 @@ export default class Mapa extends Phaser.Scene{
             this.zonas.create(x, y, 20, 20);
         }
 
+        //  Zona para a cidade 2 
         this.zonaCidade2 = this.physics.add.sprite(1160, 205).setOrigin(0, 0).setSize(100,100).setVisible(true)
 
-        console.log(this.zonaCidade2)
+        // se a Cidade 2 foi completada remove a zona para evitar o jogador entrar de novo por engano
 
+        if (this.cidade == 2){
+
+            this.zonaCidade2.destroy()
+        }
+
+        this.physics.add.overlap(this.player, this.zonas, this.colisaoInimigo, false, this)
         this.physics.add.overlap(this.player, this.zonaCidade2, this.colisaoCidade, false, this)
 
+        if (this.instrucoes){
+
+            let r1 = this.add.rectangle( 100, 100, this.width - 200, this.height - 200, 0xffffff, 0.6).setOrigin(0,0).setInteractive()
+            let content = "To recover the parts go to each city in the map and collect it. Once inside defeat all the enemies, and find the stolen part. Collect it find the exit to return to the map. Recover all three parts hidden in the 3 cities. Be careful, on the way to the cities you might be acttacked. Good Luck!"
+            
+
+            let textHist = this.add.text(this.width / 2, this.height / 2, content, {fontSize: 20, color: 0x2127F1, wordWrap: {width: 1000}, align: 'center'}).setOrigin(0.5, 0.5)
+            let textHist2 = this.add.text(this.width / 2, this.height / 1.5, 'Click here to Continue', {fontSize: 20, color: 0x2127F1, wordWrap: {width: 1000}, align: 'center'}).setOrigin(0.5, 0.5)
+
+
+            r1.on('pointerup', (clica) => {
+
+                r1.destroy()
+                textHist.destroy()
+                textHist2.destroy()
+                this.instrucoes = false
+            }) 
+    
+            
+
+        }
+        
         
         
     }
@@ -206,10 +197,7 @@ export default class Mapa extends Phaser.Scene{
     colisaoInimigo(player, zona){
 
 
-        // zona.x = Phaser.Math.RND.between(500 , this.physics.world.bounds.width)
-        // zona.y = Phaser.Math.RND.between(100, this.physics.world.bounds.height)
-
-        this.scene.start('Floresta')
+        this.scene.start('Floresta', { heroi: this.playerSelected, positionX: this.player.x, positionY: this.player.y})
  
     }
 
@@ -217,7 +205,7 @@ export default class Mapa extends Phaser.Scene{
 
         if (zona.x == 1160){
 
-            this.scene.start('Cidade2')
+            this.scene.start('Cidade2', { heroi: this.playerSelected})
 
         }
     }
@@ -228,6 +216,10 @@ export default class Mapa extends Phaser.Scene{
         var areas = this.zonas.getChildren()
 
         for (var i = 0; i < areas.length; i++){
+
+            if (Phaser.Math.Distance.Between(areas[i].x,areas[i].y, this.player.x, this.player.y) < 50){
+
+            }
             for (var j = 0; j < areas.length; j++){
               
                 if (i != j){
@@ -236,7 +228,7 @@ export default class Mapa extends Phaser.Scene{
 
                         areas[i].x = Phaser.Math.RND.between( 500, this.physics.world.bounds.width );
                         areas[i].y = Phaser.Math.RND.between( 100, this.physics.world.bounds.height );
-                        console.log('executou')
+                        
 
                     }
                 }

@@ -66,10 +66,12 @@ export default class Seleciona extends Phaser.Scene{
         this.add.sprite(0,0,'intro_background').setOrigin(0,0)
         
         //rectangulo com alpha para efeito visual
-        let r1 = this.add.rectangle( 0, 0, this.width, this.height, 0xffffff, 0.3).setOrigin(0,0)
+        let r1 = this.add.rectangle( 0, 0, this.width, this.height, 0xffffff, 0.5).setOrigin(0,0)
         //Adiciona o rectangulo
 
         let titulo = this.add.text(this.width / 2, this.height / 4, 'Click on your character to choose your hero', {fontSize: 48, color: 0x2127F1}).setOrigin(0.5)
+
+        let instrucoes = this.add.text(this.width / 2, this.height - 100, 'Use the cursor keys to control your hero and SPACE to shoot', {fontSize: 23, color: 0x2127F1}).setOrigin(0.5)
 
         
         // torna os herois clickaveis
@@ -106,13 +108,13 @@ export default class Seleciona extends Phaser.Scene{
 
         jack.on('pointerup', (clica) => {
 
-            this.scene.start('Mapa', { id: 0, positionx: 650, positiony: 160, heroi: 'jack'})
+            this.scene.start('Loading2', {heroi: 'jack'})
 
          })
 
          jill.on('pointerup', (clica) => {
 
-            this.scene.start('Mapa', { id: 0, positionx: 650, positiony: 160, heroi: 'jill'})
+            this.scene.start('Loading2', {heroi: 'jill'})
 
          })
 

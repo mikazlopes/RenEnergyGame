@@ -28,7 +28,7 @@ export default class Cidade2 extends Phaser.Scene{
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: true,
+                    debug: false,
                     tileBias: 32,
                     fps: 30,
                     fixedStep: true,
@@ -40,10 +40,10 @@ export default class Cidade2 extends Phaser.Scene{
     
     }
 
-    init(){
+    init(data){
 
         // Usado para importar que jogador foi escolhido e a dificuldade
-        this.playerSelected = 'jack'
+        this.playerSelected = data.heroi
         this.difficulty = 6
         this.speedH = 250
         this.speedV = 400
@@ -61,12 +61,6 @@ export default class Cidade2 extends Phaser.Scene{
     preload(){
 
 
-        // this.load.image('tilesCidade2', 'assets/tileset/cidade2/Tileset.png')
-        // this.load.image('spike', 'assets/tileset/cidade2/spike.png')
-        // this.load.image('door', 'assets/tileset/cidade2/door.png')
-        // this.load.image('movel', 'assets/tileset/cidade2/movel.png')
-        // this.load.image('fundoCidade2', 'assets/backgrounds/cidade2.jpg')
-        // this.load.tilemapTiledJSON('cidade2', 'assets/tileset/cidade2/cidade2.json')
     }
 
     create(){
@@ -399,7 +393,7 @@ export default class Cidade2 extends Phaser.Scene{
 
         if (this.bossDead){
 
-            this.scene.start('Mapa', { id: 1, positionx: 1200, positiony: 150 })
+            this.scene.start('Mapa', { id: 1, positionx: 1200, positiony: 150, heroi: this.playerSelected, cidade: 2})
 
         }
         
