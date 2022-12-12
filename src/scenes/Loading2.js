@@ -29,9 +29,11 @@ export default class Loading2 extends Phaser.Scene{
         
     }
 
+    // Preloader para os assets do Jogo principal
+
     preload(){
 
-        // se o jogador apos gameover escolher a mesma personagem nao precisa de creegar tudo de novo
+        // se o jogador apos gameover escolher a mesma personagem nao precisa de carregar tudo de novo
 
         if (!this.repete){
 

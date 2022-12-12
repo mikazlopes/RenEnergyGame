@@ -20,6 +20,8 @@ export default class Loading extends Phaser.Scene{
 
     }
 
+    // Preloader para os assets da Intro
+
     preload(){
 
         // Preloader original de https://gamedevacademy.org/creating-a-preloading-screen-in-phaser-3/
