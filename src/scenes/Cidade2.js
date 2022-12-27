@@ -55,6 +55,10 @@ export default class Cidade2 extends Phaser.Scene{
         this.width = this.scale.width
         this.height = this.scale.height
 
+        //Settings do jogo
+        this.dificuldade = data.opcaoDificuldade
+        this.defAudio = data.opcaoAudio
+
 
     }
 

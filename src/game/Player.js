@@ -27,8 +27,6 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             this.body.setSize(this.width, this.height, true)
         }
         
-        
-        
         this.muzzle = new MuzzlesHero(this.scene, this.x, this.y)
         
         this.health = 100
@@ -353,6 +351,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     calculaDano(damage, origem){
 
+        //Guarda a dificuldade caso seja GameOver
+        
 
         this.health = this.health - damage
         
@@ -372,22 +372,22 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     jogadorMorreu(){
 
+
         if (!this.isDead){
-
+            
             this.body.enable = false
-        console.log('executou')
-        this.estado = 'dead'
-        this.isDead = true
-        this.play(this.scene.playerSelected + '_dead', true)
-        this.on('animationcomplete', () => {
-            this.setActive(false)
-            this.setVisible(false)
-        })
+            this.estado = 'dead'
+            this.isDead = true
+            this.play(this.scene.playerSelected + '_dead', true)
+            this.on('animationcomplete', () => {
+                this.setActive(false)
+                this.setVisible(false)
+            })
 
-        // Inicia a funcao que chama a scene para Game over
+            // Inicia a funcao que chama a scene para Game over
 
-        this.scene.cameras.main.fadeOut(1000, 0, 0, 0)
-        this.scene.time.addEvent({delay: 1500, repeat: 0, callback: this.gameOver, callbackScope: this.scene})
+            this.scene.cameras.main.fadeOut(1000, 0, 0, 0)
+            this.scene.time.addEvent({delay: 1500, repeat: 0, callback: this.gameOver, callbackScope: this.scene})
 
         }
         
@@ -396,7 +396,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     gameOver(){
 
-        this.scene.start('GameOver')
+        this.scene.start('GameOver',{opcaoAudio: this.defAudio, opcaoDificuldade: this.dificuldade})
     }
 
    jogadorFlasha(origin){
@@ -404,7 +404,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         if (origin == 'inimigo'){
             
             this.body.enable = false
-            console.log('executou')
+    
         }
         
         this.setTintFill(0xffffff)

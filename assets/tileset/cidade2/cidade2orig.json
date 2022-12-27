@@ -214,14 +214,14 @@
                      "objects":[
                             {
                              "class":"collision",
-                             "height":37.8947,
+                             "height":37.8947368421053,
                              "id":2,
                              "name":"",
                              "rotation":0,
                              "visible":true,
-                             "width":59.3484,
-                             "x":0.501253,
-                             "y":25.6642
+                             "width":59.3483709273183,
+                             "x":0.50125313283208,
+                             "y":25.6641604010025
                             }],
                      "opacity":1,
                      "type":"objectgroup",
@@ -240,14 +240,14 @@
                      "objects":[
                             {
                              "class":"",
-                             "height":54.4361,
+                             "height":54.4360902255639,
                              "id":1,
                              "name":"",
                              "rotation":0,
                              "visible":true,
-                             "width":41.1028,
-                             "x":12.0301,
-                             "y":9.12281
+                             "width":41.1027568922306,
+                             "x":12.0300751879699,
+                             "y":9.12280701754386
                             }],
                      "opacity":1,
                      "type":"objectgroup",
@@ -266,14 +266,14 @@
                      "objects":[
                             {
                              "class":"",
-                             "height":44.7118,
+                             "height":44.7117794486216,
                              "id":1,
                              "name":"caixa_cinzenta",
                              "rotation":0,
                              "visible":true,
-                             "width":45.0125,
-                             "x":10.2256,
-                             "y":18.8471
+                             "width":45.0125313283208,
+                             "x":10.2255639097744,
+                             "y":18.8471177944862
                             }],
                      "opacity":1,
                      "type":"objectgroup",

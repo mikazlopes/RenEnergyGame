@@ -21,7 +21,7 @@ export default class Mapa extends Phaser.Scene{
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: false,
+                    debug: true,
                     gravity: { y: 0 }
                 }
               }
@@ -40,8 +40,11 @@ export default class Mapa extends Phaser.Scene{
         this.playerSelected = data.heroi
         this.cidade = data.cidade
         this.instrucoes = data.primeira
-        this.difficulty = 'easy'
+        this.dificuldade = data.opcaoDificuldade
+        this.defAudio = data.opcaoAudio
         this.speed = 70
+
+        console.log(this.dificuldade)
 
         // Guardar as dimensoes da scene numa variavel
         this.width = this.scale.width
@@ -147,7 +150,7 @@ export default class Mapa extends Phaser.Scene{
 
         this.zonas = this.physics.add.group({classType: Phaser.GameObjects.Zone})
 
-        for ( var i = 0; i < 30; i++ ) {
+        for ( var i = 0; i < this.dificuldade * 10; i++ ) {
             var x = Phaser.Math.RND.between( 700, this.physics.world.bounds.width )
             var y = Phaser.Math.RND.between( 100, this.physics.world.bounds.height )
             
@@ -169,6 +172,8 @@ export default class Mapa extends Phaser.Scene{
         this.physics.add.overlap(this.player, this.zonas, this.colisaoInimigo, false, this)
         this.physics.add.overlap(this.player, this.zonaCidade2, this.colisaoCidade, false, this)
 
+        // mostra as instrucoes a primeira vez que o jogador comeca o jogo e remove-as quando o jogador clica
+        
         if (this.instrucoes){
 
             let r1 = this.add.rectangle( 100, 100, this.width - 200, this.height - 200, 0xffffff, 0.6).setOrigin(0,0).setInteractive()
@@ -198,7 +203,7 @@ export default class Mapa extends Phaser.Scene{
     colisaoInimigo(player, zona){
 
 
-        this.scene.start('Floresta', { heroi: this.playerSelected, positionX: this.player.x, positionY: this.player.y})
+        this.scene.start('Floresta', { heroi: this.playerSelected, positionX: this.player.x, positionY: this.player.y, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
  
     }
 
@@ -206,7 +211,7 @@ export default class Mapa extends Phaser.Scene{
 
         if (zona.x == 1160){
 
-            this.scene.start('Cidade2', { heroi: this.playerSelected})
+            this.scene.start('Cidade2', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
 
         }
     }

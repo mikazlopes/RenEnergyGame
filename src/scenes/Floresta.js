@@ -46,14 +46,14 @@ export default class Floresta extends Phaser.Scene{
         this.playerSelected = data.heroi
         this.positionX = data.positionX
         this.positionY = data.positionY
-        this.difficulty = 2
+        
         this.speedH = 250
         this.speedV = 400
         this.balaIntervalohero = 0
-        
-    
-    
 
+        this.dificuldade = data.opcaoDificuldade
+        this.defAudio = data.opcaoAudio
+        
         // Guardar as dimensoes da scene numa variavel
         this.width = this.scale.width
         this.height = this.scale.height
@@ -108,7 +108,7 @@ export default class Floresta extends Phaser.Scene{
         
         this.osInimigos = this.physics.add.group()
         
-        for (var i = 0; i < this.difficulty; i++ ){
+        for (var i = 0; i < this.dificuldade; i++ ){
             var xOffset = 400 * i
             this.osInimigos.add(new Enemy(this, 700 + xOffset, 300, 'enemy_idle'))
         }    
@@ -287,7 +287,7 @@ export default class Floresta extends Phaser.Scene{
         
         this.cameras.main.shake(50)
         aBalaInimigo.acertouHeroi()
-        oHeroi.calculaDano(aBalaInimigo.dano)
+        oHeroi.calculaDano(aBalaInimigo.dano, 'inimigo')
 
     }
 

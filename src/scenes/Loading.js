@@ -104,6 +104,15 @@ export default class Loading extends Phaser.Scene{
         // Assets para o menu
 
         this.load.image('play_btn', 'assets/menu/play.png')
+        this.load.image('settings_btn', 'assets/menu/settings.png')
+        this.load.image('next_btn', 'assets/menu/next.png')
+        this.load.image('prev_btn', 'assets/menu/prev.png')
+        this.load.image('diff_btn', 'assets/menu/difficulty.png')
+        this.load.image('close_btn', 'assets/menu/close.png')
+        this.load.image('sound_btn', 'assets/menu/sound.png')
+        this.load.image('sound_off_btn', 'assets/menu/sound_off.png')
+        this.load.image('music_btn', 'assets/menu/music.png')
+
 
 
         //aassets para o Mapa

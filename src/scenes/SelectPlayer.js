@@ -18,12 +18,15 @@ export default class Seleciona extends Phaser.Scene{
         this.width = this.scale.width
         this.height = this.scale.height
 
-        this.gameover = data.gameover
+        // Transporta os valores para Dificuldade e Audio
+        this.dificuldade = data.opcaoDificuldade
+        this.defAudio = data.opcaoAudio
+
+        console.log(this.dificuldade)
+
     }
 
     preload(){
-
-
 
 
     }
@@ -102,14 +105,14 @@ export default class Seleciona extends Phaser.Scene{
 
         jack.on('pointerup', (clica) => {
                    
-            this.scene.start('Loading2', {heroi: 'jack'})
+            this.scene.start('Loading2', {heroi: 'jack', opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
      
          })
 
          jill.on('pointerup', (clica) => {
 
                
-                this.scene.start('Loading2', {heroi: 'jill'})
+                this.scene.start('Loading2', {heroi: 'jill', opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
 
          })
 

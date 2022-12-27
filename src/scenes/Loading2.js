@@ -23,8 +23,10 @@ export default class Loading2 extends Phaser.Scene{
     init(data){
 
         this.playerSelected = data.heroi
+        this.dificuldade = data.opcaoDificuldade
+        this.defAudio = data.opcaoAudio
         
-        // verifica se ja carregou o asset
+        // verifica se ja carregou o asset e se sim nao corre muito do codigo abaixo
         this.repete = this.textures.exists(this.playerSelected + '_hurt')
         
     }
@@ -341,7 +343,7 @@ export default class Loading2 extends Phaser.Scene{
 
         }
 
-        this.scene.start('Mapa', { id: 0, positionx: 650, positiony: 160, heroi: this.playerSelected, primeira: true})
+        this.scene.start('Mapa', { id: 0, positionx: 650, positiony: 160, heroi: this.playerSelected, primeira: true, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
     }
 
 }

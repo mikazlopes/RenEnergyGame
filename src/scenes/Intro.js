@@ -192,10 +192,6 @@ export default class Intro extends Phaser.Scene{
             this.moveHerois()
 
         }
-
-
-        // let teclado = this.input.keyboard
-        // if (teclado.checkDown(teclado.addKey('A'), 200)){this.scene.start('Menu', { id: 0, positionx: 650, positiony: 160 })}
         
     }
 
