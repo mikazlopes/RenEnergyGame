@@ -28,13 +28,11 @@ export default new Phaser.Game({
     type: Phaser.AUTO,
     width: 1280,
     height: 720,
-    scene: [Loading, Intro , Menu,  Seleciona, Loading2, Mapa, GameOver, Floresta, Cidade2],
-    jackEverUsed: false,
-    jillEverUsed: false
+    pixelArt: true,
+    scene: [Loading, Intro , Menu,  Seleciona, Loading2, Mapa, GameOver, Floresta, Cidade1, Cidade2]
     })
 
 
-    // Propriedades personalizadas do jogo para saber que animacoes carregar
 
 
 

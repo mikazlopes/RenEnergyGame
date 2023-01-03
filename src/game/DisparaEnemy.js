@@ -13,7 +13,8 @@ export default class BalaEnemy extends Phaser.Physics.Arcade.Sprite
         scene.physics.world.enable(this)
         this.setTexture('enemy_bullet')
 
-        this.dano = 5
+        // quanto mais dificuldade maior o dano do inimigo
+        this.dano = 5 + this.scene.dificuldade
 	}
 
 	dispara(x, y, direcao) {
@@ -26,9 +27,9 @@ export default class BalaEnemy extends Phaser.Physics.Arcade.Sprite
         this.body.setAllowGravity(false)
         
 		if (direcao == 'esquerda'){
-            this.setVelocityX(-500)
+            this.setVelocityX(-400 * ((this.scene.dificuldade / 5) + 1))
         }else{
-            this.setVelocityX(500)
+            this.setVelocityX(400 * ((this.scene.dificuldade / 5) + 1))
         }
 	}
 

@@ -44,20 +44,23 @@ export default class Cidade2 extends Phaser.Scene{
 
         // Usado para importar que jogador foi escolhido e a dificuldade
         this.playerSelected = data.heroi
-        this.difficulty = 6
+        this.dificuldade = data.opcaoDificuldade
+        this.defAudio = data.opcaoAudio
+        this.posicaoX = data.posicaoX
+        this.posicaoY = data.posicaoY
         this.speedH = 250
         this.speedV = 400
         this.balaIntervalohero = 0
         this.bossDead = true
+
+        console.log(this.dificuldade)
         
     
         // Guardar as dimensoes da scene numa variavel
         this.width = this.scale.width
         this.height = this.scale.height
 
-        //Settings do jogo
-        this.dificuldade = data.opcaoDificuldade
-        this.defAudio = data.opcaoAudio
+        
 
 
     }
@@ -71,13 +74,13 @@ export default class Cidade2 extends Phaser.Scene{
 
          
         // adiciona a imagem de fundo e efeito Paralax
-        this.add.tileSprite(0, 0, 3291, 1280, 'fundoCidade2').setOrigin(0.0).setScrollFactor(0.2)
+        this.add.tileSprite(0, 0, 3291, 1280, 'fundoCidade').setOrigin(0.0).setScrollFactor(0.2)
 
         /** @type {Phaser.Tilemaps.Parsers.Tiled} */
 
         var cidade2 = this.make.tilemap({key: 'cidade2'})
 
-        let cidade2Tiles = cidade2.addTilesetImage("tilesCidade2", 'tilesCidade2')
+        let cidade2Tiles = cidade2.addTilesetImage('tilesCidade2', 'tilesCidade2')
 
 
         let plataformasFixas = cidade2.createLayer('fixos', cidade2Tiles, 0, 0)
@@ -145,7 +148,7 @@ export default class Cidade2 extends Phaser.Scene{
         
         this.osInimigos = this.physics.add.group()
         
-        for (var i = 0; i < this.difficulty; i++ ){
+        for (var i = 0; i < this.dificuldade; i++ ){
             var posicao = Phaser.Math.RND.between(1000, 3600)
             this.osInimigos.add(new Enemy(this, posicao, 300, 'enemy_idle'))
             
@@ -398,7 +401,7 @@ export default class Cidade2 extends Phaser.Scene{
 
         if (this.bossDead){
 
-            this.scene.start('Mapa', { id: 1, positionx: 1200, positiony: 150, heroi: this.playerSelected, cidade: 2})
+            this.scene.start('Mapa', { id: 1, positionx: this.posicaoX, positiony: this.posicaoY, heroi: this.playerSelected, cidade: 2, opcaoDificuldade: this.dificuldade})
 
         }
         

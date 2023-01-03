@@ -20,9 +20,11 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
         scene.add.existing(this)
         this.setScale(0.2)
         this.flipX = true
+
+        // quanto maior a dificuldade mais fortes os inimigos
         
-        this.health = 50
-        this.meele = 20
+        this.health = 50 * ((this.scene.dificuldade / 5) + 1)
+        this.meele = 20 * ((this.scene.dificuldade / 5) + 1)
         
         this.play('enemy_idle')
 
@@ -34,9 +36,9 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
         // objeto que cria e mostra o Muzzle da arma
         this.muzzle = new MuzzlesEnemy(this.scene, this.x, this.y)
 
-        //define o intervalo em que o inimigo dispara
+        //define o intervalo em que o inimigo dispara influenciado pela dificuldade
         this.shootTimer = this.scene.time.addEvent({
-            delay: 1000,
+            delay: 2000 / this.scene.dificuldade,
             callback: this.scene.disparouBalaEnemy,
             args: [this, 'idle'],
             callbackScope: this.scene,
@@ -119,7 +121,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
         
         var distV = jogador.y - this.y
 
-        if (dist < 700 && dist > 80 && this.estado != 'dead' && this.body.onFloor()){
+        if (dist < 700 * ((this.scene.dificuldade / 10) + 1) && dist > 80 && this.estado != 'dead' && this.body.onFloor()){
             
             this.play('enemy_idle_aim')
             this.anims.playAfterRepeat('enemy_idle', true)

@@ -13,7 +13,10 @@ export default class BalaHero extends Phaser.Physics.Arcade.Sprite
         scene.physics.world.enable(this)
         this.setTexture('hero_bullet')
 
-        this.dano = 10
+        // Dificuldade influencia dano feito pelas balas do heroi
+
+        this.dano = 11 - this.scene.dificuldade
+    
 	}
 
 	dispara(x, y, direcao) {

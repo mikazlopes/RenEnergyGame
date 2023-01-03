@@ -109,7 +109,7 @@ export default class Floresta extends Phaser.Scene{
         this.osInimigos = this.physics.add.group()
         
         for (var i = 0; i < this.dificuldade; i++ ){
-            var xOffset = 400 * i
+            var xOffset = 200 * i
             this.osInimigos.add(new Enemy(this, 700 + xOffset, 300, 'enemy_idle'))
         }    
 
@@ -268,11 +268,10 @@ export default class Floresta extends Phaser.Scene{
 
         if (this.osInimigos.getLength() == 0){
 
-            this.scene.start('Mapa', { id: 1, positionx: this.positionX, positiony: this.positionY, heroi: this.playerSelected})
+            this.scene.start('Mapa', { id: 1, positionx: this.positionX, positiony: this.positionY, heroi: this.playerSelected, opcaoDificuldade: this.dificuldade})
         }
 
-
-
+        console.log(this.osInimigos.getLength())
     }
 
     acertouInimigo(aBalaHeroi, oInimigo){

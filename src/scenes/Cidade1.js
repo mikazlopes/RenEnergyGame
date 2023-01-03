@@ -9,8 +9,6 @@ import CriaBalasHero from '../game/GrupoBalasHero.js'
 import CriaBalasEnemy from '../game/GrupoBalasEnemy.js'
 
 
-// Ainda falta acrescentar esta cidade
-
 export default class Cidade1 extends Phaser.Scene{
      
     constructor(){
@@ -30,7 +28,7 @@ export default class Cidade1 extends Phaser.Scene{
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: true,
+                    debug: false,
                     tileBias: 32,
                     fps: 30,
                     fixedStep: true,
@@ -42,46 +40,42 @@ export default class Cidade1 extends Phaser.Scene{
     
     }
 
-    init(){
+    init(data){
 
         // Usado para importar que jogador foi escolhido e a dificuldade
-        this.playerSelected = 'jack'
-        this.difficulty = 6
+        this.playerSelected = data.heroi
+        this.dificuldade = data.opcaoDificuldade
+        this.defAudio = data.opcaoAudio
+        this.posicaoX = data.posicaoX
+        this.posicaoY = data.posicaoY
         this.speedH = 250
         this.speedV = 400
         this.balaIntervalohero = 0
-        this.bossDead = false
+        this.bossDead = true
         
     
         // Guardar as dimensoes da scene numa variavel
         this.width = this.scale.width
         this.height = this.scale.height
 
-
     }
 
     preload(){
 
 
-        this.load.image('tilesCidade2', 'assets/tileset/cidade1/Tileset.png')
-        this.load.image('spike', 'assets/tileset/cidade1/spike.png')
-        this.load.image('door', 'assets/tileset/cidade1/door.png')
-        this.load.image('movel', 'assets/tileset/cidade1/movel.png')
-        this.load.image('fundoCidade2', 'assets/backgrounds/cidade1.jpg')
-        this.load.tilemapTiledJSON('cidade1', 'assets/tileset/cidade1/cidade1.json')
     }
 
     create(){
 
          
         // adiciona a imagem de fundo e efeito Paralax
-        this.add.tileSprite(0, 0, 3291, 1280, 'fundoCidade2').setOrigin(0.0).setScrollFactor(0.2)
+        this.add.tileSprite(0, 0, 3291, 1280, 'fundoCidade').setOrigin(0.0).setScrollFactor(0.2)
 
         /** @type {Phaser.Tilemaps.Parsers.Tiled} */
 
         var cidade1 = this.make.tilemap({key: 'cidade1'})
 
-        let cidade1Tiles = cidade1.addTilesetImage("tilesCidade2", 'tilesCidade2')
+        let cidade1Tiles = cidade1.addTilesetImage("tilesCidade1", 'tilesCidade1')
 
 
         let plataformasFixas = cidade1.createLayer('fixos', cidade1Tiles, 0, 0)
@@ -123,14 +117,14 @@ export default class Cidade1 extends Phaser.Scene{
 
         plataformasFixas.setCollisionByExclusion(-1)
 
-        this.plataformasMoveis = this.physics.add.sprite(4200, 550, 'movel')
+        this.plataformasMoveis = this.physics.add.sprite(5000, 550, 'movel')
         this.plataformasMoveis.body.setAllowGravity(false)
         this.plataformasMoveis.body.setImmovable(true)
 
       
 
         /** @type {Phaser.Physics.Arcade.Sprite} */
-        this.player = new Jogador(this, 200, 300, this.playerSelected + '_idle')
+        this.player = new Jogador(this, 200, 100, this.playerSelected + '_idle')
         this.add.existing(this.player)
         this.player.play(this.playerSelected + '_idle')
         
@@ -149,13 +143,13 @@ export default class Cidade1 extends Phaser.Scene{
         
         this.osInimigos = this.physics.add.group()
         
-        for (var i = 0; i < this.difficulty; i++ ){
+        for (var i = 0; i < this.dificuldade; i++ ){
             var posicao = Phaser.Math.RND.between(1000, 3600)
             this.osInimigos.add(new Enemy(this, posicao, 300, 'enemy_idle'))
             
         }
 
-        //reposiciona o inimigo se estiverem muito juntos ou se algum caiu
+        //reposiciona o inimigo se estiverem muito juntos ou se algum caiu (a acrescentar)
 
         // teclas para mover o heroi
         this.cursors = this.input.keyboard.createCursorKeys()
@@ -187,10 +181,11 @@ export default class Cidade1 extends Phaser.Scene{
 
         this.physics.add.overlap(this.player, this.picosObjTile, this.nosSpikes, false, this)
 
-        this.physics.add.overlap(this.player, portaLayer, this.voltaMapa, false, this)
+        this.physics.add.overlap(this.player, this.portas, this.voltaMapa, false, this)
 
         //verificar posicao do heroi
-        this.cord = this.add.text(this.player.x, this.plataformasMoveis.y - 200, this.game.input.mousePointer.x + ' ' + this.game.input.mousePointer.y, {align: 'center', color: '#00ff00', fontSize: 20} )
+        // usado para debug quando e preciso ver coordenadas x, y
+        //this.cord = this.add.text(this.player.x, this.plataformasMoveis.y - 200, this.game.input.mousePointer.x + ' ' + this.game.input.mousePointer.y, {align: 'center', color: '#00ff00', fontSize: 20} )
 
 
     }
@@ -271,10 +266,12 @@ export default class Cidade1 extends Phaser.Scene{
         }
 
         
+        // usado para debug quando e preciso ver coordenadas x, y
+        // this.cord.x = this.player.x
+        // this.cord.y = this.player.y - 300
+        // this.cord.text = this.player.x + ' ' + this.player.y
 
-        this.cord.x = this.player.x
-        this.cord.y = this.player.y - 300
-        this.cord.text = this.player.x + ' ' + this.player.y
+    
 
 
     }
@@ -399,7 +396,8 @@ export default class Cidade1 extends Phaser.Scene{
 
         if (this.bossDead){
 
-            this.scene.start('Mapa', { id: 0, position: 'cidade1' })
+            this.scene.start('Mapa', { id: 1, positionx: this.posicaoX, positiony: this.posicaoY, heroi: this.playerSelected, cidade: 1, opcaoDificuldade: this.dificuldade})
+
         }
         
     }

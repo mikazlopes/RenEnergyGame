@@ -140,11 +140,13 @@ export default class Loading extends Phaser.Scene{
 
 
         this.load.image('tilesCidade2', 'assets/tileset/cidade2/Tileset.png')
+        this.load.image('tilesCidade1', 'assets/tileset/cidade1/Tileset.png')
         this.load.image('spike', 'assets/tileset/cidade2/spike.png')
         this.load.image('door', 'assets/tileset/cidade2/door.png')
         this.load.image('movel', 'assets/tileset/cidade2/movel.png')
-        this.load.image('fundoCidade2', 'assets/backgrounds/cidade2.jpg')
+        this.load.image('fundoCidade', 'assets/backgrounds/cidade.jpg')
         this.load.tilemapTiledJSON('cidade2', 'assets/tileset/cidade2/cidade2.json')
+        this.load.tilemapTiledJSON('cidade1', 'assets/tileset/cidade1/cidade1.json')
         
 
     }
