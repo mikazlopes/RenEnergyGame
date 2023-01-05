@@ -1,0 +1,115 @@
+{
+	"frames": {
+		"dead__001.png": {
+			"frame": {
+				"x": 0,
+				"y": 0,
+				"w": 498,
+				"h": 465
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 498,
+				"h": 465
+			},
+			"sourceSize": {
+				"w": 498,
+				"h": 465
+			}
+		},
+		"dead__002.png": {
+			"frame": {
+				"x": 498,
+				"y": 0,
+				"w": 498,
+				"h": 465
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 498,
+				"h": 465
+			},
+			"sourceSize": {
+				"w": 498,
+				"h": 465
+			}
+		},
+		"dead__003.png": {
+			"frame": {
+				"x": 996,
+				"y": 0,
+				"w": 498,
+				"h": 465
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 498,
+				"h": 465
+			},
+			"sourceSize": {
+				"w": 498,
+				"h": 465
+			}
+		},
+		"dead__004.png": {
+			"frame": {
+				"x": 1494,
+				"y": 0,
+				"w": 498,
+				"h": 465
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 498,
+				"h": 465
+			},
+			"sourceSize": {
+				"w": 498,
+				"h": 465
+			}
+		},
+		"dead__005.png": {
+			"frame": {
+				"x": 1992,
+				"y": 0,
+				"w": 498,
+				"h": 465
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 498,
+				"h": 465
+			},
+			"sourceSize": {
+				"w": 498,
+				"h": 465
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 2490,
+			"h": 465
+		},
+		"scale": "1"
+	}
+}

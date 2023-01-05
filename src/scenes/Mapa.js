@@ -179,9 +179,20 @@ export default class Mapa extends Phaser.Scene{
             this.zonaCidade2.destroy()
         }
 
+        //  Zona para a cidade 3 
+        this.zonaCidade3 = this.physics.add.sprite(1150, 600).setOrigin(0, 0).setSize(100,100).setVisible(true)
+
+        // se a Cidade 3 foi completada remove a zona para evitar o jogador entrar de novo por engano
+
+        if (this.cidade == 3){
+
+            this.zonaCidade3.destroy()
+        }
+
         this.physics.add.overlap(this.player, this.zonas, this.colisaoInimigo, false, this)
         this.physics.add.overlap(this.player, this.zonaCidade1, this.colisaoCidade, false, this)
         this.physics.add.overlap(this.player, this.zonaCidade2, this.colisaoCidade, false, this)
+        this.physics.add.overlap(this.player, this.zonaCidade3, this.colisaoCidade, false, this)
 
         // mostra as instrucoes a primeira vez que o jogador comeca o jogo e remove-as quando o jogador clica
         
@@ -211,6 +222,7 @@ export default class Mapa extends Phaser.Scene{
         
     }
 
+    // colidiu com uma zona inimiga e inicia o combate
     colisaoInimigo(player, zona){
 
 
@@ -218,6 +230,7 @@ export default class Mapa extends Phaser.Scene{
  
     }
 
+    // Saber que cidade colidiu e iniciar a cena
     colisaoCidade(player, zona){
 
         if (zona.x == 387){
@@ -229,6 +242,12 @@ export default class Mapa extends Phaser.Scene{
         if (zona.x == 1160){
 
             this.scene.start('Cidade2', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio, posicaoX: this.player.x, posicaoY: this.player.y})
+
+        }
+
+        if (zona.x == 1150){
+
+            this.scene.start('Cidade3', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio, posicaoX: this.player.x, posicaoY: this.player.y})
 
         }
     }

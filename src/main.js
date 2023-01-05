@@ -10,6 +10,8 @@ import Cidade1 from './scenes/Cidade1.js'
 
 import Cidade2 from './scenes/Cidade2.js'
 
+import Cidade3 from './scenes/Cidade3.js'
+
 import Loading from './scenes/Loading.js'
 
 import Loading2 from './scenes/Loading2.js'
@@ -29,7 +31,7 @@ export default new Phaser.Game({
     width: 1280,
     height: 720,
     pixelArt: true,
-    scene: [Loading, Intro , Menu,  Seleciona, Loading2, Mapa, GameOver, Floresta, Cidade1, Cidade2]
+    scene: [Loading, Intro , Menu,  Seleciona, Loading2, Mapa, GameOver, Floresta, Cidade1, Cidade2, Cidade3]
     })
 
 

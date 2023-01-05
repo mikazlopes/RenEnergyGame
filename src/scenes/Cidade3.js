@@ -4,19 +4,12 @@ import Jogador from '../game/Player.js'
 
 import Enemy from '../game/Enemies.js'
 
-import Boss from '../game/Boss.js'
-
-import CriaBalasBoss from '../game/GrupoBalasBoss.js'
-
 import CriaBalasHero from '../game/GrupoBalasHero.js'
 
 import CriaBalasEnemy from '../game/GrupoBalasEnemy.js'
 
 
-
-
-
-export default class Cidade2 extends Phaser.Scene{
+export default class Cidade3 extends Phaser.Scene{
      
     constructor(){
 
@@ -31,11 +24,11 @@ export default class Cidade2 extends Phaser.Scene{
     
         // configura physics para esta cena
         super({
-            key: 'Cidade2',
+            key: 'Cidade3',
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: true,
+                    debug: false,
                     tileBias: 32,
                     fps: 30,
                     fixedStep: true,
@@ -58,8 +51,9 @@ export default class Cidade2 extends Phaser.Scene{
         this.speedH = 250
         this.speedV = 400
         this.balaIntervalohero = 0
-        this.bossDead = false
-            
+        this.bossDead = true
+        
+    
         // Guardar as dimensoes da scene numa variavel
         this.width = this.scale.width
         this.height = this.scale.height
@@ -79,18 +73,18 @@ export default class Cidade2 extends Phaser.Scene{
 
         /** @type {Phaser.Tilemaps.Parsers.Tiled} */
 
-        var cidade2 = this.make.tilemap({key: 'cidade2'})
+        var cidade3 = this.make.tilemap({key: 'cidade3'})
 
-        let cidade2Tiles = cidade2.addTilesetImage('tilesCidade2', 'tilesCidade2')
+        let cidade3Tiles = cidade3.addTilesetImage("tilesCidade3", 'tilesCidade3')
 
 
-        let plataformasFixas = cidade2.createLayer('fixos', cidade2Tiles, 0, 0)
-        let sinais = cidade2.createLayer('sinais', cidade2Tiles, 0, 0)
-        let portaJanelas = cidade2.createLayer('porta_janelas', cidade2Tiles, 0, 0)
-        let spikesLayer = cidade2.createLayer('spikes', cidade2Tiles, 0, 0)
+        let plataformasFixas = cidade3.createLayer('fixos', cidade3Tiles, 0, 0)
+        let sinais = cidade3.createLayer('sinais', cidade3Tiles, 0, 0)
+        let portaJanelas = cidade3.createLayer('porta_janelas', cidade3Tiles, 0, 0)
+        let spikesLayer = cidade3.createLayer('spikes', cidade3Tiles, 0, 0)
          
         // Insere a(s) porta(s) da layer de objetos do Tiled
-        let portaLayer = cidade2.getObjectLayer('porta')['objects'] 
+        let portaLayer = cidade3.getObjectLayer('porta')['objects'] 
         this.portas = this.physics.add.staticGroup()
 
         portaLayer.forEach(object => {
@@ -102,7 +96,7 @@ export default class Cidade2 extends Phaser.Scene{
 
 
         // Insere is os objetos da layer do Tiled 
-        let picosLayer = cidade2.getObjectLayer('picos')['objects']
+        let picosLayer = cidade3.getObjectLayer('picos')['objects']
         this.picosObjTile = this.physics.add.staticGroup()
 
         picosLayer.forEach(object => {
@@ -123,18 +117,27 @@ export default class Cidade2 extends Phaser.Scene{
 
         plataformasFixas.setCollisionByExclusion(-1)
 
-        this.plataformasMoveis = this.physics.add.sprite(4200, 550, 'movel')
-        this.plataformasMoveis.body.setAllowGravity(false)
-        this.plataformasMoveis.body.setImmovable(true)
+        // insere as plataformas moveis
 
+        this.plataformasMoveis1 = this.physics.add.sprite(3300, 350, 'movel')
+        this.plataformasMoveis1.body.setAllowGravity(false)
+        this.plataformasMoveis1.body.setImmovable(true)
+        
+        this.plataformasMoveis2 = this.physics.add.sprite(3750, 550, 'movel')
+        this.plataformasMoveis2.body.setAllowGravity(false)
+        this.plataformasMoveis2.body.setImmovable(true)
+
+        this.plataformasMoveis3 = this.physics.add.sprite(3750 + 450, 350, 'movel')
+        this.plataformasMoveis3.body.setAllowGravity(false)
+        this.plataformasMoveis3.body.setImmovable(true)
       
 
         /** @type {Phaser.Physics.Arcade.Sprite} */
-        this.player = new Jogador(this, 200, 800, this.playerSelected + '_idle')
+        this.player = new Jogador(this, 200, 1045, this.playerSelected + '_idle')
         this.add.existing(this.player)
         this.player.play(this.playerSelected + '_idle')
         
-        //cria os objetos para as balas para o heroi, inimigos e boss
+        //cria os objetos para as balas para o heroi e inimigos
 
         /** @type {Phaser.Physics.Arcade.Group} */
         this.balashero = new CriaBalasHero(this)
@@ -144,10 +147,6 @@ export default class Cidade2 extends Phaser.Scene{
         this.balasenemy = new CriaBalasEnemy(this)
         this.balasenemy.playAnimation('enemy_bullet_spin')
 
-        /** @type {Phaser.Physics.Arcade.Group} */
-        this.balasboss = new CriaBalasBoss(this)
-        this.balasboss.playAnimation('boss_bullet')
-
         // Insere Inimigos mediante a dificuldade escolhida
         /** @type {Phaser.Physics.Arcade.Group} */
         
@@ -155,18 +154,11 @@ export default class Cidade2 extends Phaser.Scene{
         
         for (var i = 0; i < this.dificuldade; i++ ){
             var posicao = Phaser.Math.RND.between(1000, 3600)
-            this.osInimigos.add(new Enemy(this, posicao, 300, 'enemy_idle'))
+            this.osInimigos.add(new Enemy(this, posicao, 100, 'enemy_idle'))
             
         }
 
-        // acrescenta o boss
-        this.boss = new Boss(this, 6115, 800, 'boss_idle')
-        this.add.existing(this.boss)
-        this.boss.play('boss_idle')
-
-        // acrescenta explosao quando o bosso morre
-
-        this.explosao = this.add.sprite(this.boss.x,this.boss.y, 'boss_explosion').setScale(0.3).setVisible(false)
+        //reposiciona o inimigo se estiverem muito juntos ou se algum caiu (a acrescentar)
 
         // teclas para mover o heroi
         this.cursors = this.input.keyboard.createCursorKeys()
@@ -174,30 +166,27 @@ export default class Cidade2 extends Phaser.Scene{
         //tecla para dispaara
         this.inputKeys = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE)
 
-        this.physics.world.bounds.width = cidade2.widthInPixels
-        this.physics.world.bounds.height = cidade2.heightInPixels;
+        this.physics.world.bounds.width = cidade3.widthInPixels
+        this.physics.world.bounds.height = cidade3.heightInPixels;
         this.player.setCollideWorldBounds()
 
-        this.cameras.main.setBounds(0, 0, cidade2.widthInPixels, cidade2.heightInPixels)
+        this.cameras.main.setBounds(0, 0, cidade3.widthInPixels, cidade3.heightInPixels)
         this.cameras.main.startFollow(this.player)
 
         
         // Adiciona colisoes com objetos do cenario
         this.physics.add.collider(this.player, plataformasFixas)
-        this.physics.add.collider(this.player, this.plataformasMoveis)
+        this.physics.add.collider(this.player, this.plataformasMoveis1)
+        this.physics.add.collider(this.player, this.plataformasMoveis2)
+        this.physics.add.collider(this.player, this.plataformasMoveis3)
         this.physics.add.collider(this.osInimigos, plataformasFixas)
-        this.physics.add.collider(this.boss, plataformasFixas)
         this.physics.add.collider(this.balasenemy, plataformasFixas, this.acertouParede, false, this)
         this.physics.add.collider(this.balashero, plataformasFixas, this.acertouParede, false, this)
-        this.physics.add.collider(this.balasboss, plataformasFixas, this.acertouParede, false, this)
 
         // Condicoes quando comeca o combate
-        this.physics.add.collider(this.osInimigos, this.balashero, this.acertouInimigo, false, this)
-        this.physics.add.collider(this.balashero, this.boss, this.acertouInimigo, false, this)
+        this.physics.add.collider(this.balashero, this.osInimigos, this.acertouInimigo, false, this)
         this.physics.add.collider(this.balasenemy, this.player, this.acertouHeroi, false, this)
         this.physics.add.collider(this.osInimigos, this.player, this.colidiram, false, this)
-        this.physics.add.collider(this.boss, this.player, this.colidiram, false, this)
-        this.physics.add.collider(this.balasboss, this.player, this.acertouHeroi, false, this)
 
         //overlap com os picos ou a porta
 
@@ -207,8 +196,7 @@ export default class Cidade2 extends Phaser.Scene{
 
         //verificar posicao do heroi
         // usado para debug quando e preciso ver coordenadas x, y
-        //this.cord = this.add.text(this.player.x, this.plataformasMoveis.y - 200, this.game.input.mousePointer.x + ' ' + this.game.input.mousePointer.y, {align: 'center', color: '#00ff00', fontSize: 20} )
-
+        this.cord = this.add.text(this.player.x, this.player.y - 200, this.game.input.mousePointer.x + ' ' + this.game.input.mousePointer.y, {align: 'center', color: '#00ff00', fontSize: 20} )
 
     }
 
@@ -216,7 +204,7 @@ export default class Cidade2 extends Phaser.Scene{
 
         // Verifica se caiu num abismo
 
-        if (this.player.y > this.physics.world.bounds.height - 50 && !this.player.isDead){
+        if (this.player.y > this.physics.world.bounds.height - 75 && !this.player.isDead){
 
             this.player.setCollideWorldBounds(false, 0, 0, false)
             this.player.jogadorMorreu()
@@ -228,8 +216,6 @@ export default class Cidade2 extends Phaser.Scene{
         this.player.setVelocityX(0)
 
         this.osInimigos.getChildren().forEach(this.inimigoReage, this)
-
-        this.inimigoReage(this.boss)
 
         if ((this.cursors.left.isDown && this.inputKeys.isDown || this.cursors.right.isDown && this.inputKeys.isDown || this.cursors.up.isDown && this.inputKeys.isDown) && !this.player.isDead){
             
@@ -276,24 +262,42 @@ export default class Cidade2 extends Phaser.Scene{
          //fim do bloco para todos os updates
 
 
-        // Plataforma que se move verticalmente
-
+        // move as plataformas moveis
         var pSpeed = 200
 
-        if (this.plataformasMoveis.y < 600){
+        if (this.plataformasMoveis1.y < 600){
 
-            this.plataformasMoveis.body.setVelocityY(pSpeed)
+            this.plataformasMoveis1.body.setVelocityY(pSpeed)
 
-        }else if (this.plataformasMoveis.y > 1100){
+        }else if (this.plataformasMoveis1.y > 1100){
 
-            this.plataformasMoveis.setVelocityY(pSpeed * -1)
+            this.plataformasMoveis1.setVelocityY(pSpeed * -1)
         }
 
-        
+
+        if (this.plataformasMoveis2.y < 600){
+
+            this.plataformasMoveis2.body.setVelocityY(pSpeed)
+
+        }else if (this.plataformasMoveis2.y > 1100){
+
+            this.plataformasMoveis2.setVelocityY(pSpeed * -1)
+        }
+
+
+        if (this.plataformasMoveis3.y < 600){
+
+            this.plataformasMoveis3.body.setVelocityY(pSpeed)
+
+        }else if (this.plataformasMoveis3.y > 1100){
+
+            this.plataformasMoveis3.setVelocityY(pSpeed * -1)
+        }
+            
         // usado para debug quando e preciso ver coordenadas x, y
-        // this.cord.x = this.player.x
-        // this.cord.y = this.player.y - 300
-        // this.cord.text = this.player.x + ' ' + this.player.y
+        this.cord.x = this.player.x
+        this.cord.y = this.player.y - 300
+        this.cord.text = this.player.x + ' ' + this.player.y
 
     
 
@@ -358,30 +362,6 @@ export default class Cidade2 extends Phaser.Scene{
         }
     }
 
-    disparouBalaBoss(personagem, posicao){
-
-        personagem.body.setVelocityX(0)
-
-        var dist = Phaser.Math.Distance.BetweenPoints(this.player, personagem)
-
-        if (dist < 700 && dist > 100 && personagem.estado != 'dead' && personagem.estado != 'hurt'){
-            
-            
-            if (personagem.flipX){
-
-                this.balasboss.disparouBala(personagem.x - 78, personagem.y + 15, "esquerda")
-                personagem.inimigoDispara(personagem.x - 78, personagem.y + 15, "esquerda")
-                
-            }else{
-            
-                this.balasboss.disparouBala(personagem.x + 78, personagem.y + 15, "direita")
-                personagem.inimigoDispara(personagem.x + 78, personagem.y + 15, "direita")
-               
-            }
-            
-        }
-    }
-
     destroiInimigo(personagem){
 
         personagem.shootTimer.reset()
@@ -389,7 +369,7 @@ export default class Cidade2 extends Phaser.Scene{
 
     }
 
-    acertouInimigo(oInimigo, aBalaHeroi){
+    acertouInimigo(aBalaHeroi, oInimigo){
 
         oInimigo.body.setVelocityX(0)
         aBalaHeroi.acertouInimigo()
@@ -444,7 +424,7 @@ export default class Cidade2 extends Phaser.Scene{
 
         if (this.bossDead){
 
-            this.scene.start('Mapa', { id: 1, positionx: this.posicaoX, positiony: this.posicaoY, heroi: this.playerSelected, cidade: 2, opcaoDificuldade: this.dificuldade})
+            this.scene.start('Mapa', { id: 1, positionx: this.posicaoX, positiony: this.posicaoY, heroi: this.playerSelected, cidade: 3, opcaoDificuldade: this.dificuldade})
 
         }
         

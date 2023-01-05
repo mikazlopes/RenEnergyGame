@@ -124,13 +124,12 @@ export default class Loading extends Phaser.Scene{
         this.load.image('tiles_mapa5', 'assets/tileset/tiles_mapa5.png')
         this.load.image('tiles_mapa6', 'assets/tileset/tiles_mapa6.png')
         this.load.image('tiles_mapa7', 'assets/tileset/tiles_mapa7.png')
-        
         this.load.tilemapTiledJSON('mapa', 'assets/tileset/renEnergy_mapa.json')
-    
-
         this.load.image('fundo_floresta', 'assets/backgrounds/2d_tb_forest_background.png')
         this.load.image('tiles_floresta', 'assets/tileset/tiles_forest.png')   
         this.load.tilemapTiledJSON('floresta', 'assets/tileset/2d_tb_forest.json')
+
+        //assets dos inimigos
         this.load.atlas('enemy_idle', 'assets/spritesheets/enemy_idle_spritesheet.png', 'assets/spritesheets/enemy_idle_spritesheet.json')
         this.load.atlas('enemy_hurt', 'assets/spritesheets/enemy_hurt_spritesheet.png', 'assets/spritesheets/enemy_hurt_spritesheet.json')
         this.load.atlas('enemy_dead', 'assets/spritesheets/enemy_dead_spritesheet.png', 'assets/spritesheets/enemy_dead_spritesheet.json')
@@ -138,7 +137,17 @@ export default class Loading extends Phaser.Scene{
         this.load.atlas('enemy_melee', 'assets/spritesheets/enemy_melee_spritesheet.png', 'assets/spritesheets/enemy_melee_spritesheet.json')
         this.load.atlas('hero_bullet', 'assets/spritesheets/hero_bullet_spritesheet.png', 'assets/spritesheets/hero_bullet_spritesheet.json')
 
+        //assets do Boss
+        this.load.atlas('boss_bullet', 'assets/spritesheets/boss_bullet_spritesheet.png', 'assets/spritesheets/boss_bullet_spritesheet.json')
+        this.load.atlas('boss_idle', 'assets/spritesheets/boss_idle_spritesheet.png', 'assets/spritesheets/boss_idle_spritesheet.json')
+        this.load.atlas('boss_dead', 'assets/spritesheets/boss_dead_spritesheet.png', 'assets/spritesheets/boss_dead_spritesheet.json')
+        this.load.atlas('boss_explosion', 'assets/spritesheets/boss_explosion_spritesheet.png', 'assets/spritesheets/boss_explosion_spritesheet.json')
+        this.load.atlas('boss_muzzle', 'assets/spritesheets/boss_muzzle_spritesheet.png', 'assets/spritesheets/boss_muzzle_spritesheet.json')
+        this.load.atlas('boss_shoot', 'assets/spritesheets/boss_shoot_spritesheet.png', 'assets/spritesheets/boss_shoot_spritesheet.json')
+        this.load.atlas('boss_walk', 'assets/spritesheets/boss_walk_spritesheet.png', 'assets/spritesheets/boss_walk_spritesheet.json')
 
+        // Assets Cidades
+        this.load.image('tilesCidade3', 'assets/tileset/cidade3/Tileset.png')
         this.load.image('tilesCidade2', 'assets/tileset/cidade2/Tileset.png')
         this.load.image('tilesCidade1', 'assets/tileset/cidade1/Tileset.png')
         this.load.image('spike', 'assets/tileset/cidade2/spike.png')
@@ -147,7 +156,7 @@ export default class Loading extends Phaser.Scene{
         this.load.image('fundoCidade', 'assets/backgrounds/cidade.jpg')
         this.load.tilemapTiledJSON('cidade2', 'assets/tileset/cidade2/cidade2.json')
         this.load.tilemapTiledJSON('cidade1', 'assets/tileset/cidade1/cidade1.json')
-        
+        this.load.tilemapTiledJSON('cidade3', 'assets/tileset/cidade3/cidade3.json')
 
     }
 
@@ -271,7 +280,97 @@ export default class Loading extends Phaser.Scene{
             repeat: 0
         })
 
-        this.scene.stop('Loading')
+        this.anims.create({
+            key: 'boss_bullet',
+            frames: this.anims.generateFrameNames('boss_bullet', {
+                start: 1,
+                end: 4,
+                zeroPad: 3,
+                prefix: 'blue_bullet__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'boss_idle',
+            frames: this.anims.generateFrameNames('boss_idle', {
+                start: 1,
+                end: 6,
+                zeroPad: 3,
+                prefix: 'idle__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'boss_dead',
+            frames: this.anims.generateFrameNames('boss_dead', {
+                start: 1,
+                end: 5,
+                zeroPad: 3,
+                prefix: 'dead__',
+                suffix: '.png'
+            }),
+            frameRate: 8,
+            repeat: 0
+        })
+
+        this.anims.create({
+            key: 'boss_explosion',
+            frames: this.anims.generateFrameNames('boss_explosion', {
+                start: 1,
+                end: 11,
+                zeroPad: 3,
+                prefix: 'explo__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: 0
+        })
+
+        this.anims.create({
+            key: 'boss_muzzle',
+            frames: this.anims.generateFrameNames('boss_muzzle', {
+                start: 0,
+                end: 6,
+                zeroPad: 3,
+                prefix: 'blue_muzzle__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: 0
+        })
+
+        this.anims.create({
+            key: 'boss_shoot',
+            frames: this.anims.generateFrameNames('boss_shoot', {
+                start: 1,
+                end: 4,
+                zeroPad: 3,
+                prefix: 'shoot__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
+        this.anims.create({
+            key: 'boss_walk',
+            frames: this.anims.generateFrameNames('boss_walk', {
+                start: 1,
+                end: 9,
+                zeroPad: 3,
+                prefix: 'walk__',
+                suffix: '.png'
+            }),
+            frameRate: 15,
+            repeat: -1
+        })
+
         this.scene.start('Intro')
 
     }

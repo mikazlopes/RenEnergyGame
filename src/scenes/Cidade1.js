@@ -192,6 +192,15 @@ export default class Cidade1 extends Phaser.Scene{
 
     update(){
 
+        // Verifica se caiu num abismo
+
+        if (this.player.y > this.physics.world.bounds.height - 50 && !this.player.isDead){
+
+            this.player.setCollideWorldBounds(false, 0, 0, false)
+            this.player.jogadorMorreu()
+
+         }
+
         // Bloco de codigo comum para controlo do herois e comportamento dos inimigos
 
         this.player.setVelocityX(0)
@@ -241,16 +250,6 @@ export default class Cidade1 extends Phaser.Scene{
         }
 
          //fim do bloco para todos os updates
-
-
-         // Verifica se caiu num abismo
-
-         if (this.player.y > this.physics.world.bounds.height - 50 && !this.player.isDead){
-
-            this.player.setCollideWorldBounds(false, 0, 0, false)
-            this.player.jogadorMorreu()
-
-         }
 
         // Plataforma que se move verticalmente
 
