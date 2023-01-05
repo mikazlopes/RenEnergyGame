@@ -30,6 +30,7 @@ export default class BalaBoss extends Phaser.Physics.Arcade.Sprite
             this.flipX = true
             this.setVelocityX(-400 * ((this.scene.dificuldade / 5) + 1))
         }else{
+            this.flipX = false
             this.setVelocityX(400 * ((this.scene.dificuldade / 5) + 1))
         }
 	}

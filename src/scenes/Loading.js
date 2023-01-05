@@ -124,6 +124,7 @@ export default class Loading extends Phaser.Scene{
         this.load.image('tiles_mapa5', 'assets/tileset/tiles_mapa5.png')
         this.load.image('tiles_mapa6', 'assets/tileset/tiles_mapa6.png')
         this.load.image('tiles_mapa7', 'assets/tileset/tiles_mapa7.png')
+        this.load.image('greenCheck', 'assets/icons/greenCheck.png')
         this.load.tilemapTiledJSON('mapa', 'assets/tileset/renEnergy_mapa.json')
         this.load.image('fundo_floresta', 'assets/backgrounds/2d_tb_forest_background.png')
         this.load.image('tiles_floresta', 'assets/tileset/tiles_forest.png')   
@@ -150,13 +151,16 @@ export default class Loading extends Phaser.Scene{
         this.load.image('tilesCidade3', 'assets/tileset/cidade3/Tileset.png')
         this.load.image('tilesCidade2', 'assets/tileset/cidade2/Tileset.png')
         this.load.image('tilesCidade1', 'assets/tileset/cidade1/Tileset.png')
-        this.load.image('spike', 'assets/tileset/cidade2/spike.png')
-        this.load.image('door', 'assets/tileset/cidade2/door.png')
-        this.load.image('movel', 'assets/tileset/cidade2/movel.png')
+        this.load.image('spike', 'assets/icons/spike.png')
+        this.load.image('door', 'assets/icons/door.png')
+        this.load.image('movel', 'assets/icons/movel.png')
+        this.load.image('cogs', 'assets/icons/cogs.png')
         this.load.image('fundoCidade', 'assets/backgrounds/cidade.jpg')
         this.load.tilemapTiledJSON('cidade2', 'assets/tileset/cidade2/cidade2.json')
         this.load.tilemapTiledJSON('cidade1', 'assets/tileset/cidade1/cidade1.json')
         this.load.tilemapTiledJSON('cidade3', 'assets/tileset/cidade3/cidade3.json')
+        this.load.atlas('door_open', 'assets/spritesheets/door_open_spritesheet.png', 'assets/spritesheets/door_open_spritesheet.json')
+        
 
     }
 
@@ -369,6 +373,19 @@ export default class Loading extends Phaser.Scene{
             }),
             frameRate: 15,
             repeat: -1
+        })
+
+        this.anims.create({
+            key: 'door_open',
+            frames: this.anims.generateFrameNames('door_open', {
+                start: 1,
+                end: 5,
+                zeroPad: 3,
+                prefix: 'door__',
+                suffix: '.png'
+            }),
+            frameRate: 7,
+            repeat: 0
         })
 
         this.scene.start('Intro')

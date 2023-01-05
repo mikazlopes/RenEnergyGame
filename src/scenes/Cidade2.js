@@ -55,10 +55,13 @@ export default class Cidade2 extends Phaser.Scene{
         this.defAudio = data.opcaoAudio
         this.posicaoX = data.posicaoX
         this.posicaoY = data.posicaoY
+        
+        // settings e outras opcoes
         this.speedH = 250
         this.speedV = 400
         this.balaIntervalohero = 0
         this.bossDead = false
+        this.cogsCollect = false
             
         // Guardar as dimensoes da scene numa variavel
         this.width = this.scale.width
@@ -95,7 +98,7 @@ export default class Cidade2 extends Phaser.Scene{
 
         portaLayer.forEach(object => {
 
-            let objPorta = this.portas.create(object.x, object.y, 'door').setVisible(false).setOrigin(0,0).setScale(0.5)
+            let objPorta = this.portas.create(object.x -20, object.y - 25, 'door_open').setVisible(true)
             objPorta.refreshBody()
 
         })
@@ -130,7 +133,7 @@ export default class Cidade2 extends Phaser.Scene{
       
 
         /** @type {Phaser.Physics.Arcade.Sprite} */
-        this.player = new Jogador(this, 200, 800, this.playerSelected + '_idle')
+        this.player = new Jogador(this, 5000, 600, this.playerSelected + '_idle')
         this.add.existing(this.player)
         this.player.play(this.playerSelected + '_idle')
         
@@ -160,9 +163,14 @@ export default class Cidade2 extends Phaser.Scene{
         }
 
         // acrescenta o boss
-        this.boss = new Boss(this, 6115, 800, 'boss_idle')
+        this.boss = new Boss(this, 6100, 800, 'boss_idle')
         this.add.existing(this.boss)
         this.boss.play('boss_idle')
+
+        // acrescenta a peca
+
+        this.cog = this.physics.add.sprite(1, 200, 'cogs').setVisible(false).setActive(false).setScale(0.2)
+        this.cog.setBounceY(0.4)
 
         // acrescenta explosao quando o bosso morre
 
@@ -187,6 +195,7 @@ export default class Cidade2 extends Phaser.Scene{
         this.physics.add.collider(this.player, this.plataformasMoveis)
         this.physics.add.collider(this.osInimigos, plataformasFixas)
         this.physics.add.collider(this.boss, plataformasFixas)
+        this.physics.add.collider(this.cog, plataformasFixas)
         this.physics.add.collider(this.balasenemy, plataformasFixas, this.acertouParede, false, this)
         this.physics.add.collider(this.balashero, plataformasFixas, this.acertouParede, false, this)
         this.physics.add.collider(this.balasboss, plataformasFixas, this.acertouParede, false, this)
@@ -196,23 +205,19 @@ export default class Cidade2 extends Phaser.Scene{
         this.physics.add.collider(this.balashero, this.boss, this.acertouInimigo, false, this)
         this.physics.add.collider(this.balasenemy, this.player, this.acertouHeroi, false, this)
         this.physics.add.collider(this.osInimigos, this.player, this.colidiram, false, this)
-        this.physics.add.collider(this.boss, this.player, this.colidiram, false, this)
+        this.physics.add.collider(this.player, this.boss, this.colidiram, false, this)
         this.physics.add.collider(this.balasboss, this.player, this.acertouHeroi, false, this)
 
-        //overlap com os picos ou a porta
+        //overlap com os picos, porta ou a peca
 
         this.physics.add.overlap(this.player, this.picosObjTile, this.nosSpikes, false, this)
-
+        this.physics.add.overlap(this.player, this.cog, this.apanhouCog, false, this)
         this.physics.add.overlap(this.player, this.portas, this.voltaMapa, false, this)
-
-        //verificar posicao do heroi
-        // usado para debug quando e preciso ver coordenadas x, y
-        //this.cord = this.add.text(this.player.x, this.plataformasMoveis.y - 200, this.game.input.mousePointer.x + ' ' + this.game.input.mousePointer.y, {align: 'center', color: '#00ff00', fontSize: 20} )
-
 
     }
 
     update(){
+
 
         // Verifica se caiu num abismo
 
@@ -358,13 +363,13 @@ export default class Cidade2 extends Phaser.Scene{
         }
     }
 
-    disparouBalaBoss(personagem, posicao){
+    disparouBalaBoss(personagem){
 
         personagem.body.setVelocityX(0)
 
         var dist = Phaser.Math.Distance.BetweenPoints(this.player, personagem)
 
-        if (dist < 700 && dist > 100 && personagem.estado != 'dead' && personagem.estado != 'hurt'){
+        if (dist < 500 && personagem.estado != 'dead'){
             
             
             if (personagem.flipX){
@@ -408,6 +413,7 @@ export default class Cidade2 extends Phaser.Scene{
 
     colidiram(heroiColidiu, inimigoColidiu){
 
+        console.log(heroiColidiu)
         this.cameras.main.shake(50)
         heroiColidiu.calculaDano(inimigoColidiu.meele)
 
@@ -430,20 +436,29 @@ export default class Cidade2 extends Phaser.Scene{
 
     }
 
-    // Fim do bloco de funcoes comuns
-
     nosSpikes(){
 
         // envia a origem do dano de modo a permitir ao jogador conseguir saltar fora dos picos
 
         this.player.calculaDano(5, 'spikes')
     }
+
+    // apanhou a peca
+    apanhouCog(){
+
+        this.cogsCollect = true
+            this.portas.playAnimation('door_open')
+            this.cog.destroy()
+    }
+
+    // Fim do bloco de funcoes comuns
     
     //se o Boss do nivel morreu o overlap causa o jogador voltar ao Mapa
     voltaMapa(){
 
-        if (this.bossDead){
+        if (this.cogsCollect){
 
+            this.registry.set('cidade2completa', true)
             this.scene.start('Mapa', { id: 1, positionx: this.posicaoX, positiony: this.posicaoY, heroi: this.playerSelected, cidade: 2, opcaoDificuldade: this.dificuldade})
 
         }

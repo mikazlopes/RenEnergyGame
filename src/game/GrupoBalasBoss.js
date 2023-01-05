@@ -10,7 +10,7 @@ export default class CriaBalasBoss extends Phaser.Physics.Arcade.Group
 		super(scene.physics.world, scene);
 
 		this.createMultiple({
-			frameQuantity: 20,
+			frameQuantity: 100,
 			key: 'boss_bullet',
 			active: false,
 			visible: false,

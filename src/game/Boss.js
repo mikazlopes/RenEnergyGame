@@ -19,14 +19,14 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
         scene.physics.world.enable(this)
         scene.add.existing(this)
         this.setScale(0.4)
-        this.body.setSize(300, 450, true)
-        this.body.setOffset(150, -2)
+        this.body.setSize(300, 400, true)
+        this.body.setOffset(150, 38)
         this.flipX = true
 
         // quanto maior a dificuldade mais fortes os inimigos
         
         this.health = 100 * ((this.scene.dificuldade / 5) + 1)
-        this.meele = 40 * ((this.scene.dificuldade / 5) + 1)
+        this.meele = 15 * ((this.scene.dificuldade / 5) + 1)
         
         this.play('boss_idle')
 
@@ -57,7 +57,7 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
         
         if(this.health > 0){
 
-            this.body.enable = false
+            // this.body.enable = false
             this.anims.playAfterRepeat('boss_shoot', true)
             this.inimigoFlasha()
 
@@ -79,6 +79,10 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
         this.scene.explosao.play('boss_explosion')
         this.on('animationcomplete', () => {
             this.scene.bossDead = true
+            this.scene.cog.setActive(true)
+            this.scene.cog.setVisible(true)
+            this.scene.cog.x = this.x
+            this.scene.cog.y = 500
             this.scene.explosao.setVisible(false)
             this.scene.destroiInimigo(this)
         })
@@ -90,8 +94,6 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
 
     inimigoFlasha(){
 
-        this.shootTimer.reset()
-        this.body.enable = false
         this.setTintFill(0xffffff)
         this.scene.time.addEvent({delay: 100, repeat: 0, callback: this.setTintFill,args: [0xFF0000], callbackScope: this})
         this.scene.time.addEvent({delay: 100, repeat: 0, callback: this.inimigoRecupera, callbackScope: this})
@@ -100,17 +102,10 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
     inimigoRecupera(){
 
         this.mudaCor = this.scene.time.addEvent({delay: 100, repeat: 0, callback: this.clearTint, callbackScope: this})
-        this.estado = 'ok'
-        this.body.enable = true
-        this.shootTimer = this.scene.time.addEvent({
-            delay: 1000,
-            callback: this.scene.disparouBalaEnemy,
-            args: [this, 'idle'],
-            callbackScope: this.scene,
-            loop: true
-        })
 
     }
+
+    // funcao que controla as accoes do boss incluindo ir atras do jogador
 
     inimigoAcoes(jogador){
 
@@ -123,30 +118,29 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
             this.flipX = true
         }
 
-        var dist = Phaser.Math.Distance.BetweenPoints(jogador, this)
+        var dist = Phaser.Math.Distance.BetweenPoints(this, jogador)
+
         
 
-        if (dist < 600 * ((this.scene.dificuldade / 10) + 1) && this.estado != 'dead'){
+        if (dist < 500 && this.estado != 'dead'){
             
-            this.play('boss_idle_shoot')
+            this.play('boss_shoot', true)
+            this.body.setVelocityX(0)
 
 
-        }else if (dist > 600 && dist < 1000 && this.estado != 'dead'){
+        }else if (dist > 501 && dist < 1200 && this.estado != 'dead'){
 
-            this.play('boss_walk')
-
+            this.play('boss_walk',true)
+            
             if (this.flipX){
 
-                this.scene.physics.moveToObject(this, this.scene.player.x, 100)
-            
+                this.body.setVelocityX(-80)
+
             }else{
 
-                this.scene.physics.moveToObject(this, this.scene.player.x, 100)
-
+                this.body.setVelocityX(80)
             }
-
-
-            
+            console.log(dist)
         }
 
         if (this.flipX){

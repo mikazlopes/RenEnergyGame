@@ -29,6 +29,12 @@ export default class Menu extends Phaser.Scene{
         this.width = this.scale.width
         this.height = this.scale.height
 
+        // reinicia as variaveis no registro que indica se as cidades foram completadas
+
+        this.registry.set('cidade1completa', false)
+        this.registry.set('cidade2completa', false)
+        this.registry.set('cidade3completa', false)
+
         
     }
 

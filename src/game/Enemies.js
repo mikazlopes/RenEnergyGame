@@ -24,7 +24,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
         // quanto maior a dificuldade mais fortes os inimigos
         
         this.health = 50 * ((this.scene.dificuldade / 5) + 1)
-        this.meele = 20 * ((this.scene.dificuldade / 5) + 1)
+        this.meele = 10 * ((this.scene.dificuldade / 5) + 1)
         
         this.play('enemy_idle')
 

@@ -164,9 +164,12 @@ export default class Mapa extends Phaser.Scene{
 
         // se a Cidade 1 foi completada remove a zona para evitar o jogador entrar de novo por engano
 
-        if (this.cidade == 1){
+        let city1 = this.registry.get('cidade1completa')
+
+        if (city1){
 
             this.zonaCidade1.destroy()
+            this.add.image(387, 500, 'greenCheck').setScale(0.3)
         }
 
         //  Zona para a cidade 2 
@@ -174,9 +177,12 @@ export default class Mapa extends Phaser.Scene{
 
         // se a Cidade 2 foi completada remove a zona para evitar o jogador entrar de novo por engano
 
-        if (this.cidade == 2){
+        let city2 = this.registry.get('cidade2completa')
+
+        if (city2){
 
             this.zonaCidade2.destroy()
+            this.add.image(1185, 230, 'greenCheck').setScale(0.3)
         }
 
         //  Zona para a cidade 3 
@@ -184,9 +190,14 @@ export default class Mapa extends Phaser.Scene{
 
         // se a Cidade 3 foi completada remove a zona para evitar o jogador entrar de novo por engano
 
-        if (this.cidade == 3){
+        let city3 = this.registry.get('cidade3completa')
+
+        console.log(city3)
+
+        if (city3){
 
             this.zonaCidade3.destroy()
+            this.add.image(1185, 630, 'greenCheck').setScale(0.3)
         }
 
         this.physics.add.overlap(this.player, this.zonas, this.colisaoInimigo, false, this)
@@ -217,8 +228,6 @@ export default class Mapa extends Phaser.Scene{
             
 
         }
-        
-        
         
     }
 

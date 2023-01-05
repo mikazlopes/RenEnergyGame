@@ -4,6 +4,10 @@ import Jogador from '../game/Player.js'
 
 import Enemy from '../game/Enemies.js'
 
+import Boss from '../game/Boss.js'
+
+import CriaBalasBoss from '../game/GrupoBalasBoss.js'
+
 import CriaBalasHero from '../game/GrupoBalasHero.js'
 
 import CriaBalasEnemy from '../game/GrupoBalasEnemy.js'
@@ -28,7 +32,7 @@ export default class Cidade3 extends Phaser.Scene{
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: false,
+                    debug: true,
                     tileBias: 32,
                     fps: 30,
                     fixedStep: true,
@@ -51,7 +55,8 @@ export default class Cidade3 extends Phaser.Scene{
         this.speedH = 250
         this.speedV = 400
         this.balaIntervalohero = 0
-        this.bossDead = true
+        this.bossDead = false
+        this.cogsCollect = false
         
     
         // Guardar as dimensoes da scene numa variavel
@@ -89,10 +94,12 @@ export default class Cidade3 extends Phaser.Scene{
 
         portaLayer.forEach(object => {
 
-            let objPorta = this.portas.create(object.x, object.y, 'door').setVisible(false).setOrigin(0,0).setScale(0.5)
+            let objPorta = this.portas.create(object.x -20, object.y - 20, 'door_open').setVisible(true)
             objPorta.refreshBody()
 
         })
+
+
 
 
         // Insere is os objetos da layer do Tiled 
@@ -133,11 +140,11 @@ export default class Cidade3 extends Phaser.Scene{
       
 
         /** @type {Phaser.Physics.Arcade.Sprite} */
-        this.player = new Jogador(this, 200, 1045, this.playerSelected + '_idle')
+        this.player = new Jogador(this, 5800, 600, this.playerSelected + '_idle')
         this.add.existing(this.player)
         this.player.play(this.playerSelected + '_idle')
         
-        //cria os objetos para as balas para o heroi e inimigos
+        //cria os objetos para as balas para o heroi, inimigos e boss
 
         /** @type {Phaser.Physics.Arcade.Group} */
         this.balashero = new CriaBalasHero(this)
@@ -147,6 +154,10 @@ export default class Cidade3 extends Phaser.Scene{
         this.balasenemy = new CriaBalasEnemy(this)
         this.balasenemy.playAnimation('enemy_bullet_spin')
 
+        /** @type {Phaser.Physics.Arcade.Group} */
+        this.balasboss = new CriaBalasBoss(this)
+        this.balasboss.playAnimation('boss_bullet')
+
         // Insere Inimigos mediante a dificuldade escolhida
         /** @type {Phaser.Physics.Arcade.Group} */
         
@@ -154,11 +165,23 @@ export default class Cidade3 extends Phaser.Scene{
         
         for (var i = 0; i < this.dificuldade; i++ ){
             var posicao = Phaser.Math.RND.between(1000, 3600)
-            this.osInimigos.add(new Enemy(this, posicao, 100, 'enemy_idle'))
+            this.osInimigos.add(new Enemy(this, posicao, 300, 'enemy_idle'))
             
         }
 
-        //reposiciona o inimigo se estiverem muito juntos ou se algum caiu (a acrescentar)
+        // acrescenta o boss
+        this.boss = new Boss(this, 6100, 800, 'boss_idle')
+        this.add.existing(this.boss)
+        this.boss.play('boss_idle')
+
+        // acrescenta a peca
+
+        this.cog = this.physics.add.sprite(1, 200, 'cogs').setVisible(false).setActive(false).setScale(0.2)
+        this.cog.setBounceY(0.4)
+
+        // acrescenta explosao quando o bosso morre
+
+        this.explosao = this.add.sprite(this.boss.x,this.boss.y, 'boss_explosion').setScale(0.3).setVisible(false)
 
         // teclas para mover o heroi
         this.cursors = this.input.keyboard.createCursorKeys()
@@ -180,36 +203,46 @@ export default class Cidade3 extends Phaser.Scene{
         this.physics.add.collider(this.player, this.plataformasMoveis2)
         this.physics.add.collider(this.player, this.plataformasMoveis3)
         this.physics.add.collider(this.osInimigos, plataformasFixas)
+        this.physics.add.collider(this.boss, plataformasFixas)
+        this.physics.add.collider(this.cog, plataformasFixas)
         this.physics.add.collider(this.balasenemy, plataformasFixas, this.acertouParede, false, this)
         this.physics.add.collider(this.balashero, plataformasFixas, this.acertouParede, false, this)
+        this.physics.add.collider(this.balasboss, plataformasFixas, this.acertouParede, false, this)
 
         // Condicoes quando comeca o combate
-        this.physics.add.collider(this.balashero, this.osInimigos, this.acertouInimigo, false, this)
+        this.physics.add.collider(this.osInimigos, this.balashero, this.acertouInimigo, false, this)
+        this.physics.add.collider(this.balashero, this.boss, this.acertouInimigo, false, this)
         this.physics.add.collider(this.balasenemy, this.player, this.acertouHeroi, false, this)
         this.physics.add.collider(this.osInimigos, this.player, this.colidiram, false, this)
+        this.physics.add.collider(this.player, this.boss, this.colidiram, false, this)
+        this.physics.add.collider(this.balasboss, this.player, this.acertouHeroi, false, this)
 
         //overlap com os picos ou a porta
 
         this.physics.add.overlap(this.player, this.picosObjTile, this.nosSpikes, false, this)
-
+        this.physics.add.overlap(this.player, this.cog, this.apanhouCog, false, this)
         this.physics.add.overlap(this.player, this.portas, this.voltaMapa, false, this)
-
-        //verificar posicao do heroi
-        // usado para debug quando e preciso ver coordenadas x, y
-        this.cord = this.add.text(this.player.x, this.player.y - 200, this.game.input.mousePointer.x + ' ' + this.game.input.mousePointer.y, {align: 'center', color: '#00ff00', fontSize: 20} )
 
     }
 
     update(){
 
-        // Verifica se caiu num abismo
+         // Verifica se caiu num abismo
 
-        if (this.player.y > this.physics.world.bounds.height - 75 && !this.player.isDead){
+         if (this.player.y > this.physics.world.bounds.height - 50 && !this.player.isDead){
 
             this.player.setCollideWorldBounds(false, 0, 0, false)
             this.player.jogadorMorreu()
 
          }
+
+        // Bloco de codigo comum para controlo do herois e comportamento dos inimigos
+
+        this.player.setVelocityX(0)
+
+        this.osInimigos.getChildren().forEach(this.inimigoReage, this)
+
+        this.inimigoReage(this.boss)
 
         // Bloco de codigo comum para controlo do herois e comportamento dos inimigos
 
@@ -295,135 +328,170 @@ export default class Cidade3 extends Phaser.Scene{
         }
             
         // usado para debug quando e preciso ver coordenadas x, y
-        this.cord.x = this.player.x
-        this.cord.y = this.player.y - 300
-        this.cord.text = this.player.x + ' ' + this.player.y
+        // this.cord.x = this.player.x
+        // this.cord.y = this.player.y - 300
+        // this.cord.text = this.player.x + ' ' + this.player.y
 
     
 
 
     }
 
-    //funcoes comumns que controlam o comportamentos dos inimigos e heroi
+        //funcoes comumns que controlam o comportamentos dos inimigos e heroi
 
-    disparouBalaHero(personagem, estado){
+        disparouBalaHero(personagem, estado){
 
-        if (this.time.now > this.balaIntervalohero){
-            
-            if (estado != 'jump'){
+            if (this.time.now > this.balaIntervalohero){
+                
+                if (estado != 'jump'){
+                   
+                    personagem.play(this.playerSelected + '_' + estado +'_aim', true)
+    
+                }else{
+    
+                    personagem.play(this.playerSelected + '_' + estado, true)
+                }
                
-                personagem.play(this.playerSelected + '_' + estado +'_aim', true)
-
-            }else{
-
-                personagem.play(this.playerSelected + '_' + estado, true)
-            }
-           
-            if (personagem.flipX){
-
-                this.balashero.disparouBala(personagem.x - 70, personagem.y, "esquerda")
-                personagem.heroiDispara(personagem.x - 70, personagem.y, "esquerda")
-
+                if (personagem.flipX){
+    
+                    this.balashero.disparouBala(personagem.x - 70, personagem.y, "esquerda")
+                    personagem.heroiDispara(personagem.x - 70, personagem.y, "esquerda")
+    
+                    
+                }else{
                 
-            }else{
-            
-                this.balashero.disparouBala(personagem.x + 70, personagem.y, "direita")
-                personagem.heroiDispara(personagem.x + 70, personagem.y, "direita")
+                    this.balashero.disparouBala(personagem.x + 70, personagem.y, "direita")
+                    personagem.heroiDispara(personagem.x + 70, personagem.y, "direita")
+                    
+                }
+                
+            this.balaIntervalohero = this.time.now + 200
                 
             }
-            
-        this.balaIntervalohero = this.time.now + 200
-            
+    
         }
-
-    }
-
-    disparouBalaEnemy(personagem, posicao){
-
-        personagem.body.setVelocityX(0)
-
-        var dist = Phaser.Math.Distance.BetweenPoints(this.player, personagem)
-
-        if (dist < 700 && dist > 100 && personagem.estado != 'dead' && personagem.estado != 'hurt'){
-            
-            
-            if (personagem.flipX){
-
-                this.balasenemy.disparouBala(personagem.x - 50, personagem.y, "esquerda")
-                personagem.inimigoDispara(personagem.x - 52, personagem.y + 3, "esquerda")
+    
+        disparouBalaEnemy(personagem, posicao){
+    
+            personagem.body.setVelocityX(0)
+    
+            var dist = Phaser.Math.Distance.BetweenPoints(this.player, personagem)
+    
+            if (dist < 700 && dist > 100 && personagem.estado != 'dead' && personagem.estado != 'hurt'){
                 
-            }else{
-            
-                this.balasenemy.disparouBala(personagem.x + 60, personagem.y, "direita")
-                personagem.inimigoDispara(personagem.x + 52, personagem.y + 3, "direita")
-               
+                
+                if (personagem.flipX){
+    
+                    this.balasenemy.disparouBala(personagem.x - 50, personagem.y, "esquerda")
+                    personagem.inimigoDispara(personagem.x - 52, personagem.y + 3, "esquerda")
+                    
+                }else{
+                
+                    this.balasenemy.disparouBala(personagem.x + 60, personagem.y, "direita")
+                    personagem.inimigoDispara(personagem.x + 52, personagem.y + 3, "direita")
+                   
+                }
+                
             }
-            
         }
-    }
-
-    destroiInimigo(personagem){
-
-        personagem.shootTimer.reset()
-        personagem.destroy()
-
-    }
-
-    acertouInimigo(aBalaHeroi, oInimigo){
-
-        oInimigo.body.setVelocityX(0)
-        aBalaHeroi.acertouInimigo()
-        oInimigo.calculaDano(aBalaHeroi.dano) 
-
-    }
-
-    acertouHeroi(oHeroi, aBalaInimigo){
+    
+        disparouBalaBoss(personagem){
+    
+            personagem.body.setVelocityX(0)
+    
+            var dist = Phaser.Math.Distance.BetweenPoints(this.player, personagem)
+    
+            if (dist < 500 && personagem.estado != 'dead'){
+                
+                
+                if (personagem.flipX){
+    
+                    this.balasboss.disparouBala(personagem.x - 78, personagem.y + 15, "esquerda")
+                    personagem.inimigoDispara(personagem.x - 78, personagem.y + 15, "esquerda")
+                    
+                }else{
+                
+                    this.balasboss.disparouBala(personagem.x + 78, personagem.y + 15, "direita")
+                    personagem.inimigoDispara(personagem.x + 78, personagem.y + 15, "direita")
+                   
+                }
+                
+            }
+        }
+    
+        destroiInimigo(personagem){
+    
+            personagem.shootTimer.reset()
+            personagem.destroy()
+    
+        }
+    
+        acertouInimigo(oInimigo, aBalaHeroi){
+    
+            oInimigo.body.setVelocityX(0)
+            aBalaHeroi.acertouInimigo()
+            oInimigo.calculaDano(aBalaHeroi.dano) 
+    
+        }
+    
+        acertouHeroi(oHeroi, aBalaInimigo){
+            
+            this.cameras.main.shake(50)
+            aBalaInimigo.acertouHeroi()
+            oHeroi.calculaDano(aBalaInimigo.dano, 'inimigo')
+    
+    
+        }
+    
+        colidiram(heroiColidiu, inimigoColidiu){
+    
+            console.log(heroiColidiu)
+            this.cameras.main.shake(50)
+            heroiColidiu.calculaDano(inimigoColidiu.meele)
+    
+    
+        }
+    
+        inimigoReage(inimigo){
+    
+            if (inimigo.estado != 'hurt' && inimigo.estado != 'dead'){
+    
+                inimigo.inimigoAcoes(this.player)
+            }
+    
+        }
         
-        this.cameras.main.shake(50)
-        aBalaInimigo.acertouHeroi()
-        oHeroi.calculaDano(aBalaInimigo.dano, 'inimigo')
-
-
-    }
-
-    colidiram(heroiColidiu, inimigoColidiu){
-
-        this.cameras.main.shake(50)
-        heroiColidiu.calculaDano(inimigoColidiu.meele)
-
-
-    }
-
-    inimigoReage(inimigo){
-
-        if (inimigo.estado != 'hurt' && inimigo.estado != 'dead'){
-
-            inimigo.inimigoAcoes(this.player)
+        // Bala acertou na parede
+        acertouParede(aBala, aParede){
+    
+            aBala.acertouParede()
+    
+        }
+    
+        nosSpikes(){
+    
+            // envia a origem do dano de modo a permitir ao jogador conseguir saltar fora dos picos
+    
+            this.player.calculaDano(5, 'spikes')
         }
 
-    }
+        // apanhou a peca
+        apanhouCog(){
+
+            this.cogsCollect = true
+            this.portas.playAnimation('door_open')
+            this.cog.destroy()
+        }
     
-    // Bala acertou na parede
-    acertouParede(aBala, aParede){
-
-        aBala.acertouParede()
-
-    }
-
-    // Fim do bloco de funcoes comuns
-
-    nosSpikes(){
-
-        // envia a origem do dano de modo a permitir ao jogador conseguir saltar fora dos picos
-
-        this.player.calculaDano(5, 'spikes')
-    }
+        // Fim do bloco de funcoes comuns
     
-    //se o Boss do nivel morreu o overlap causa o jogador voltar ao Mapa
+    
+        //se o Boss do nivel morreu o overlap causa o jogador voltar ao Mapa e guarda que a cidade ja esta completa
     voltaMapa(){
 
-        if (this.bossDead){
+        if (this.cogsCollect){
 
+            this.registry.set('cidade3completa', true)
             this.scene.start('Mapa', { id: 1, positionx: this.posicaoX, positiony: this.posicaoY, heroi: this.playerSelected, cidade: 3, opcaoDificuldade: this.dificuldade})
 
         }
