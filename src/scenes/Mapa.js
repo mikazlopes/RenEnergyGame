@@ -50,11 +50,10 @@ export default class Mapa extends Phaser.Scene{
         this.width = this.scale.width
         this.height = this.scale.height
 
-    }
+        // Seta a indicar onde acabar o jogo
 
-    preload(){
+        this.arrowApareceu = false
 
-        
     }
 
     create(){
@@ -160,49 +159,62 @@ export default class Mapa extends Phaser.Scene{
         }
 
         //  Zona para a cidade 1 
-        this.zonaCidade1 = this.physics.add.sprite(387, 500).setOrigin(0, 0).setSize(100,100).setVisible(true)
+        this.zonaCidade1 = this.physics.add.sprite(387, 500).setOrigin(0, 0).setSize(100,100)
 
         // se a Cidade 1 foi completada remove a zona para evitar o jogador entrar de novo por engano
 
-        let city1 = this.registry.get('cidade1completa')
+        this.city1 = this.registry.get('cidade1completa')
 
-        if (city1){
+        if (this.city1){
 
             this.zonaCidade1.destroy()
             this.add.image(387, 500, 'greenCheck').setScale(0.3)
         }
 
         //  Zona para a cidade 2 
-        this.zonaCidade2 = this.physics.add.sprite(1160, 205).setOrigin(0, 0).setSize(100,100).setVisible(true)
+        this.zonaCidade2 = this.physics.add.sprite(1160, 205).setOrigin(0, 0).setSize(100,100)
 
         // se a Cidade 2 foi completada remove a zona para evitar o jogador entrar de novo por engano
 
-        let city2 = this.registry.get('cidade2completa')
+        this.city2 = this.registry.get('cidade2completa')
 
-        if (city2){
+        if (this.city2){
 
             this.zonaCidade2.destroy()
             this.add.image(1185, 230, 'greenCheck').setScale(0.3)
         }
 
         //  Zona para a cidade 3 
-        this.zonaCidade3 = this.physics.add.sprite(1150, 600).setOrigin(0, 0).setSize(100,100).setVisible(true)
+        this.zonaCidade3 = this.physics.add.sprite(1150, 600).setOrigin(0, 0).setSize(100,100)
 
         // se a Cidade 3 foi completada remove a zona para evitar o jogador entrar de novo por engano
 
-        let city3 = this.registry.get('cidade3completa')
+        this.city3 = this.registry.get('cidade3completa')
 
 
-        if (city3){
+        if (this.city3){
 
             this.zonaCidade3.destroy()
             this.add.image(1185, 630, 'greenCheck').setScale(0.3)
         }
 
+        //  Zona para a cidade Viana
+        this.zonaViana = this.physics.add.sprite(560, 140).setOrigin(0, 0).setSize(120,120).setActive(false)
+
+        //colisoes com as zonas das cidades
+
         this.physics.add.overlap(this.player, this.zonas, this.colisaoInimigo, false, this)
         this.physics.add.overlap(this.player, this.zonaCidade1, this.colisaoCidade, false, this)
         this.physics.add.overlap(this.player, this.zonaCidade2, this.colisaoCidade, false, this)
         this.physics.add.overlap(this.player, this.zonaCidade3, this.colisaoCidade, false, this)
+        
+        
+
+        
+        // seta que aparece quando todas as pecas foram apanhadas a indicar para voltar a Viana
+
+        this.greenArrow = this.add.image(425, 160, 'greenArrow').setScale(0.75).setAlpha(0)
+
 
         // mostra as instrucoes a primeira vez que o jogador comeca o jogo e remove-as quando o jogador clica
         
@@ -269,11 +281,17 @@ export default class Mapa extends Phaser.Scene{
             this.scene.start('Cidade3', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio, posicaoX: this.player.x, posicaoY: this.player.y})
 
         }
+
+        if (zona.x == 560 && this.city1 && this.city2 && this.city3){
+
+            this.scene.start('TheEnd', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
+        
+        }
     }
 
     update(){
 
-        //evitar que as areas dos inimigos estejam muito juntas
+        // evitar que as areas dos inimigos estejam muito juntas
         var areas = this.zonas.getChildren()
 
         for (var i = 0; i < areas.length; i++){
@@ -286,7 +304,12 @@ export default class Mapa extends Phaser.Scene{
 
                         areas[i].x = Phaser.Math.RND.between( 700, this.physics.world.bounds.width)
                         areas[i].y = Phaser.Math.RND.between( 100, this.physics.world.bounds.height)
-                        
+
+                        if (Phaser.Math.Distance.Between(areas[i].x,areas[i].y, this.player.x, this.player.y) < 20){
+                            
+                            areas[i].x = Phaser.Math.RND.between( 700, this.physics.world.bounds.width)
+                            areas[i].y = Phaser.Math.RND.between( 100, this.physics.world.bounds.height)
+                        }
 
                     }
                 }
@@ -333,8 +356,29 @@ export default class Mapa extends Phaser.Scene{
         
         } else {this.player.play(this.playerSelected + '_idle', true)}
 
-        
+       // se o jogador completou as 3 cidades indica para voltar a viana mas so uma vez para nao repetir o tween constantemente
        
+        if (this.city1 && this.city2 && this.city3 && !this.arrowApareceu){
+
+        this.voltaViana()
+
+       }  
+       
+    }
+
+    voltaViana(){
+
+        this.arrowApareceu = true
+        this.physics.add.overlap(this.player, this.zonaViana, this.colisaoCidade, false, this)
+
+        this.tweens.add({
+            targets:  this.greenArrow,
+            ease: 'Cubic.easeOut',
+            alpha: 1,
+            duration: 2000,
+            repeat: -1,
+            yoyo: true
+        })
     }
 }
 

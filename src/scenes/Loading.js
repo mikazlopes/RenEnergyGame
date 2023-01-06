@@ -125,6 +125,7 @@ export default class Loading extends Phaser.Scene{
         this.load.image('tiles_mapa6', 'assets/tileset/tiles_mapa6.png')
         this.load.image('tiles_mapa7', 'assets/tileset/tiles_mapa7.png')
         this.load.image('greenCheck', 'assets/icons/greenCheck.png')
+        this.load.image('greenArrow', 'assets/icons/greenArrow.png')
         this.load.tilemapTiledJSON('mapa', 'assets/tileset/renEnergy_mapa.json')
         this.load.image('fundo_floresta', 'assets/backgrounds/2d_tb_forest_background.png')
         this.load.image('tiles_floresta', 'assets/tileset/tiles_forest.png')   
@@ -177,6 +178,8 @@ export default class Loading extends Phaser.Scene{
         this.load.audio('jack_dying', 'assets/audio/jack_dying.mp3')
         this.load.audio('jill_dying', 'assets/audio/jill_dying.mp3')
         this.load.audio('cogPickup', 'assets/audio/cog.mp3')
+        this.load.audio('victory_music', 'assets/audio/victory_music.mp3')
+        this.load.audio('gameover', 'assets/audio/gameover.mp3')
 
 
 

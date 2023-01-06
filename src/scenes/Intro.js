@@ -15,7 +15,7 @@ let content = [
     "They also generate lots of pollution which makes everyone unhappy. ",
     "Their energy sources, aside from not clean will end someday, leaving them in the dark.",
     "Instead of asking the Vianenses to teach them how to use clean, renewable energy, they decided to attack Viana.", 
-    "They stole parts of the machines that provided different types of renewable energy.",
+    "They stole the parts of the machines that provided different types of renewable energy.",
     "Viana’s Mayor asked them to return the parts, but they refused.", 
     "The Mayor decided to send Jack and Jill to get the machine parts back to reactivate their solar, wind, geothermal, and hydraulic power sources and bring energy back to Viana.",
     "Help Jack and Jill on their adventure!. Click anywhere to continue"
@@ -117,6 +117,9 @@ export default class Intro extends Phaser.Scene{
                 stepY: 60
             }
         })
+
+        
+
         
         Phaser.Actions.ScaleXY(enemyRun.getChildren(), -0.75, -0.75)
         enemies = enemyRun.getChildren()
@@ -153,6 +156,31 @@ export default class Intro extends Phaser.Scene{
             enemies[i].play('enemy_run')
         }
 
+        // Adiciona as pecas
+        this.cogs = this.add.group({
+            key: 'cogs',
+            repeat: 2,
+            setScale: {x: 0.5, y: 0.5},
+            setXY:{
+                x: 200,
+                y: height / 2,
+                stepX:  400,
+                stepY: 0
+            }
+        }).setAlpha(0)
+
+        //aparecem as pecas
+            
+        this.tweens.add({
+            targets: this.cogs.getChildren(),
+            ease: 'Cubic.easeOut',
+            delay: 20000,
+            alpha: 1,
+            duration: 3000,
+            repeat: 0,
+            yoyo: false
+        })
+
         this.input.on('pointerup', (clica) => {
 
             this.musicaEnemies.stop()
@@ -177,6 +205,7 @@ export default class Intro extends Phaser.Scene{
         //manipula a entrada do primeiro paragrafo da historia
         if (apareceTexto){this.moveText()}
 
+        //controla a entrada dos inimigos e a accao disparar
         if (comecaInimigos){this.moveInimigos()}
 
         if (enemies[0].x == width / 4){
@@ -198,7 +227,7 @@ export default class Intro extends Phaser.Scene{
             
         }
 
-        
+        // controla a entrada dos herois     
         if (comecaHerois){
 
             this.moveHerois()
@@ -220,6 +249,8 @@ export default class Intro extends Phaser.Scene{
             
             entraViana = false
             tempViana.remove()
+
+
         }
 
     }
@@ -270,7 +301,8 @@ export default class Intro extends Phaser.Scene{
             this.tweens.add({
                 targets:  this.musicaIntro,
                 volume:   0,
-                duration: 8000
+                delay: 7000,
+                duration: 3000
             })
 
             this.musicaEnemies.play()
@@ -282,10 +314,21 @@ export default class Intro extends Phaser.Scene{
             this.tweens.add({
                 targets:  this.musicaEnemies,
                 volume:   1,
-                duration: 2000
+                duration: 3000
             })
 
             this.moveInimigos()
+
+            this.tweens.add({
+                targets: this.cogs.getChildren(),
+                ease: 'Cubic.easeOut',
+                delay: 3000,
+                alpha: 0,
+                duration: 3000,
+                repeat: 0,
+                yoyo: false
+            })
+
             
         }
 
@@ -294,9 +337,12 @@ export default class Intro extends Phaser.Scene{
             this.tweens.add({
                 targets:  this.musicaEnemies,
                 volume:   0,
-                duration: 7000
+                duration: 10000
             })
+            let explosao = this.sound.add('explosion')
+            explosao.play()
             this.musicaHeroes.play()
+
         }
 
         if (index == 10){
@@ -342,6 +388,8 @@ export default class Intro extends Phaser.Scene{
             muzzles[i].play('enemy_muzzle')
             bullets[i].setPosition(muzzles[i].x +12, muzzles[i].y)
             bullets[i].play('enemy_bullet_spin')
+            let iDispara = this.sound.add('enemy_shoot')
+            iDispara.play()
 
         }
     }

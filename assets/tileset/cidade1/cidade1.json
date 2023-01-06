@@ -70,8 +70,8 @@
                  "name":"spikes2",
                  "rotation":0,
                  "visible":true,
-                 "width":120,
-                 "x":3308,
+                 "width":102.666666666667,
+                 "x":3325.33333333333,
                  "y":860
                 }, 
                 {
@@ -92,7 +92,7 @@
                  "name":"spikes3",
                  "rotation":0,
                  "visible":true,
-                 "width":120,
+                 "width":81.333333333333,
                  "x":3434,
                  "y":860
                 }],

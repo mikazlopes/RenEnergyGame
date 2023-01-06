@@ -115,7 +115,7 @@ export default class Cidade1 extends Phaser.Scene{
 
             child.setVisible(false)
             child.setOrigin(0,0)
-            child.setScale(1, 0.5)
+            child.setScale(0.75, 0.5)
             child.refreshBody()
             
         })

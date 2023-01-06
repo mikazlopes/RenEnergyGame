@@ -29,6 +29,10 @@ export default class GameOver extends Phaser.Scene{
         
         let titulo = this.add.text(this.width / 2, this.height / 2, 'Game Over', {fontSize: 48, fontColor: 0xFFFFFF}).setOrigin(0.5)
         let subtitulo = this.add.text(this.width / 2, this.height / 1.5, 'Click to try again', {fontSize: 30, fontColor: 0xFFFFFF}).setOrigin(0.5)
+        
+        // audio que diz game over
+        this.voice = this.sound.add('gameover')
+        this.voice.play()
 
         
         // Inicia o jogo de novo

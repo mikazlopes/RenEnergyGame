@@ -22,6 +22,8 @@ import Seleciona from './scenes/SelectPlayer.js'
 
 import GameOver from './scenes/GameOver.js'
 
+import TheEnd from './scenes/theEnd.js'
+
 
 
 export default new Phaser.Game({
@@ -29,10 +31,10 @@ export default new Phaser.Game({
     width: 1280,
     height: 720,
     pixelArt: true,
-    scene: [Loading, Intro , Menu,  Seleciona, Loading2, Mapa, GameOver, Floresta, Cidade1, Cidade2, Cidade3]
+    scene: [Loading, Intro , Menu,  Seleciona, Loading2, Mapa, Floresta, Cidade1, Cidade2, Cidade3, GameOver, TheEnd]
     })
 
-    
+
 
 
 

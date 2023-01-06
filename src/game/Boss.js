@@ -40,7 +40,7 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
 
         //define o intervalo em que o inimigo dispara influenciado pela dificuldade
         this.shootTimer = this.scene.time.addEvent({
-            delay: 2000 / this.scene.dificuldade,
+            delay: Phaser.Math.RND.between(600, 2000 / this.scene.dificuldade),
             callback: this.scene.disparouBalaBoss,
             args: [this, 'idle'],
             callbackScope: this.scene,
