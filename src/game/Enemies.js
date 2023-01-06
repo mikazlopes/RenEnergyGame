@@ -143,9 +143,14 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
         
         var distV = jogador.y - this.y
 
-        if (dist < 700 * ((this.scene.dificuldade / 10) + 1) && dist > 80 && this.estado != 'dead' && this.body.onFloor()){
+        // accao de inimigo influenciada pela dificuldade, quanto mais dificil mais depressa o inimigo vai atras do heroi
+
+        var distAcao = 700 * ((this.scene.dificuldade / 10) + 1)
+
+        if (dist < distAcao && dist > 80 && this.estado != 'dead' && this.body.onFloor()){
             
             this.play('enemy_idle_aim')
+            this.body.setVelocityX(0)
             this.anims.playAfterRepeat('enemy_idle', true)
 
             if ( distV < - 10 && this.body.onFloor()){
@@ -175,6 +180,19 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
             this.anims.playAfterRepeat('enemy_idle', true)
 
             
+        }else if(dist > distAcao && dist < 1700 && this.estado != 'dead' && this.estado != 'hurt'){
+
+            this.estado = 'run'
+            this.play('enemy_run_shoot', true)
+            
+            if (this.flipX){
+
+                this.body.setVelocityX(-100)
+
+            }else{
+
+                this.body.setVelocityX(100)
+            }
         }
 
         if (this.flipX && !this.body.onFloor()){

@@ -32,7 +32,7 @@ export default class Cidade3 extends Phaser.Scene{
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: true,
+                    debug: false,
                     tileBias: 32,
                     fps: 30,
                     fixedStep: true,

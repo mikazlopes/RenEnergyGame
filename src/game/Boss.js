@@ -162,7 +162,7 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
 
                 this.body.setVelocityX(80)
             }
-            console.log(dist)
+            
         }
 
         if (this.flipX){

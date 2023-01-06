@@ -249,7 +249,9 @@ export default class Floresta extends Phaser.Scene{
 
         var dist = Phaser.Math.Distance.BetweenPoints(this.player, personagem)
 
-        if (dist < 700 && dist > 100 && personagem.estado != 'dead' && personagem.estado != 'hurt'){
+        var distAcao = 1000 * ((this.dificuldade / 10) + 1)
+
+        if (dist < distAcao && dist > 100 && personagem.estado != 'dead' && personagem.estado != 'hurt'){
             
             
             if (personagem.flipX){
