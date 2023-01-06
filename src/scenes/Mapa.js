@@ -192,7 +192,6 @@ export default class Mapa extends Phaser.Scene{
 
         let city3 = this.registry.get('cidade3completa')
 
-        console.log(city3)
 
         if (city3){
 
@@ -228,19 +227,30 @@ export default class Mapa extends Phaser.Scene{
             
 
         }
+
+        this.musicaMapa = this.sound.add('mapa_music', {loop: true, volume: 0.5})
+
+        
+
+        if (this.defAudio){
+
+            this.musicaMapa.play()
+        }
         
     }
 
     // colidiu com uma zona inimiga e inicia o combate
     colisaoInimigo(player, zona){
 
-
+        this.musicaMapa.stop()
         this.scene.start('Floresta', { heroi: this.playerSelected, positionX: this.player.x, positionY: this.player.y, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
  
     }
 
     // Saber que cidade colidiu e iniciar a cena
     colisaoCidade(player, zona){
+
+        this.musicaMapa.stop()
 
         if (zona.x == 387){
 

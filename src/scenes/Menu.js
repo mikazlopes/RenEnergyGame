@@ -163,7 +163,6 @@ export default class Menu extends Phaser.Scene{
             this.roundRect.setPosition(0,0)
             this.subOpcaoTitulo.setVisible(true).setText('Audio On')
             this.defAudio = true
-
         })
 
         this.sonsOff.on('pointerup', (clica) => {

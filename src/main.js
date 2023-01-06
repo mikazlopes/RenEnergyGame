@@ -24,8 +24,6 @@ import GameOver from './scenes/GameOver.js'
 
 
 
-
-
 export default new Phaser.Game({
     type: Phaser.AUTO,
     width: 1280,
@@ -34,8 +32,7 @@ export default new Phaser.Game({
     scene: [Loading, Intro , Menu,  Seleciona, Loading2, Mapa, GameOver, Floresta, Cidade1, Cidade2, Cidade3]
     })
 
-
-
+    
 
 
 

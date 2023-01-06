@@ -16,6 +16,10 @@ export default class BalaHero extends Phaser.Physics.Arcade.Sprite
         // Dificuldade influencia dano feito pelas balas do heroi
 
         this.dano = 11 - this.scene.dificuldade
+
+        // audio do heroi a disparar
+
+        this.heroShoot = this.scene.sound.add('hero_shoot')
     
 	}
 
@@ -27,6 +31,7 @@ export default class BalaHero extends Phaser.Physics.Arcade.Sprite
         this.body.enable = true
         this.body.setSize(this.width, this.height, true)
         this.body.setAllowGravity(false)
+        this.heroShoot.play()
         
 		if (direcao == 'esquerda'){
             this.setVelocityX(-500)
@@ -53,8 +58,9 @@ export default class BalaHero extends Phaser.Physics.Arcade.Sprite
 
     preUpdate(time, delta) {
 		super.preUpdate(time, delta)
- 
-		if (this.x < 0 || this.x > 6350) {
+        
+
+		if (this.x < 0 || this.x > this.scene.physics.world.bounds.width) {
 			this.setActive(false)
 			this.setVisible(false)
 		}

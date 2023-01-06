@@ -160,8 +160,27 @@ export default class Loading extends Phaser.Scene{
         this.load.tilemapTiledJSON('cidade1', 'assets/tileset/cidade1/cidade1.json')
         this.load.tilemapTiledJSON('cidade3', 'assets/tileset/cidade3/cidade3.json')
         this.load.atlas('door_open', 'assets/spritesheets/door_open_spritesheet.png', 'assets/spritesheets/door_open_spritesheet.json')
-        
 
+        //Assets Audio
+
+        this.load.audio('city_music', 'assets/audio/city_music.mp3')
+        this.load.audio('mapa_music', 'assets/audio/mapa_music.mp3')
+        this.load.audio('forest_music', 'assets/audio/forest_music.mp3')
+        this.load.audio('boss_shoot', 'assets/audio/boss_shoot.mp3')
+        this.load.audio('door', 'assets/audio/door.mp3')
+        this.load.audio('enemy_shoot', 'assets/audio/enemy_shoot.mp3')
+        this.load.audio('enemy_dying', 'assets/audio/enemy_dying.mp3')
+        this.load.audio('explosion', 'assets/audio/explosion.mp3')
+        this.load.audio('hero_shoot', 'assets/audio/hero_shoot.mp3')
+        this.load.audio('enemy_hit', 'assets/audio/enemy_hit.mp3')
+        this.load.audio('hero_hit', 'assets/audio/hero_hit.mp3')
+        this.load.audio('jack_dying', 'assets/audio/jack_dying.mp3')
+        this.load.audio('jill_dying', 'assets/audio/jill_dying.mp3')
+        this.load.audio('cogPickup', 'assets/audio/cog.mp3')
+
+
+
+        
     }
 
     create(){

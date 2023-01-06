@@ -15,6 +15,9 @@ export default class BalaBoss extends Phaser.Physics.Arcade.Sprite
 
         // quanto mais dificuldade maior o dano do inimigo
         this.dano = 10 + this.scene.dificuldade
+
+        // audio do boss a disparar
+        this.bossShoot = this.scene.sound.add('boss_shoot')
 	}
 
 	dispara(x, y, direcao) {
@@ -25,7 +28,7 @@ export default class BalaBoss extends Phaser.Physics.Arcade.Sprite
         this.body.enable = true
         this.body.setSize(this.width, this.height, true)
         this.body.setAllowGravity(false)
-        
+        this.bossShoot.play()
 		if (direcao == 'esquerda'){
             this.flipX = true
             this.setVelocityX(-400 * ((this.scene.dificuldade / 5) + 1))
@@ -54,7 +57,7 @@ export default class BalaBoss extends Phaser.Physics.Arcade.Sprite
     preUpdate(time, delta) {
 		super.preUpdate(time, delta)
  
-		if (this.x < 0 || this.x > 9000) {
+		if (this.x < 0 || this.x > this.scene.physics.world.bounds.width) {
 			this.setActive(false)
 			this.setVisible(false)
 		}

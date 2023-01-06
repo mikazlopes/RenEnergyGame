@@ -9,19 +9,21 @@ export default class CriaBalasHero extends Phaser.Physics.Arcade.Group
     constructor(scene) {
 		super(scene.physics.world, scene);
 
+		// dificuldade influencia o numero de balas disponiveis
+
 		this.createMultiple({
-			frameQuantity: 20,
+			frameQuantity: Phaser.Math.RoundTo(20 / this.scene.dificuldade, 0),
 			key: 'hero_bullet',
 			active: false,
 			visible: false,
 			classType: BalaHero
 		})
+		
 	}
 
 	disparouBala(x, y, direcao) {
 		const bala = this.getFirstDead(false)
 		const sentido = direcao
-
 		if(bala) {
 			bala.dispara(x, y, sentido)
 		}

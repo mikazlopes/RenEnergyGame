@@ -40,12 +40,30 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
 
         //define o intervalo em que o inimigo dispara influenciado pela dificuldade
         this.shootTimer = this.scene.time.addEvent({
-            delay: 1500 / this.scene.dificuldade,
+            delay: 2000 / this.scene.dificuldade,
             callback: this.scene.disparouBalaBoss,
             args: [this, 'idle'],
             callbackScope: this.scene,
             loop: true
         })
+
+        // efeitos de som
+
+        this.enemyDying = this.scene.sound.add('explosion')
+        this.enemyHit = this.scene.sound.add('enemy_hit')
+
+        //barra de energia
+
+        this.roundRect1 = this.scene.add.graphics({x: this.x - 50, y: this.y - 50})
+        this.roundRect2 = this.scene.add.graphics({x: this.x - 50, y: this.y - 50})
+
+        this.roundRect1.fillStyle(0xd20505)
+        this.roundRect2.fillStyle(0x90ee09)
+
+        this.originalSize = this.health
+
+        this.roundRect1.fillRoundedRect(0, 0, this.originalSize, 20, 5)
+        this.roundRect2.fillRoundedRect(0, 0, this.health, 20, 5)
 
 
 
@@ -54,6 +72,7 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
     calculaDano(damage){
 
         this.health = this.health - damage
+        this.enemyHit.play()
         
         if(this.health > 0){
 
@@ -72,9 +91,12 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
 
         this.estado = 'dead'
         this.body.enable = false
+        this.roundRect1.clear()
+        this.roundRect2.clear()
         this.play('boss_dead', true)
         this.scene.explosao.x = this.x
         this.scene.explosao.y = this.y
+        this.enemyDying.play()
         this.scene.explosao.setVisible(true)
         this.scene.explosao.play('boss_explosion')
         this.on('animationcomplete', () => {
@@ -167,7 +189,6 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
     inimigoDispara(x, y, direcao){
 
         const sentido = direcao
-
         this.muzzle.dispara(x, y, sentido, this)
         
     }
@@ -176,7 +197,9 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
     preUpdate(time, delta) {        
 		super.preUpdate(time, delta)  
 
-        
+        this.roundRect1.setPosition(this.x - 35, this.y - 100)
+        this.roundRect2.setPosition(this.x - 35,this.y - 100)
+        this.roundRect2.setScale(this.health / this.originalSize, 1)
 
    
     }

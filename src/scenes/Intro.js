@@ -60,6 +60,14 @@ export default class Intro extends Phaser.Scene{
         var i
         var numInimigos = 2
 
+        //musica de fundo
+
+        this.musicaIntro = this.sound.add('mapa_music')
+        this.musicaIntro.play()
+
+        this.musicaEnemies = this.sound.add('city_music', {volume: 0})
+        this.musicaHeroes = this.sound.add('forest_music', {volume: 0})
+
 
         //arquivar tamanho da cena para usar no posicionamento dos objetos
         width = this.scale.width;
@@ -146,6 +154,10 @@ export default class Intro extends Phaser.Scene{
         }
 
         this.input.on('pointerup', (clica) => {
+
+            this.musicaEnemies.stop()
+            this.musicaIntro.stop()
+            this.musicaHeroes.stop()
 
             this.scene.start('Menu')
 
@@ -253,12 +265,48 @@ export default class Intro extends Phaser.Scene{
             tempText.remove()
         }
 
+        if(index == 7){
+
+            this.tweens.add({
+                targets:  this.musicaIntro,
+                volume:   0,
+                duration: 8000
+            })
+
+            this.musicaEnemies.play()
+
+        }
+
         if (index == 8){
 
+            this.tweens.add({
+                targets:  this.musicaEnemies,
+                volume:   1,
+                duration: 2000
+            })
+
             this.moveInimigos()
+            
+        }
+
+        if (index == 9){
+            
+            this.tweens.add({
+                targets:  this.musicaEnemies,
+                volume:   0,
+                duration: 7000
+            })
+            this.musicaHeroes.play()
         }
 
         if (index == 10){
+
+            
+            this.tweens.add({
+                targets:  this.musicaHeroes,
+                volume:   1,
+                duration: 2000
+            })
 
             this.moveHerois()
         }

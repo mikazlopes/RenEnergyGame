@@ -38,12 +38,30 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
 
         //define o intervalo em que o inimigo dispara influenciado pela dificuldade
         this.shootTimer = this.scene.time.addEvent({
-            delay: 2000 / this.scene.dificuldade,
+            delay: 2500 / this.scene.dificuldade,
             callback: this.scene.disparouBalaEnemy,
             args: [this, 'idle'],
             callbackScope: this.scene,
             loop: true
         })
+
+        // efeitos de som
+
+        this.enemyDying = this.scene.sound.add('enemy_dying')
+        this.enemyHit = this.scene.sound.add('enemy_hit')
+
+        //barra de energia
+
+        this.roundRect1 = this.scene.add.graphics({x: this.x - 50, y: this.y - 50})
+        this.roundRect2 = this.scene.add.graphics({x: this.x - 50, y: this.y - 50})
+
+        this.roundRect1.fillStyle(0xd20505)
+        this.roundRect2.fillStyle(0x90ee09)
+
+        this.originalSize = this.health
+
+        this.roundRect1.fillRoundedRect(0, 0, this.originalSize, 20, 5)
+        this.roundRect2.fillRoundedRect(0, 0, this.health, 20, 5)
 
 
 
@@ -52,6 +70,7 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
     calculaDano(damage){
 
         this.health = this.health - damage
+        this.enemyHit.play()
         
         if(this.health > 0){
 
@@ -71,6 +90,9 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
     inimigoMorreu(){
 
         this.estado = 'dead'
+        this.roundRect1.clear()
+        this.roundRect2.clear()
+        this.enemyDying.play()
         this.body.enable = false
         this.play('enemy_dead', true)
         this.on('animationcomplete', () => {
@@ -187,6 +209,13 @@ export default class Enemy extends Phaser.Physics.Arcade.Sprite
     // corre funcoes antes to update
     preUpdate(time, delta) {        
 		super.preUpdate(time, delta)  
+
+        // move a barra de energia com o inimigo e atualiza
+
+        this.roundRect1.setPosition(this.x - 25, this.y - 100)
+        this.roundRect2.setPosition(this.x - 25,this.y - 100)
+        this.roundRect2.setScale(this.health / this.originalSize, 1)
+
 
         
 

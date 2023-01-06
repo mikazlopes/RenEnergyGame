@@ -133,7 +133,7 @@ export default class Cidade2 extends Phaser.Scene{
       
 
         /** @type {Phaser.Physics.Arcade.Sprite} */
-        this.player = new Jogador(this, 5000, 600, this.playerSelected + '_idle')
+        this.player = new Jogador(this, 100, 600, this.playerSelected + '_idle')
         this.add.existing(this.player)
         this.player.play(this.playerSelected + '_idle')
         
@@ -213,6 +213,17 @@ export default class Cidade2 extends Phaser.Scene{
         this.physics.add.overlap(this.player, this.picosObjTile, this.nosSpikes, false, this)
         this.physics.add.overlap(this.player, this.cog, this.apanhouCog, false, this)
         this.physics.add.overlap(this.player, this.portas, this.voltaMapa, false, this)
+
+        // Comeca musica
+
+        this.musica = this.sound.add('city_music', {loop: true, volume: 0.3})
+        this.portaAudio = this.sound.add('door')
+        this.cogAudio = this.sound.add('cogPickup')
+
+        if (this.defAudio){
+
+            this.musica.play()
+        }
 
     }
 
@@ -333,7 +344,7 @@ export default class Cidade2 extends Phaser.Scene{
                 
             }
             
-        this.balaIntervalohero = this.time.now + 200
+        this.balaIntervalohero = this.time.now + 200 * this.dificuldade
             
         }
 
@@ -447,6 +458,8 @@ export default class Cidade2 extends Phaser.Scene{
     apanhouCog(){
 
         this.cogsCollect = true
+            this.portaAudio.play()
+            this.cogAudio.play()
             this.portas.playAnimation('door_open')
             this.cog.destroy()
     }
@@ -457,9 +470,9 @@ export default class Cidade2 extends Phaser.Scene{
     voltaMapa(){
 
         if (this.cogsCollect){
-
+            this.musica.stop()
             this.registry.set('cidade2completa', true)
-            this.scene.start('Mapa', { id: 1, positionx: this.posicaoX, positiony: this.posicaoY, heroi: this.playerSelected, cidade: 2, opcaoDificuldade: this.dificuldade})
+            this.scene.start('Mapa', { id: 1, positionx: this.posicaoX, positiony: this.posicaoY, heroi: this.playerSelected, cidade: 2, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
 
         }
         

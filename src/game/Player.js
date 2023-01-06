@@ -21,11 +21,23 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             
             this.body.setSize(280, 450, true)
             this.body.setOffset(0, -2)
+             
+            // efeitos audio
+
+            this.heroDying = this.scene.sound.add('jack_dying')
 
         }else{
 
             this.body.setSize(this.width, this.height, true)
+
+            // efeitos audio
+
+            this.heroDying = this.scene.sound.add('jill_dying')
         }
+
+        // efeitos audio comuns
+
+        this.heroHurt = this.scene.sound.add('hero_hit')
         
         this.muzzle = new MuzzlesHero(this.scene, this.x, this.y)
         
@@ -35,8 +47,27 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         this.movimento = 'idle'
 
         this.isDead = false
-        
 
+        //Barra de Energia
+
+        //barra de energia
+
+        this.roundRect1 = this.scene.add.graphics({x: 300, y: 50})
+        this.roundRect2 = this.scene.add.graphics({x: 300, y: 50})
+
+        this.roundRect1.fillStyle(0xd20505)
+        this.roundRect2.fillStyle(0x90ee09)
+
+        this.originalSize = this.health
+
+        this.roundRect1.fillRoundedRect(0, 0, this.originalSize, 20, 5)
+        this.roundRect2.fillRoundedRect(0, 0, this.health, 20, 5)
+
+        // Mostra municoes
+       
+        this.scene.add.text(25 ,53, 'Ammo:', {align: 'center', color: 0x2127F1})
+
+        this.ammo = this.scene.add.text(85 ,53, Phaser.Math.RoundTo(20 / this.scene.dificuldade, 0), {align: 'center', color: 0x2127F1})
 
 
     }
@@ -355,6 +386,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         
 
         this.health = this.health - damage
+
+        this.heroHurt.play()
         
         if(this.health > 0){
             this.estado = 'hurt'
@@ -376,6 +409,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         if (!this.isDead){
             
             this.body.enable = false
+            this.heroDying.play()
             this.estado = 'dead'
             this.isDead = true
             this.play(this.scene.playerSelected + '_dead', true)
@@ -396,6 +430,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     gameOver(){
 
+        this.musica.stop()
         this.scene.start('GameOver',{opcaoAudio: this.defAudio, opcaoDificuldade: this.dificuldade})
     }
 
@@ -433,7 +468,12 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
     // corre funcoes antes to update
     preUpdate(time, delta) {        
 		super.preUpdate(time, delta)  
-        
+
+        this.roundRect1.setPosition(this.x - 75, this.y - 100)
+        this.roundRect2.setPosition(this.x - 75, this.y - 100)
+
+        this.roundRect2.setScale(this.health / this.originalSize, 1)
+        this.ammo.setText(Phaser.Math.RoundTo(20 / this.scene.dificuldade, 0) - this.scene.balashero.getTotalUsed())
         
     }  
     
