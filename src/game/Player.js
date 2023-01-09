@@ -473,6 +473,12 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
         this.roundRect2.setScale(this.health / this.originalSize, 1)
         this.ammo.setText(Phaser.Math.RoundTo(20 / this.scene.dificuldade, 0) - this.scene.balashero.getTotalUsed())
+
+        if (this.roundRect2.scaleX < 0){
+
+            this.roundRect2.clear()
+            
+        }
         
     }  
     

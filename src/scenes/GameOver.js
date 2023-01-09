@@ -19,9 +19,6 @@ export default class GameOver extends Phaser.Scene{
          this.height = this.scale.height
 
          this.dificuldade = data.opcaoDificuldade
-         this.defAudio = data.opcaoAudio
-
-         console.log(this.dificuldade)
     }
 
     create(){
@@ -39,7 +36,7 @@ export default class GameOver extends Phaser.Scene{
 
         this.input.on('pointerup', (clica) => {
 
-            this.scene.start('Menu', {opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
+            this.scene.start('Menu', {opcaoDificuldade: this.dificuldade})
 
         })
     }

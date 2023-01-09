@@ -49,7 +49,6 @@ export default class Cidade3 extends Phaser.Scene{
         // Usado para importar que jogador foi escolhido e a dificuldade
         this.playerSelected = data.heroi
         this.dificuldade = data.opcaoDificuldade
-        this.defAudio = data.opcaoAudio
         this.posicaoX = data.posicaoX
         this.posicaoY = data.posicaoY
         this.speedH = 250
@@ -229,10 +228,8 @@ export default class Cidade3 extends Phaser.Scene{
         this.portaAudio = this.sound.add('door')
         this.cogAudio = this.sound.add('cogPickup')
 
-        if (this.defAudio){
-
-            this.musica.play()
-        }
+        this.musica.play()
+      
 
     }
 
@@ -505,7 +502,7 @@ export default class Cidade3 extends Phaser.Scene{
         if (this.cogsCollect){
             this.musica.stop()
             this.registry.set('cidade3completa', true)
-            this.scene.start('Mapa', { id: 1, positionx: this.posicaoX, positiony: this.posicaoY, heroi: this.playerSelected, cidade: 3, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
+            this.scene.start('Mapa', { id: 1, positionx: this.posicaoX, positiony: this.posicaoY, heroi: this.playerSelected, cidade: 3, opcaoDificuldade: this.dificuldade})
 
         }
         

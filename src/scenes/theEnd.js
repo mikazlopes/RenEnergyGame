@@ -19,7 +19,6 @@ export default class TheEnd extends Phaser.Scene{
          this.height = this.scale.height
 
          this.dificuldade = data.opcaoDificuldade
-         this.defAudio = data.opcaoAudio
          this.playerSelected = data.heroi
          
     }
@@ -30,10 +29,10 @@ export default class TheEnd extends Phaser.Scene{
 
         this.musica = this.sound.add('victory_music', {volume: 0.5})
         
-        if (this.defAudio){
-            this.musica.play()
-        }
-        
+       
+        this.musica.play()
+
+
         //adiciona o background
         this.add.sprite(0 , 0,'intro_background').setOrigin(0,0)
 
@@ -165,7 +164,7 @@ export default class TheEnd extends Phaser.Scene{
 
             this.musica.stop()
 
-            this.scene.start('Menu', {opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
+            this.scene.start('Menu', {opcaoDificuldade: this.dificuldade})
 
         })
     }

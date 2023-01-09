@@ -1,5 +1,6 @@
 import Phaser from '../lib/phaser.js'
 
+
 export default class Menu extends Phaser.Scene{
      
     constructor(){
@@ -22,7 +23,6 @@ export default class Menu extends Phaser.Scene{
 
     init(data){
 
-        this.defAudio = data.opcaoAudio
         this.grauDificuldade = data.opcaoDificuldade
         
         // Guardar as dimensoes da scene numa variavel
@@ -34,6 +34,8 @@ export default class Menu extends Phaser.Scene{
         this.registry.set('cidade1completa', false)
         this.registry.set('cidade2completa', false)
         this.registry.set('cidade3completa', false)
+
+        console.log(this.game.sound.mute.valueOf())
 
         
     }
@@ -52,13 +54,9 @@ export default class Menu extends Phaser.Scene{
         let r1 = this.add.rectangle( 0, 0, this.width, this.height, 0xffffff, 0.3).setOrigin(0,0)
 
 
-        // verifica se ja existiam opcoes selecionadas previamente para dificuldade e audio. Se nao entao define uma por defeito
+        // verifica se ja existiam opcoes selecionadas previamente para dificuldade. Se nao entao define uma por defeito
         if (this.grauDificuldade == null){
             this.grauDificuldade = 2
-        }
-        
-        if (this.defAudio == null) {
-            this.defAudio = true
         }
 
         // Adiciona butoes e labels para o menu e subopcoes
@@ -114,7 +112,7 @@ export default class Menu extends Phaser.Scene{
 
         this.joga.on('pointerup', (clica) => {
 
-            this.scene.start('Seleciona',{opcaoDificuldade: this.grauDificuldade, opcaoAudio: this.defAudio})
+            this.scene.start('Seleciona',{opcaoDificuldade: this.grauDificuldade})
 
         })
 
@@ -146,7 +144,9 @@ export default class Menu extends Phaser.Scene{
         this.roundRect.fillRoundedRect(this.sons.x - this.sons.displayWidth / 2, this.sons.y - this.sons.displayHeight / 2, this.sons.displayWidth, this.sons.displayHeight)
 
         // verifica a ultima opcao selecionada
-        if (!this.defAudio){
+        var somAtivo = this.game.sound.mute.valueOf()
+
+        if (somAtivo){
 
             this.roundRect.setPosition(100,0)
             this.subOpcaoTitulo.setVisible(true).setText('Audio Off')
@@ -162,14 +162,14 @@ export default class Menu extends Phaser.Scene{
 
             this.roundRect.setPosition(0,0)
             this.subOpcaoTitulo.setVisible(true).setText('Audio On')
-            this.defAudio = true
+            this.game.sound.setMute(false)
         })
 
         this.sonsOff.on('pointerup', (clica) => {
 
             this.roundRect.setPosition(100,0)
             this.subOpcaoTitulo.setVisible(true).setText('Audio Off')
-            this.defAudio = false
+            this.game.sound.setMute(true)
 
         })
         

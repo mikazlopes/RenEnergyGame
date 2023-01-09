@@ -41,7 +41,6 @@ export default class Mapa extends Phaser.Scene{
         this.cidade = data.cidade
         this.instrucoes = data.primeira
         this.dificuldade = data.opcaoDificuldade
-        this.defAudio = data.opcaoAudio
         this.speed = 70
 
         console.log(this.dificuldade)
@@ -240,14 +239,12 @@ export default class Mapa extends Phaser.Scene{
 
         }
 
+        // comeca musica
+
         this.musicaMapa = this.sound.add('mapa_music', {loop: true, volume: 0.5})
 
+        this.musicaMapa.play()
         
-
-        if (this.defAudio){
-
-            this.musicaMapa.play()
-        }
         
     }
 
@@ -255,7 +252,7 @@ export default class Mapa extends Phaser.Scene{
     colisaoInimigo(player, zona){
 
         this.musicaMapa.stop()
-        this.scene.start('Floresta', { heroi: this.playerSelected, positionX: this.player.x, positionY: this.player.y, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
+        this.scene.start('Floresta', { heroi: this.playerSelected, positionX: this.player.x, positionY: this.player.y, opcaoDificuldade: this.dificuldade})
  
     }
 
@@ -266,25 +263,25 @@ export default class Mapa extends Phaser.Scene{
 
         if (zona.x == 387){
 
-            this.scene.start('Cidade1', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio, posicaoX: this.player.x, posicaoY: this.player.y})
+            this.scene.start('Cidade1', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, posicaoX: this.player.x, posicaoY: this.player.y})
 
         }
 
         if (zona.x == 1160){
 
-            this.scene.start('Cidade2', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio, posicaoX: this.player.x, posicaoY: this.player.y})
+            this.scene.start('Cidade2', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, posicaoX: this.player.x, posicaoY: this.player.y})
 
         }
 
         if (zona.x == 1150){
 
-            this.scene.start('Cidade3', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio, posicaoX: this.player.x, posicaoY: this.player.y})
+            this.scene.start('Cidade3', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, posicaoX: this.player.x, posicaoY: this.player.y})
 
         }
 
         if (zona.x == 560 && this.city1 && this.city2 && this.city3){
 
-            this.scene.start('TheEnd', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
+            this.scene.start('TheEnd', { heroi: this.playerSelected, opcaoDificuldade: this.dificuldade})
         
         }
     }

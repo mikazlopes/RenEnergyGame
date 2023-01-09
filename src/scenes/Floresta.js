@@ -52,11 +52,12 @@ export default class Floresta extends Phaser.Scene{
         this.balaIntervalohero = 0
 
         this.dificuldade = data.opcaoDificuldade
-        this.defAudio = data.opcaoAudio
         
         // Guardar as dimensoes da scene numa variavel
         this.width = this.scale.width
         this.height = this.scale.height
+
+        
     }
     
     preload(){
@@ -137,12 +138,12 @@ export default class Floresta extends Phaser.Scene{
         this.physics.world.height = floresta.heightInPixels
         this.player.setCollideWorldBounds(true)
 
+        // comeca musica de fundo
+
         this.musica = this.sound.add('forest_music', {loop: true, volume: 0.3})
 
-        if (this.defAudio){
-
-            this.musica.play()
-        }
+        this.musica.play()
+        
         
 
     }
@@ -277,7 +278,7 @@ export default class Floresta extends Phaser.Scene{
         if (this.osInimigos.getLength() == 0){
 
             this.musica.stop()
-            this.scene.start('Mapa', { id: 1, positionx: this.positionX, positiony: this.positionY, heroi: this.playerSelected, opcaoDificuldade: this.dificuldade, opcaoAudio: this.defAudio})
+            this.scene.start('Mapa', { id: 1, positionx: this.positionX, positiony: this.positionY, heroi: this.playerSelected, opcaoDificuldade: this.dificuldade})
         }
 
         console.log(this.osInimigos.getLength())

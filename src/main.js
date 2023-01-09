@@ -26,15 +26,15 @@ import TheEnd from './scenes/theEnd.js'
 
 
 
-export default new Phaser.Game({
+let config = {
     type: Phaser.AUTO,
     width: 1280,
     height: 720,
     pixelArt: true,
     scene: [Loading, Intro , Menu,  Seleciona, Loading2, Mapa, Floresta, Cidade1, Cidade2, Cidade3, GameOver, TheEnd]
-    })
+    }
 
-
+export default new Phaser.Game(config)
 
 
 
