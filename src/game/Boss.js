@@ -108,10 +108,6 @@ export default class Boss extends Phaser.Physics.Arcade.Sprite
             this.scene.explosao.setVisible(false)
             this.scene.destroiInimigo(this)
         })
-        
-        
-
-
     }
 
     inimigoFlasha(){
