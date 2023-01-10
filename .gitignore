@@ -3,5 +3,6 @@ node_modules/
 *.tmx
 assets/source_materials/
 .vscode/
+.DS_Store
 
 
