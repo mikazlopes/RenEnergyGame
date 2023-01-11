@@ -128,6 +128,7 @@ export default class Cidade1 extends Phaser.Scene{
         this.plataformasMoveis.body.setImmovable(true)
 
       
+        // cria o jogador
 
         /** @type {Phaser.Physics.Arcade.Sprite} */
         this.player = new Jogador(this, 100, 600, this.playerSelected + '_idle')
@@ -212,8 +213,7 @@ export default class Cidade1 extends Phaser.Scene{
         this.physics.add.overlap(this.player, this.portas, this.voltaMapa, false, this)
 
         // Comeca musica e inicia efeitos sonoros
-
-
+        
         this.musica = this.sound.add('city_music', {loop: true, volume: 0.3})
         this.portaAudio = this.sound.add('door')
         this.cogAudio = this.sound.add('cogPickup')

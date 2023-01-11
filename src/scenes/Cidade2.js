@@ -35,7 +35,7 @@ export default class Cidade2 extends Phaser.Scene{
             physics: {
                 default: 'arcade',
                 arcade: {
-                    debug: false,
+                    debug: true,
                     tileBias: 32,
                     fps: 30,
                     fixedStep: true,
@@ -340,7 +340,7 @@ export default class Cidade2 extends Phaser.Scene{
                 personagem.heroiDispara(personagem.x + 70, personagem.y, "direita")
                 
             }
-            
+        // quanto maior a dificuldade menos balas o heroi consegue disparar de cada vez  
         this.balaIntervalohero = this.time.now + 200 * this.dificuldade
             
         }

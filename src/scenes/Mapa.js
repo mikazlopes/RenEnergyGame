@@ -30,8 +30,6 @@ export default class Mapa extends Phaser.Scene{
     }
 
     init(data){
-
-        // Usado para importar que jogador foi escolhido e a dificuldade
         
 
         //variaveis de outras scenes para dar contexto em termos de heroi escolhido e a ultima posicao no mapa

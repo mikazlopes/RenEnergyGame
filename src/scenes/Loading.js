@@ -20,7 +20,7 @@ export default class Loading extends Phaser.Scene{
 
     }
 
-    // Preloader para os assets da Intro
+    // Preloader para os assets da Intro , cria listeners que mostram o progresso do Loading
 
     preload(){
 

@@ -22,7 +22,11 @@ export default class Loading2 extends Phaser.Scene{
 
     init(data){
 
+        // Saber qual o heroi selecionado
+
         this.playerSelected = data.heroi
+        
+        // saber a dificuldade escolhida
         this.dificuldade = data.opcaoDificuldade
         
         // verifica se ja carregou o asset e se sim nao corre muito do codigo abaixo

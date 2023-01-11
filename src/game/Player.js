@@ -74,6 +74,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     }
 
+    // funcoes que iniciam movimento e animacao quando o as teclas sao pressionadas
+
     vaiEsquerda(){
 
         this.flipX = true
@@ -382,9 +384,9 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
           
     }
 
-    calculaDano(damage, origem){
+    // quando o heroi e atingido inicia a verificacao se morreu e chama as funcoes que fazem o heroi piscar, verifica tb a origem do ano
 
-        //Guarda a dificuldade caso seja GameOver
+    calculaDano(damage, origem){
         
 
         this.health = this.health - damage
@@ -405,6 +407,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         
     }
 
+    // jogador morreu, prepara a transicao para o GameOver
     jogadorMorreu(){
 
 
@@ -430,11 +433,15 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     }
 
+    // acabou o jogo
+
     gameOver(){
 
-        this.musica.stop()
+        this.scene.musica.stop()
         this.scene.start('GameOver',{opcaoAudio: this.defAudio, opcaoDificuldade: this.dificuldade})
     }
+
+    // efeito que faz o jogador piscar quando e atingido
 
    jogadorFlasha(origin){
 
@@ -450,6 +457,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     }
 
+    // jogador deixa de piscar
+
     jogadorRecupera(){
 
         this.mudaCor = this.scene.time.addEvent({delay: 100, repeat: 0, callback: this.clearTint, callbackScope: this})
@@ -458,6 +467,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     }
 
+    // Animacao para o muzzle
     heroiDispara(x, y, direcao){
 
         const sentido = direcao
@@ -470,6 +480,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
     // corre funcoes antes to update
     preUpdate(time, delta) {        
 		super.preUpdate(time, delta)  
+
+        // atualiza os mostradores de energia e Ammo
 
         this.roundRect2.setScale(this.health / this.originalSize, 1)
         this.ammo.setText(Phaser.Math.RoundTo(20 / this.scene.dificuldade, 0) - this.scene.balashero.getTotalUsed())
