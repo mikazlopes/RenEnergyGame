@@ -437,7 +437,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
     gameOver(){
 
-        this.scene.musica.stop()
+        this.musica.stop()
         this.scene.start('GameOver',{opcaoAudio: this.defAudio, opcaoDificuldade: this.dificuldade})
     }
 
