@@ -78,6 +78,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         });
 
         this.socket.emit('lightGreen', 1)
+        this.socket.emit('lightRed', 0)
+
 
     }
 
@@ -426,7 +428,6 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             this.heroDying.play()
             this.estado = 'dead'
             this.isDead = true
-            this.socket.disconnect()
             this.play(this.scene.playerSelected + '_dead', true)
             this.on('animationcomplete', () => {
                 this.setActive(false)

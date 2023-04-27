@@ -426,11 +426,11 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             this.heroDying.play()
             this.estado = 'dead'
             this.isDead = true
-            this.socket.disconnect()
             this.play(this.scene.playerSelected + '_dead', true)
             this.on('animationcomplete', () => {
                 this.setActive(false)
                 this.setVisible(false)
+                this.socket.disconnect()
             })
 
             // Inicia a funcao que chama a scene para Game over
