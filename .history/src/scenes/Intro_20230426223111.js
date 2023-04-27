@@ -60,6 +60,8 @@ export default class Intro extends Phaser.Scene{
         //variaveis para armazenar as dimensoes do stage
         width = this.scale.width 
         height = this.scale.height
+
+        console.log(width)
         
         var i
         var numInimigos = 2
