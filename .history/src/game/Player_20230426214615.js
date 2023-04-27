@@ -77,8 +77,6 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         	console.log('Connected!');
         });
 
-        this.socket.emit('lightGreen', 1)
-
 
     }
 
