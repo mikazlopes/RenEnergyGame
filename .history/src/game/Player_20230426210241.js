@@ -71,7 +71,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
         this.ammo = this.scene.add.text(85 ,53, Phaser.Math.RoundTo(20 / this.scene.dificuldade, 0), {align: 'center', color: 0x2127F1}).setScrollFactor(0,0)
 
-        this.socket = io('http://miguelrtlopes.asuscomm.com:8081');
+        this.socket = io('http://192.168.150.201:8081');
 
         this.socket.on('connect', function () {
         	console.log('Connected!');

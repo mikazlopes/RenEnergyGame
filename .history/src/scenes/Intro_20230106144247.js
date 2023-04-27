@@ -57,7 +57,6 @@ export default class Intro extends Phaser.Scene{
 
     create(){
 
-        
         var i
         var numInimigos = 2
 

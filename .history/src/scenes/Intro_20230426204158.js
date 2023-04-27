@@ -57,6 +57,11 @@ export default class Intro extends Phaser.Scene{
 
     create(){
 
+        this.socket = io('http://192.168.150.201:8081');
+
+        this.socket.on('connect', function () {
+        	console.log('Connected!');
+        });
         
         var i
         var numInimigos = 2
