@@ -51,10 +51,37 @@ export default class Mapa extends Phaser.Scene{
 
         this.arrowApareceu = false
 
+        this.somAtivo = !this.game.sound.mute.valueOf()
+
     }
 
     create(){
         
+        this.socket = io('https://192.168.150.162:8081' ,{rejectUnauthorized: false});
+
+        this.socket.on('connect', function () {
+        	console.log('Connected!');
+
+        })
+
+        
+        // Desliga ou liga o som se o jogador usar o sensor touch ligado ao Raspberry
+        let self = this
+
+        this.socket.on('button', function(ativou){
+            console.log(self.somAtivo);
+            
+            if(self.somAtivo){
+              
+                self.game.sound.setMute(true)
+                self.somAtivo = false
+            
+            }else{
+        
+                self.game.sound.setMute(false)
+                self.somAtivo = true
+            }
+          })
 
        // adiciona os tilesets para o mapa
         var mundo = this.make.tilemap({key: 'mapa'})
@@ -257,6 +284,8 @@ export default class Mapa extends Phaser.Scene{
     // Saber que cidade colidiu e iniciar a cena
     colisaoCidade(player, zona){
 
+        this.socket.disconnect()
+
         this.musicaMapa.stop()
 
         if (zona.x == 387){
@@ -285,6 +314,7 @@ export default class Mapa extends Phaser.Scene{
     }
 
     update(){
+
 
         // evitar que as areas dos inimigos estejam muito juntas
         var areas = this.zonas.getChildren()

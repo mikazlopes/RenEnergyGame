@@ -71,13 +71,13 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
 
         this.ammo = this.scene.add.text(85 ,53, Phaser.Math.RoundTo(20 / this.scene.dificuldade, 0), {align: 'center', color: 0x2127F1}).setScrollFactor(0,0)
 
-        this.socket = io('https://192.168.150.201:8081' ,{rejectUnauthorized: false});
+        this.socketPlayer = io('https://192.168.150.162:8081' ,{rejectUnauthorized: false});
 
-        this.socket.on('connect', function () {
+        this.socketPlayer.on('connect', function () {
         	console.log('Connected!');
         });
 
-        this.socket.emit('lightGreen', 1)
+        this.socketPlayer.emit('lightGreen', 1)
 
     }
 
@@ -402,8 +402,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         
         if(this.health > 0){
             this.estado = 'hurt'
-            this.socket.emit('lightRed', 1)
-            this.socket.emit('lightGreen', 0)
+            this.socketPlayer.emit('lightRed', 1)
+            this.socketPlayer.emit('lightGreen', 0)
             this.play(this.scene.playerSelected + '_hurt', true)  
             this.disableInteractive(this)
             this.jogadorFlasha(origem)
@@ -426,7 +426,7 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
             this.heroDying.play()
             this.estado = 'dead'
             this.isDead = true
-            this.socket.disconnect()
+            this.socketPlayer.disconnect()
             this.play(this.scene.playerSelected + '_dead', true)
             this.on('animationcomplete', () => {
                 this.setActive(false)
@@ -474,8 +474,8 @@ export default class Jogador extends Phaser.Physics.Arcade.Sprite
         this.mudaCor = this.scene.time.addEvent({delay: 100, repeat: 0, callback: this.clearTint, callbackScope: this})
         this.estado = 'ok'
         this.body.enable = true
-        this.socket.emit('lightRed', 0)
-        this.socket.emit('lightGreen', 1)
+        this.socketPlayer.emit('lightRed', 0)
+        this.socketPlayer.emit('lightGreen', 1)
 
     }
 

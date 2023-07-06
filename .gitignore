@@ -4,5 +4,6 @@ assets/source_materials/
 .vscode/
 .DS_Store
 node_modules/
+.history/
 
 
